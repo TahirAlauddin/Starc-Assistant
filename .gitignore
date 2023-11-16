@@ -1,0 +1,38 @@
+# ENV
+
+venv
+.env
+
+
+# Executables
+dist
+build
+*.exe
+
+# Resources & Documents
+docs
+
+# Pip
+Pipfile.lock
+
+
+# Cache
+__pycache__
+*.pyc
+
+# Database
+db.sqlite3
+
+
+# VIdeos 
+*.mp4
+
+
+# Installers
+*.spec
+*.aip
+
+
+# AdvancedInstaller
+*SetupFiles
+*cache

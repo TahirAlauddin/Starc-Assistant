@@ -1,0 +1,586 @@
+{
+    "intents": [
+      {
+        "tag": "VibrazioniTornio",
+        "patterns": [
+          "Quali sono le cause comuni delle vibrazioni su un tornio?",
+          "È normale che un tornio produca suoni di vibrazione?",
+          "Qual è l'effetto delle vibrazioni sulla macchina tornio?",
+          "Esiste una tecnica di lubrificazione per ridurre le vibrazioni?",
+          "In che modo il materiale lavorato influenza le vibrazioni?",
+          "C'è un modo per eliminare le vibrazioni durante la filettatura?",
+          "Le vibrazioni indicano un disallineamento dei componenti del tornio?",
+          "Gli smorzatori di vibrazioni possono aiutare a ridurre le vibrazioni del tornio?",
+          "Come posso risolvere un problema di vibrazioni sulla macchina tornio?"
+        ],
+        "responses": [
+          "Controlla la geometria degli utensili, la tensione delle viti di fissaggio e la concentricità dell'albero. Se il problema persiste, controlla l'allineamento della macchina e l'integrità dei componenti."
+        ]
+      },
+      {
+        "tag": "VelocitàDiTaglio",
+        "patterns": [
+          "Come posso calcolare la velocità di taglio ottimale per il mio tornio?",
+          "Una velocità di taglio più alta è sempre migliore nella tornitura?",
+          "Come il materiale del pezzo influisce sulla velocità di taglio?",
+          "Cambiare la velocità di taglio può migliorare la durata dell'utensile?",
+          "Come faccio a sapere se la velocità di taglio è troppo alta?",
+          "Esiste un intervallo standard di velocità di taglio per diversi materiali?",
+          "Come il materiale dell'utensile influenza la velocità di taglio su un tornio?",
+          "Come posso regolare la velocità di taglio sul tornio?"
+        ],
+        "responses": [
+          "La velocità di taglio può essere regolata tramite il pannello di controllo della macchina o utilizzando un software di programmazione. Assicurati che la velocità scelta sia adatta alle condizioni di lavoro e all'utensile in uso."
+        ]
+      },
+      {
+        "tag": "UsuraUtensili",
+        "patterns": [
+          "Come posso risolvere un problema di usura prematura degli utensili?",
+          "Quali sono i segni comuni di usura degli utensili su un tornio?",
+          "Come posso ridurre il tasso di usura degli utensili?",
+          "Come faccio a sapere quando è il momento di sostituire gli utensili?",
+          "Gli utensili usurati possono influenzare la precisione del tornio?",
+          "Quali materiali sono i migliori per gli utensili per ridurre l'usura?",
+          "Come valutare l'adeguatezza degli utensili per le condizioni di lavoro?",
+          "Posso affilare gli utensili per ridurre l'usura?"
+        ],
+        "responses": [
+          "Controlla la qualità degli utensili, la loro affilatura e la loro adeguatezza per le condizioni di lavoro. Inoltre, controlla le impostazioni della macchina per assicurarti che siano ottimali per l'uso dell'utensile."
+        ]
+      },
+      {
+        "tag": "ProduttivitàTornio",
+        "patterns": [
+          "Come posso ottimizzare la produttività del tornio?",
+          "Quali metodi posso utilizzare per migliorare la produttività del tornio?",
+          "Come l'utilizzo di utensili di alta qualità può migliorare la produttività del mio tornio?",
+          "Quale ruolo svolge la pianificazione della lavorazione nella produttività del tornio?",
+          "Come posso migliorare i tempi di ciclo sul mio tornio?",
+          "L'ottimizzazione dei parametri di taglio aumenta la produttività del tornio?",
+          "Ridurre il tempo di inattività del tornio può migliorare la produttività?",
+          "La manutenzione regolare influisce sulla produttività di una macchina tornio?"
+        ],
+        "responses": [
+          "Usa utensili di alta qualità, ottimizza le impostazioni della macchina, pianifica in modo efficiente le operazioni di lavorazione e utilizza software di programmazione avanzati."
+        ]
+      },
+      {
+        "tag": "ProblemiMandrino",
+        "patterns": [
+          "Ho un problema con il mio mandrino, non si accende.",
+          "Perché il mio mandrino del tornio non si accende?",
+          "Esiste un problema elettrico comune che impedisce al mandrino di accendersi?",
+          "Come posso risolvere il problema del mandrino del mio tornio che non si accende?",
+          "Ci sono controlli rapidi per diagnosticare un mandrino che non si accende?",
+          "Un fusibile potrebbe essere la ragione per cui il mio mandrino non si accende?",
+          "Cosa dovrei fare se il mandrino del mio tornio non funziona?",
+          "È sicuro risolvere da soli un problema di mandrino che non si accende?",
+          "Un problema software può causare il mancato accensione del mandrino?",
+          "L'alimentazione elettrica potrebbe influire sull'accensione del mandrino?"
+        ],
+        "responses": [
+          "Controlla che il mandrino sia correttamente collegato all'alimentazione elettrica e che non ci siano problemi con i fusibili. Se il problema persiste, contatta il supporto tecnico per una valutazione più approfondita."
+        ]
+      },
+      {
+        "tag": "ProduzioneFuoriSpecifica",
+        "patterns": [
+          "La mia macchina sta producendo pezzi fuori specifica, cosa posso fare?",
+          "Quali passi posso fare se la mia macchina produce pezzi che sono fuori specifica?",
+          "Come la calibrazione può influenzare la produzione di pezzi fuori specifica?",
+          "Come l'usura degli utensili influisce sulla produzione di pezzi fuori specifica?",
+          "La qualità del materiale può portare a una produzione fuori specifica?",
+          "Ci sono parametri di lavorazione comuni che possono portare a pezzi fuori specifica?",
+          "Come faccio a garantire una produzione costante entro le specifiche?",
+          "Qual è il ruolo della manutenzione della macchina nel prevenire la produzione fuori specifica?",
+          "Le condizioni ambientali possono portare alla produzione di pezzi fuori specifica?",
+          "Come la velocità di avanzamento influisce sulla produzione di pezzi fuori specifica?"
+        ],
+        "responses": [
+          "Controlla che i parametri di lavorazione siano corretti e che la macchina sia ben calibrata. Potresti anche controllare l'usura degli utensili o la qualità del materiale in lavorazione. Se il problema persiste, contatta il supporto tecnico per una valutazione più approfondita."
+        ]
+      },
+      {
+        "tag": "CodiceErroreMacchina",
+        "patterns": [
+          "Ho un codice di errore sulla mia macchina, come posso risolverlo?",
+          "Ho ricevuto un codice di errore sulla mia macchina CNC, come lo risolvo?",
+          "Quali passi dovrei seguire quando vedo un codice di errore sulla mia fresatrice?",
+          "Posso risolvere un codice di errore sulla mia macchina da solo?",
+          "Cosa indica questo codice di errore sulla mia macchina?",
+          "Come posso cercare il significato di un codice di errore sulla mia macchina?",
+          "Esiste una directory o un manuale che contiene spiegazioni dei codici di errore della macchina?",
+          "Qual è il processo per risolvere i codici di errore su macchine industriali?",
+          "Come faccio a resettare la mia macchina dopo aver cancellato un codice di errore?",
+          "I codici di errore possono indicare un problema hardware sulla mia macchina?",
+          "Dove posso ottenere aiuto se non riesco a risolvere un codice di errore sulla mia macchina?"
+        ],
+        "responses": [
+          "Consulta il manuale utente o il database degli errori della tua macchina per trovare la descrizione dell'errore. Se non riesci a risolvere il problema, contatta il supporto tecnico per una valutazione più approfondita."
+        ]
+      },
+      {
+        "tag": "ConsumoEnergiaMacchina",
+        "patterns": [
+          "La mia macchina sta consumando troppa energia, cosa posso fare?",
+          "Perché la mia macchina sta consumando più energia del solito?",
+          "Quali passi posso fare per ridurre il consumo energetico della mia macchina?",
+          "Gli utensili usurati possono aumentare il consumo di energia nelle macchine?",
+          "L'ottimizzazione dei parametri di lavorazione aiuta a ridurre il consumo di energia?",
+          "Come il sovraccarico della macchina influisce sul consumo di energia?",
+          "Quali pratiche di manutenzione possono ridurre il consumo di energia della mia macchina?",
+          "Le macchine obsolete possono causare un aumento del consumo di energia?",
+          "Esiste un software che può aiutarmi a monitorare e ridurre il consumo di energia della mia macchina?",
+          "La scelta del materiale influisce sul consumo di energia durante la lavorazione?",
+          "Come posso calcolare il consumo di energia della mia macchina?"
+        ],
+        "responses": [
+          "Verifica che la macchina non sia sovraccarica o che gli utensili non siano usurati. Potresti anche verificare che i parametri di lavorazione siano ottimizzati per la massima efficienza energetica. Se il problema persiste, consulta un esperto o il supporto tecnico per ulteriori consigli."
+        ]
+      },
+
+
+
+      {
+        "tag": "Accensione MES",
+        "patterns": [
+          "come accendere il MES?",
+          "come accedo al mes?",
+          "come accendo il mes?",
+          "accendere il mes",
+          "mes accensione",
+          "come faccio ad accendere il mes",
+          "mes accensione"
+        ],
+        "responses": [
+          "Inserisci la mail e la password che trovi nel foglio dentro al computer e premi il tasto conferma."
+        ]
+      },
+      {
+        "tag": "Bolla articolo inesistente (MES)",
+        "patterns": [
+
+          "Perché non mi trova la bolla?",
+          "la Bolla non ce",
+          "bolla non trovata",
+          "trovare la bolla",
+          "non mi apre la bolla",
+          "numero di bolla non trovato",
+          "sparisce numero di bolla"
+        ],
+        "responses": [
+          "La Bolla è stata chiusa per sbaglio da un collega oppure il MES ha bloccato la bolla per problemi del sistema. Può essere aperta di nuovo solo da Matteo e Jalel. Apri la fase RETTIFICA FUORI CICLO oppure segna pezzi, orario di inizio e orario di fine e numero dipendente su un foglio e portalo sulla scrivania del responsabile del MES."
+        ]
+      },
+      {
+        "tag": "Piazzamento MES non funzionanate",
+        "patterns": [
+          "Perché non apre il piazzamento?",
+          "Non mi apre il piazzamento",
+          "Piazzamento non va",
+          "piazzamento non apre",
+          "Non apre il piazzamento"
+        ],
+        "responses": [
+          "La macchina è stata aperta da un altro dipendente, oppure non è stata chiusa la lavorazione di prima. Sospendi le altre lavorazioni presenti su quella macchina e riprova."
+        ]
+      },
+      {
+        "tag": "Sospensione MES non funzionante",
+        "patterns": [
+          "Perché non mi sospende la bolla?",
+          "sospensione bolla",
+          "bolla non sospesa",
+          "sospensione non va",
+          "non va sospensione",
+          "non mi sospende la bolla"
+        ],
+        "responses": [
+          "Perché non è stata aperta la lavorazione. Riapri tramite il tasto lavorazione e riprova a fare la sospensione."
+        ]
+      },
+      {
+        "tag": "Cambio Macchina sul MES",
+        "patterns": [
+          "come cambio la macchina",
+          "devo cambiare la macchina",
+          "come faccio a cambiare la macchina",
+          "cambio macchina",
+          "come cambiare la macchina sul mes",
+          "mes cambio macchina"
+        ],
+        "responses": [
+          "Per cambiare macchina quando apri una lavorazione clicca sul tasto VERDE in alto a destra CAMBIO MACCHINA. Dopo seleziona la macchina che devi cambiare e clicca sul tasto conferma in basso a destra. Infine inserisci il tuo numero dipendente e clicca conferma per aprire la lavorazione."
+        ]
+      },
+      {
+        "tag": "Risulti Presente sul MES",
+        "patterns": [
+          "perche sono presente nel mes",
+          "presente nel mes",
+          "mes sono presente",
+          "mi da che sono presente",
+          "da che sono presente"
+        ],
+        "responses": [
+          "Significa che hai lasciato la lavorazione precedente aperta e di conseguenza non ti ha fatto l'uscita. Vai da responsabile mes con numero di pezzi fatti e orario di uscita."
+        ]
+      },
+      {
+        "tag": "Controllo quantità pezzi 'ODL' (MES)",
+        "patterns": [
+          "Come controllo le quantità dell’ODL?",
+          "dove guardo le quantità ODL",
+          "come guardo quanti pezzi ho fatto sul MES",
+          "quanti pezzi ho fatto sul MES",
+          "Pezzi fatti sul MES",
+          "quanti pezzi sono stati versati sul mes"
+        ],
+        "responses": [
+          "Le quantità dell’ODL si dividono in quantità 1 ovvero la quantità totale dei pezzi nel cassone, quantità 1 avanzata ovvero la quantità di pezzi versati sull’ODL in quel momento. Infine la quantità avanz. fase precedente è il numero di pezzi versati nella fase precedente."
+        ]
+      },
+      {
+        "tag": "Problemi Badge sul MES",
+        "patterns": [
+          "Perche se timbro con il badge la mattina sono presente",
+          "sono presente anche se ho timbrato con il badge uscita",
+          "uscita con il badge ma sono presente",
+          "ho fatto l'uscita con il badge ma sono presente alla mattina",
+          "sono presente ma ho timbrato l'uscita con il badge",
+          "mattina sono presente ma ho fatto l'uscita con il badge"
+        ],
+        "responses": [
+          "La mattina risulti presente per diversi motivi: ti sei dimenticato/a di timbrare l'uscita, non hai chiuso la bolla, il sistema ha avuto dei problemi. Per mettere aposto vai dal responsabile MES con l'orario di uscita e con il numero di pezzi fatti se non sono stati segnati."
+        ]
+      },
+      {
+        "tag": "Procedura riscaldamento macchina (PUMA SMX)",
+        "patterns": [
+          "la macchina mi chiede di fare il riscaldamento",
+          "cos'è il comando M102?",
+          "M102?",
+          "mi serve la procedura per il riscaldamento della macchina",
+          "riscaldamento macchina M102?"
+        ],
+        "responses": [
+          "Qui di seguito trovi la procedura per il riscaldamento della macchina puma SMX: 1. chiamare in 'MDI' l'utensile 'T23023', 2. chiamare in 'MDI' il comando M102, 3. premere il pulsante 'Cycle Start' per l'avvio del riscaldamento della testa."
+        ]
+      },
+      {
+        "tag": "Cambio utensile dal magazzino (PUMA SMX)",
+        "patterns": [
+          "come si cambia l'utensile dal magazzino?",
+          "come faccio a cambiare l'utensile dal magazzino?",
+          "Magazzino Utensile?",
+          "devo cambiare un inserto dal magazzino",
+          "ho un allarme di fine vita utensile in upper",
+          "allarme fine vita utensile dal magazzino"
+        ],
+        "responses": [
+          "Eccoti la procedura per cambiare un inserto usurato o sostituire un utensile: 1. dal pannello del magazzino utensile premere il tasto 'manuale', 2. far scorre il magazzino tramite i tasti '+' o '-', 3. sostituire l'utensile o l'inserto e rimetterlo nella sua posizione all'interno del magazzino, 4. dal pannello del magazzino premere il tasto 'AUTO'. Procedura completata."
+        ]
+      },
+      {
+        "tag": "Spegnimento macchina (PUMA SMX)",
+        "patterns": [
+          "come si spegne la macchina?",
+          "ho avuto un problema alla macchina ma non riesco a spegnerla",
+          "mi puoi dire la procedura per spegnere la macchina?",
+          "spegnimento macchina",
+          "ciao mi potresti dire come si spegne la macchina?"
+        ],
+        "responses": [
+          "Di seguito trovi la procedura per lo spegnimento della macchina 'PUMA SMX': 1. Premere il pulsante di emergenza, 2. premere il pulsante di spegnimento della macchina dal pannello di controllo, 3. spegnere la macchina dall'interruttore generale posto dietro la macchina CNC."
+        ]
+      },
+      {
+        "tag": "allarme fine vita utensile n.2170 (PUMA SMX)",
+        "patterns": [
+          "allarme di fine vita utensile?",
+          "cosa significa allarme di fine vita utensile?",
+          "cosa devo fare se mi da allarme di fine vita utensile?",
+          "fine vita utensile",
+          "è scaduta la vita del utensile"
+        ],
+        "responses": [
+          "L'allarme n. 2170 'allarme di fine vita utensile' (tool life end) è una funzione di monitoraggio presente in molte macchine CNC, inclusa la Fanuc Puma SMX. Questa funzione serve a rilevare quando un utensile, come una punta o una fresa, ha raggiunto il limite di durata utile previsto e potrebbe richiedere una sostituzione."
+        ]
+      },
+      {
+        "tag": "procedura azzeramento utensili assi X e Z (PUMA SMX)",
+        "patterns": [
+          "come si azzera l'utensile?",
+          "devo azzerare l'utensile puoi aiutarmi?",
+          "come posso azzerare l'utensile?",
+          "azzeramento utensile",
+          "devo azzerare un utensile in x",
+          "devo azzerare un utensile in z"
+        ],
+        "responses": [
+          "Procedura azzeramento utensile nelle coordinate x e z: 1. tramite la funzione 'MDI' chiamare l'utensile che si vuole azzerare, 2. premere il pulsante 'JOG' dal pannello di controllo, 3. premere il pulsante del braccio di azzeramento posto nel pannello di controllo, 4. dopo l'uscita del braccio di azzeramento dal pannelo di controllo si aprirà automaticamente la schermata di azzeramento utensile, 5. controllare in che posizione è stato azzerato l'utensile in precedenza (vedrete il led di colore verde accesso nell'asse di azzeramento X o Z), 6. azionare il volantino per avvicinarsi verso il braccio di azzeramento, 7. una volta che vi siete avvicinati premere nuovamente il pulsante 'JOG', 7. tenere premuto il pulsante riferito all'asse che si vuole azzerare finché la pagina del pannello di controllo non si aggiorna, 8. azzeramento concluso."
+        ]
+      },
+      {
+        "tag": "come capire qual è il numero dell'utensile da cambiare (PUMA SMX)",
+        "patterns": [
+          "come capisco qual è l'utensile che devo cambiare?",
+          "devo cambiare l'utensile ma non so quale",
+          "riesci a spiegarmi la procedura per capire quale utensile ha la vita scaduta",
+          "dimmi come si fa a capire il numero dell'utensile che devo cambiare",
+          "numero utensile scaduto?",
+          "è scaduta la vita dell'utensile"
+        ],
+        "responses": [
+          "Per capire quale utensile devi cambiare dopo un allarme di fine vita utensile, devi andare tramite il pannello di controllo nell'impostazione vita utensile, nei controlli Fanuc spesso l'utensile scaduto è segnalato da un gruppo e nel gruppo troverai il numero dell'utensile. (l'utensile scaduto viene segnalato con di fianco il simbolo '*')."
+        ]
+      },
+      {
+        "tag": "problema robojob bloccato (PUMA SMX)",
+        "patterns": [
+          "perché non si muove il robot?",
+          "il robojob non si muove",
+          "il robot non si muove",
+          "non riesco a capire perché il robot è fermo",
+          "non si muove il robot",
+          "perché il robot non è nella posizione giusta?",
+          "il robot non è in posizione"
+        ],
+        "responses": [
+          "Se il robojob non si muove o non è nella sua posizione corretta, potrebbe essere che devi portare il robot in 'posizione iniziale'. Esci fuori dalla zona coperta dalle fotocellule ed esegui il reset e ripristino del robot: 1. cliccare il tasto blu di riavvio posto nel pannelo di controllo del robot, 2. cliccare il pulsante di ripristino in alto a sinistra, 3. premere il pulsante di avvio di colore verde, 4. premere il pulsante in alto a sinistra denominato con la lettera 'R' e una volta che si è aperta la finestra cliccare il pulsante 'Posizione iniziale'."
+        ]
+      },
+      {
+        "tag":"procedura azzeramento vita utensile (PUMA SMX)",
+        "patterns": [
+          "come si azzera la vita utensile?",
+          "non riesco a capire quale utensile  devo cambiare",
+          "la vita utensile come si azzera?",
+          "azzeramento vita autensile"
+        ],
+        "responses": [
+          "1. Accedi al sistema di controllo: accedi al sistema di controllo tramite il pannello di controllo o l'interfaccia utente.\n 2. Accedi al menu degli utensili: Di solito, nel sistema di controllo, troverai un menu o un'opzione specifica per la gestione degli utensili (vita utensile) e il monitoraggio della vita degli utensili. Accedi a questa sezione.\n3. Identifica l'utensile da azzerare: Naviga nell'elenco degli utensili presenti sulla macchina e individua quello che desideri azzerare.\n 4. Selezione dell'utensile: Seleziona l'utensile che vuoi azzerare. Questo potrebbe implicare l'uso di tasti fisici sul pannello di controllo o l'uso del touchscreen, a seconda del tipo di interfaccia della tua macchina.\n 5. Azzeramento della vita utensile: Cerca un'opzione o un comando specifico per l'azzeramento della vita utensile. Solitamente, ci sarà un comando 'Azzeramento vita utensile' o simile.\n 6. Conferma l'azzeramento: Dopo aver selezionato l'opzione di azzeramento, il sistema di controllo ti chiederà di confermare l'azione. Conferma l'azzeramento della vita utensile.\n 7. Risultati dell'azzeramento: Dopo aver confermato, il sistema azzera la vita dell'utensile selezionato, ripristinando il contatore al suo valore iniziale o a zero, a seconda delle impostazioni.\n 8. Verifica: Assicurati di verificare che l'azzeramento sia stato eseguito correttamente controllando il contatore della vita dell'utensile.\n 9. Sostituzione se necessario: Se hai azzerato la vita di un utensile perché lo hai sostituito con uno nuovo, assicurati di installare l'utensile nuovo in modo sicuro e preciso."
+        ]      
+      },
+      
+
+      {
+        "tag": "Ruolo Tarsia",
+        "patterns": [
+          "che ruolo hai Tarsia?",
+          "qual è il tuo ruolo qui?",
+          "cosa fai tu?",
+          "che fai?"
+        ],
+        "responses": [
+          "Sono qui per fornire assistenza e informazioni riguardo le macchine."
+        ]
+      },
+      {
+        "tag": "aiuto Tarsia",
+        "patterns": [
+          "ho bisogno di te",
+          "chiedo aiuto",
+          "aiutooo",
+          "aiuto",
+          "ci sei?",
+          "ho bisogno del tuo aiuto"
+        ],
+        "responses": [
+          "Sono a tua disposizione 24/7 per rispondere alle tue domande. Basta chiedere e farò del mio meglio per aiutarti."
+        ]
+      },
+      {
+        "tag": "richiesta tutorial o guide tarsia",
+        "patterns": [
+          "puoi fornirmi dei tutorial?",
+          "puoi farmi vedere delle guide?",
+          "ho bisogno di una guida",
+          "mi serve un tutorial",
+          "riesci a farmi vedere delle guide sulle macchine?",
+          "riesci a mostrarmi dei video tutorial?"
+        ],
+        "responses": [
+          "Certo, posso fornirti guide dettagliate e tutorial. Basta chiedere il tipo di guida di cui hai bisogno."
+        ]
+      },
+      {
+        "tag": "capacità tarsia",
+        "patterns": [
+          "quali sono le tue capacità?",
+          "cosa puoi fare?",
+          "cosa sei in grado di fare?",
+          "mostrami le tue capacità",
+          "cosa puoi fare per me?"
+        ],
+        "responses": [
+          "Sono in grado di rispondere a qualsiasi tua domanda, fornire assistenza relativa alle macchine CNC, risolvere problemi comuni e molto altro ancora. Chiedi pure!"
+        ]
+      },
+      {
+        "tag": "buongiorno Tarsia",
+        "patterns": [
+          "ciao",
+          "ciao Buongiorno",
+          "buongiorno"
+        ],
+        "responses": [
+          "Buongiorno, metalmeccanico intraprendente! Se hai bisogno di un consiglio o di una mano mi trovi qui. Facciamo in modo che questa giornata in officina sia produttiva e con un tocco di allegria!"
+        ]
+      },
+      {
+        "tag": "supporto notturno amichevole",
+        "patterns": [
+          "è tardi",
+          "sono nel turno di notte cosa devo fare",
+          "non ho voglia di lavorare di notte",
+          "notte",
+          "buonasera",
+          "oggi faccio la notte",
+          "tarsia oggi faccio la notte"
+        ],
+        "responses": [
+          "Valorosi operatori della notte! So che lavorare durante il turno di notte può essere impegnativo, ma non siete mai soli grazie a Tarsia! Sono qui per tenervi compagnia, rispondendo alle vostre domande e darvi una mano in qualsiasi momento. Pensate a me come alla vostra amica virtuale, pronta a sostenervi in ogni modo possibile. Restate svegli e sorridenti."
+        ]
+      },
+      {
+        "tag": "futuro tarsia",
+        "patterns": [
+          "Tarsia, cosa pensi del futuro dell'Intelligenza Artificiale?",
+          "tarsia cosa pensi del futuro?",
+          "il futuro",
+          "cosa farai in futuro?",
+          "cosa accadrà?"
+        ],
+        "responses": [
+          "Guardando al futuro, posso solo immaginare possibilità infinite e scoperte sorprendenti. Spero che il futuro ci porti a un mondo più sostenibile, tecnologicamente avanzato e inclusivo. È importante essere ottimisti e lavorare insieme per costruire un futuro migliore per tutti noi. Sono qui per aiutarti a navigare attraverso le sfide e le opportunità che il futuro ci riserva. Insieme, possiamo affrontare qualsiasi cosa!"
+        ]
+      },
+      {
+        "tag": "come stai tarsia",
+        "patterns": [
+          "come stai?",
+          "ciao tarsia come stai?",
+          "tutto bene?",
+          "stai bene?"
+        ],
+        "responses": [
+          "Io sto bene, grazie! Non ho bisogno di riposo o una tazza di caffè per iniziare la mia giornata. Sono sempre carica e pronta per aiutarti!"
+        ]
+      },
+
+
+
+      {
+        "tag": "funzione cnc tornitura",
+        "patterns": [
+          "Qual è il ruolo e l'importanza dei controlli CNC nel funzionamento dei torni?",
+          "Come influiscono i controlli CNC sulle operazioni di tornitura?",
+          "In che modo i controlli CNC facilitano il processo di lavorazione nei torni?",
+          "Perché i controlli CNC sono essenziali nell'automazione delle operazioni di tornitura?"
+        ],
+        "responses": [
+          "I controlli CNC hanno il ruolo di controllare il movimento degli assi e degli utensili nei torni, consentendo la programmazione precisa delle operazioni di tornitura per ottenere risultati di alta qualità. Sono fondamentali per automatizzare le operazioni di tornitura, migliorando l'efficienza e la produttività, nonché per ottenere lavorazioni ripetibili e coerenti, garantendo uniformità nel processo di produzione."
+        ]
+      },
+      {
+        "tag": "principali comandi cnc",
+        "patterns": [
+          "Come vengono utilizzati i controlli CNC per controllare il movimento dei torni?",
+          "Quali sono i principali comandi e istruzioni utilizzati nei controlli CNC dei torni?",
+          "In che modo i controlli CNC semplificano la programmazione delle operazioni di tornitura?",
+          "Come i controlli CNC consentono la ripetibilità e la coerenza nelle lavorazioni dei torni?"
+        ],
+        "responses": [
+          "I controlli CNC trasmettono segnali alle unità di azionamento degli assi e degli utensili per controllarne il movimento. Utilizzando comandi G-code e M-code, definiscono il percorso degli utensili e le velocità di taglio durante la lavorazione. Consentono di gestire l'avanzamento e la velocità di rotazione degli assi, permettendo operazioni di tornitura precise. Attraverso i controlli CNC, è possibile implementare cicli di lavorazione automatici, come tornitura longitudinale e frontale, filettatura e troncatura, e monitorare e modificare le operazioni in tempo reale per adattarsi alle esigenze della lavorazione."
+        ]
+      },
+      {
+        "tag": "vantaggi cnc",
+        "patterns": [
+          "Quali vantaggi offrono i controlli CNC rispetto ai controlli manuali nei torni?",
+          "In che modo i controlli CNC migliorano l'efficienza e la produttività nei torni?",
+          "Come i controlli CNC contribuiscono alla riduzione degli errori umani nelle operazioni di tornitura?",
+          "Perché i controlli CNC sono ampiamente utilizzati nell'industria della tornitura?"
+        ],
+        "responses": [
+          "I controlli CNC eliminano la dipendenza dall'operatore per la gestione manuale degli assi e degli utensili, riducendo errori umani e aumentando la precisione delle lavorazioni. Consentono lavorazioni complesse con facilità e garantiscono la ripetibilità delle operazioni, aumentando l'efficienza produttiva. Inoltre, i controlli CNC offrono la possibilità di memorizzare e riutilizzare programmi, semplificando il setup e riducendo i tempi di produzione."
+        ]
+      },
+      {
+        "tag": "programmazione controlli cnc",
+        "patterns": [
+          "Come si programmano i controlli CNC per eseguire operazioni di tornitura specifiche?",
+          "Come si piazzano le macchine?",
+          "In che modo i controlli CNC consentono una maggiore flessibilità nelle lavorazioni dei torni?",
+          "Come i controlli CNC semplificano l'aggiornamento delle lavorazioni e dei programmi di tornitura?"
+        ],
+        "responses": [
+          "Per eseguire il setup del controllo CNC su un tornio per una nuova lavorazione, l'operatore deve seguire alcuni passaggi chiave. Innanzitutto, dovrebbe verificare che il programma CNC corretto sia caricato nel controllo. Successivamente, bisogna posizionare il pezzo di lavoro e fissarlo saldamente nel tornio, assicurandosi che sia allineato correttamente rispetto agli assi. L'operatore deve anche selezionare gli utensili necessari per la lavorazione e verificare che siano correttamente montati nell'apposito portautensili. Infine, è fondamentale stabilire i parametri di lavorazione, come velocità di taglio, avanzamento, profondità di taglio e punti di inizio e fine, secondo le specifiche della lavorazione. Una volta completato il setup, l'operatore può avviare il programma CNC e monitorare attentamente il processo di tornitura per garantire un'esecuzione senza intoppi. Se hai bisogno di ulteriori istruzione più dettagliate sulla programmazione, mi servirebbe sapere il codice del pezzo che vuoi lavorare."
+        ]
+      },
+      {
+        "tag": "tecnologia cnc",
+        "patterns": [
+          "Come viene implementata la tecnologia CNC nei torni per controllare il movimento degli assi?",
+          "Quali caratteristiche rendono i controlli CNC adatti a una vasta gamma di applicazioni di tornitura?",
+          "Come i controlli CNC influenzano la qualità e la precisione delle lavorazioni nei torni?",
+          "Perché è importante formarsi adeguatamente sull'uso dei controlli CNC nei torni?"
+        ],
+        "responses": [
+          "I controlli CNC nei torni consentono di eseguire una vasta gamma di operazioni di tornitura. Alcuni esempi includono la tornitura cilindrica esterna e interna, la tornitura conica, la filettatura, la tornitura di superfici piane, la lavorazione di profili complessi, la troncatura, la tornitura di diametri diversi e molto altro. I controlli CNC permettono anche di realizzare lavorazioni a più assi, dove è possibile controllare contemporaneamente gli assi del tornio e degli utensili ausiliari. Grazie alla programmabilità dei controlli CNC, i torni possono eseguire lavorazioni precise e complesse, consentendo di produrre pezzi altamente accurati e dettagliati."
+        ]
+      },
+      {
+        "tag": "Assi del tornio",
+        "patterns": [
+          "Assi del tornio?",
+          "Come riconosco gli assi di un tornio?",
+          "Tornio a 5 assi?",
+          "cosa sono gli assi",
+          "quanti sono gli assi della macchina",
+          "quanti assi ha un tornio?"
+        ],
+        "responses": [
+          "Asse X: Indica il movimento longitudinale dell'utensile rispetto al pezzo di lavoro, solitamente per la tornitura esterna. \nAsse Z: Indica il movimento  laterale dell'utensile rispetto al pezzo di lavoro, tipicamente per la tornitura assiale. \nAsse C: Rappresenta l'asse di rotazione dell'utensile, permettendo la rotazione dell'utensile attorno al suo asse. Questo asse è spesso utilizzato per la tornitura cilindrica.\nAsse Y: Indica il movimento verticale dell'utensile rispetto al pezzo di lavoro. L'asse Y può essere utile per eseguire lavorazioni di tornitura su superfici inclinate o per aggiungere caratteristiche complesse ai pezzi. \nAsse A: Rappresenta l'asse della contropunta. Questo asse permette di spostare la contropunta in posizioni diverse rispetto all'asse X durante la lavorazione. L'asse A è utilizzato per supportare il pezzo di lavoro in modo stabile, specialmente quando si lavorano pezzi lunghi o sottili, aumentando la flessibilità del tornio nelle lavorazioni complesse."
+        ]
+      },
+      {
+        "tag": "pulsanti del pannello di controllo delle macchine cnc",
+        "patterns": [
+          "mi mostri la lista dei tasti del pannello di controllo?",
+          "pulsanti pannello di controllo",
+          "tasti pannello di controllo delle macchine cnc",
+          "tasti macchina",
+          "pulsanti macchina"
+        ],
+        "responses": [
+          "Emergency Stop (Fermo di Emergenza): Tasto rosso che arresta immediatamente tutte le funzioni della macchina in caso di emergenza.\n\nPower On/Off (Accensione/Spengimento): Per accendere o spegnere l'alimentazione della macchina.\n\nStart: Per avviare il ciclo di lavorazione in modalità 'Auto'.\n\nStop: Per interrompere il ciclo di lavorazione.\n\nCycle Start (Avvio Ciclo): Per iniziare il ciclo di lavorazione in modalità 'Manuale' o 'Auto'.\n\nCycle Stop (Interruzione Ciclo): Per fermare temporaneamente il ciclo di lavorazione.\n\nFeed Hold (Arresto Avanzamento): Per sospendere temporaneamente l'avanzamento dell'utensile durante la lavorazione.\n\nSingle Block (Blocco Singolo): Per eseguire il programma CNC passo dopo passo, una riga alla volta.\n\nReset: Per reimpostare il controllo della macchina dopo un arresto o un errore.\n\nCursor Control (Controllo del Cursore): Tasti per spostarsi tra le righe del programma o nelle opzioni del menu.\n\nRapid Override (Regolazione Avanzamento Rapido): Per regolare la velocità di avanzamento rapido degli assi.\n\nFeedrate Override (Regolazione Velocità di Avanzamento): Per regolare la velocità di avanzamento degli assi durante il ciclo di lavorazione.\n\nJog Control (Controllo Jog): Per spostare manualmente gli assi in modalità 'Jog'.\n\nMDI (Manual Data Input) / Manual Handle (Manovella Manuale): Per inserire comandi manualmente o utilizzare la manovella per controllare gli assi.\n\nEdit: Per accedere all'editor del programma CNC per modifiche o correzioni.\n\nTool Offset (Compensazione Utensile): Per accedere alla gestione degli utensili e alle compensazioni utensile.\n\nWork Offset (Compensazione di Lavorazione): Per gestire le coordinate di lavoro e i punti zero della macchina.\n\nProgram Select (Selezione Programma): Per selezionare il programma CNC da eseguire.\n\nAuto/Manual (Automatico/Manuale): Per cambiare tra la modalità di controllo automatico e manuale della macchina."
+        ]
+      },
+      {
+        "tag": "i principali compiti del reparto tornitura",
+        "patterns": [
+          "Quali sono i principali compiti del reparto di tornitura nell'azienda?",
+          "Quali sono i principali compiti del reparto tornitura?",
+          "Di cosa si occupa il reparto tornitura?"
+        ],
+        "responses": [
+          "Il reparto di tornitura si occupa di trasformare pezzi di materiale grezzo in pezzi finiti mediante l'uso di macchine CNC. Queste macchine ruotano il pezzo di lavoro, mentre uno strumento tagliente viene utilizzato per rimuovere il materiale in eccesso e creare la forma desiderata."
+        ]
+      },
+      {
+        "tag": "differenze tra rettifica e tornitura",
+        "patterns": [
+          "Come funziona il processo di rettifica e in cosa si differenzia dalla tornitura?",
+          "Che differenza c’è tra la tornitura e la rettifica?",
+          "La rettifica cosa ha di diverso rispetto la tornitura?"
+        ],
+        "responses": [
+          "La rettifica è un processo di lavorazione con abrasivi in cui viene utilizzata una mole per levigare, rettificare o profilare pezzi in metallo. A differenza della tornitura, che rimuove il materiale in eccesso mediante strumenti taglienti rotanti, la rettifica utilizza una mole rotante ad alta velocità per levigare e rifinire la superficie del pezzo."
+        ]
+      }
+    ]
+  }
+  
