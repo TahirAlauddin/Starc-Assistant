@@ -1,5 +1,5 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter, SimpleRouter
+from rest_framework.routers import DefaultRouter
 from .views import (DepartmentViewSet, QuestionViewSet, MachineViewSet, 
                     AnswerViewSet, TopicViewSet, TrainingViewSet,
                     login_view, logout_view, chatbot_model_view)

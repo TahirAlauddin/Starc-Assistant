@@ -5,13 +5,14 @@ name = "pypi"
 
 [packages]
 django = "*"
-numpy = "*"
-nltk = "*"
-torch = "*"
 djangorestframework = "*"
+torch = "*"
+nltk = "*"
+pyinstaller = "*"
 python-dotenv = "*"
+numpy = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.12"
+python_version = "3.9"

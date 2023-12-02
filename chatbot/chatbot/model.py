@@ -1,13 +1,13 @@
-import torch.nn as nn
+from torch.nn import Module, Linear, ReLU
 
 
-class NeuraNet(nn.Module):
+class NeuraNet(Module):
     def __init__(self, input_size, hidden_size, num_classes):
         super(NeuraNet, self).__init__()
-        self.L1 = nn.Linear(input_size, hidden_size)
-        self.L2 = nn.Linear(hidden_size, hidden_size)
-        self.L3 = nn.Linear(hidden_size, num_classes)
-        self.relu = nn.ReLU()
+        self.L1 = Linear(input_size, hidden_size)
+        self.L2 = Linear(hidden_size, hidden_size)
+        self.L3 = Linear(hidden_size, num_classes)
+        self.relu = ReLU()
 
     def forward(self, x):
         out = self.L1(x)
