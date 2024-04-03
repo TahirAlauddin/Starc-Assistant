@@ -21,7 +21,7 @@ __pycache__
 *.pyc
 
 # Database
-db.sqlite3
+*.sqlite3
 
 
 # VIdeos 
@@ -36,3 +36,8 @@ db.sqlite3
 # AdvancedInstaller
 *SetupFiles
 *cache
+
+
+# Large files
+*.zip
+node_modules
