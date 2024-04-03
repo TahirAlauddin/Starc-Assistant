@@ -1,0 +1,603 @@
+@import url("../css/constants.css");
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000000;
+}
+
+.popup-content {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.close-button-popup {
+  background-color: tomato;
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 22px;
+  padding-bottom: 2px;
+  cursor: pointer;
+  width: 20px;
+  height: 25px;
+  padding-left: 5px;
+  border-radius: 50%;
+}
+
+
+/* Add your animations here */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s;
+}
+
+#uploadForm {
+  display: none;
+}
+
+#media-container {
+  flex: 0 1 calc(33.333% - 10px); /* Adjust the percentage for desired width, subtract gap */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 5px; /* Half of gap size to ensure proper spacing */
+  height: 10rem;
+  width: 10rem;
+}
+
+#media-container:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+#media-container img, #media-container video, #media-container object {
+  width: 100%;
+  height: auto;
+}
+
+.media-pdf {
+  display: block; /* Ensures the element fills its container */
+  width: 100%; /* Full width of its container */
+  max-width: 600px; /* Maximum width but can be adjusted */
+  height: 500px; /* Fixed height, can be adjusted */
+  margin: 0 auto; /* Center in the container */
+  border: 1px solid #ddd; /* Light grey border */
+  border-radius: 4px; /* Rounded corners */
+  overflow: auto; /* Allows scrolling */
+  background: #fff; /* White background */
+}
+
+
+
+.remove-video {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.remove-video > img {
+  width: 20px;
+}
+
+.training-document {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 0.8rem;
+  background-color: white;
+  position: relative;
+  font-weight: bold;
+
+}
+
+.training-document > p {
+  width: 8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-bottom: 5px;
+
+}
+
+.training-document > img {
+  width: 60%;
+}
+
+.training-main {
+  padding: 1% 2%;
+  background-color: var(--tertiary-color);
+  box-sizing: border-box;
+}
+
+.training-page {
+  background-color: white;
+  box-sizing: border-box;
+  min-height: 400px;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  gap: 1%;
+  max-height: 100%;
+}
+
+.admin-main {
+  width: 85vw;
+  justify-content: start;
+  align-items: start;
+  gap: 1%;
+  padding: 2%;
+  padding-top: 1%;
+  box-sizing: border-box;
+}
+
+.admin-heading {
+  height: auto;
+  gap: 0.8rem;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--primary-color);
+}
+
+
+.label-save-container {
+  height: 6rem;
+  justify-content: start;
+  align-items: end;
+  gap: 2%;
+  margin-bottom: 0.7rem;
+}
+
+.label-container {
+  border-radius: 0.8rem;
+  width: 45%;
+  height: 6rem;
+  background-color: var(--tertiary-color);
+  overflow: hidden;
+}
+
+.blue-line {
+  height: 2rem;
+  background-color: var(--primary-color);
+  color: white;
+  justify-content: start;
+  padding-left: 0.8rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.label-input {
+  height: 4rem;
+}
+
+#label-input {
+  width: 90%;
+  height: 60%;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  outline: none;
+  border: 2px solid gray;
+}
+
+#question-input,
+#answer-input {
+  height: 70%;
+  width: 100%;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  margin-right: 0.8rem;
+  font-weight: bold;
+  outline: none;
+  border: 2px solid var(--positive-color);
+}
+
+.save-button {
+  background-color: var(--primary-color);
+  font-size: 1.1rem;
+  padding: 1rem;
+  color: white;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  width: 10rem;
+  height: auto;
+  cursor: pointer;
+}
+
+.question-answers-container {
+  justify-content: start;
+  align-items: start;
+  gap: 2%;
+  height: 45%;
+}
+
+.questions-container {
+  width: 46.8%;
+  justify-content: start;
+  max-height: 100%;
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+.answers-container {
+  width: 55%;
+  justify-content: start;
+  max-height: 100%;
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+.question {
+  height: 4rem;
+  background-color: var(--tertiary-color);
+  border-radius: 0.5rem;
+  justify-content: start;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.question > img {
+  height: 60%;
+}
+
+.break {
+  font-size: 2rem;
+  color: #bababa;
+  margin: 5px;
+  font-weight: 100;
+}
+
+.question-text {
+  overflow-y: auto;
+  height: 85%;
+  justify-content: start;
+}
+
+.answer-text {
+  overflow-y: auto;
+  height: 85%;
+  justify-content: start;
+}
+
+/* 
+.answer {
+  height: 10rem;
+  background-color: var(--tertiary-color);
+  border-radius: 1rem;
+  justify-content: start;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1rem;
+} */
+
+.answer-heading {
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.answer-heading-text {
+  margin: 0 0.5rem;
+}
+
+.remove-answer {
+  cursor: pointer;
+}
+
+.remove-answer > img {
+  height: 1.8rem;
+}
+/* 
+.answer-body {
+  width: 95%;
+  height: 4rem;
+}
+
+.answer-body-text {
+  padding: 1rem;
+  max-height: 10rem;
+  width: 95%;
+  overflow-y: auto;
+  box-sizing: border-box;
+} */
+
+.add-questions-answers-container {
+  justify-content: start;
+  align-items: start;
+  height: 7%;
+  max-height: 7%;
+  min-height: 7%;
+}
+
+.add-questions {
+  width: 47%;
+}
+
+.add-answers {
+  width: 55%;
+  box-sizing: border-box;
+  margin-left: 2%;
+}
+
+.add-answers::before {
+  content: 'Answer';
+  padding: 10px;
+}
+.add-questions::before {
+  content: 'Question';
+}
+
+.add-answers::before, .add-questions::before {
+  font-family: 'Arial', sans-serif; /* Choose a font that you like */
+  font-size: 1.2rem; /* Adjust the size as you see fit */
+  color: #4CAF50; /* This should be a color that matches your design */
+  padding-right: 0.5em; /* Adds some space between the text and the button */
+  font-weight: bold; /* Makes the text bold */
+}
+
+/* Additional styling for hover effects */
+.add-answers:hover::before, .add-questions:hover::before {
+  color: #388E3C; /* Darker shade for hover state */
+  text-decoration: underline; /* Adds underline on hover */
+}
+
+
+.add-questions,
+.add-answers {
+  justify-content: start;
+}
+
+.add-questions > img,
+.add-answers > img {
+  height: 2.5rem;
+  cursor: pointer;
+}
+
+.videos-container {
+  background-color: var(--tertiary-color);
+  border-radius: 0.8rem;
+  height: 13.5rem;
+  min-height: 13.5rem;
+  gap: 2.2rem;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1.1rem;
+  max-height: 9rem;
+  overflow-y: auto;
+}
+
+.videos,
+.add-videos-button {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.add-videos-button {
+  cursor: pointer;
+}
+
+.videos > img {
+  width: 7rem;
+  height: 7rem;
+}
+
+@media screen and (1080px >= width >= 850px) {
+  .training-page {
+    min-height: 550px;
+  }
+}
+
+@media screen and (850px >= width >= 720px) {
+  .training-page {
+    min-height: 450px;
+  }
+
+}
+
+@media screen and (1440px >= width >= 1080px) {
+  html {
+    font-size: 80%;
+  }
+
+  .training-page {
+    min-height: 580px;
+  }
+}
+
+@media screen and (width > 1440px) {
+  html {
+    font-size: 90%;
+  }
+
+  .training-page {
+    min-height: 820px;
+  }  
+}
+
+
+/* Styles for the lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.lightbox-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.lightbox-content > video {
+  width: 350px;
+  aspect-ratio: 16 / 9;
+}
+
+
+@media screen and (1540px >= width >= 1080px) {
+  .lightbox-content > video {
+    width: 650px;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+
+@media screen and (width > 1550px) {
+
+  .lightbox-content > video {
+    width: 750px;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+
+.video-thumbnail > img {
+  width: 9.5rem;
+  height: 10rem;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.video-thumbnail {
+  width: 10rem; /* Adjusted width to match the expected output */
+  height: 10rem; /* Same height as in your style */
+  background: linear-gradient(
+    45deg,
+    #1f2a48,
+    #313c57
+  ); /* Gradient background */
+  border-radius: 5px; /* More prominent rounded corners */
+  position: relative; /* Making it a reference for absolute positioning of child elements */
+  overflow: hidden; /* Ensuring the inner video doesn't spill out of the corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: slight shadow for depth */
+}
+
+/* The inner video element styling */
+.video-thumbnail > video {
+  position: absolute; /* Absolute positioning */
+  top: 50%; /* Centering the video */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Ensure video is centered */
+  width: 9.5rem; /* Dimensions as you specified */
+  height: 10rem;
+  object-fit: cover; /* Ensuring video covers the whole thumbnail without distortion */
+}
+
+
+.add-training-cards-container {
+  width: 13rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+.training-vids-sub-container {
+  border-radius: 1rem;
+  justify-content: start;
+  /* padding: 1%; */
+  height: 85%;
+  width: 95%;
+  background-color: var(--tertiary-color);
+  box-sizing: border-box;
+}
+
+.training-vids {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  justify-items: center;
+  border-radius: 1rem;
+  gap: 1rem;
+  width: 110%;
+  background-color: var(--tertiary-color);
+  overflow-y: auto;
+  box-sizing: border-box;
+  max-height: 45rem;
+}
+
+.add-training-cards {
+  width: 70%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  background-color: white;
+  border-radius: 1rem;
+  transition: width 0.3s ease;
+}
+
+.add-training-cards > img{
+  width: 30%;
+}
+
+
+.add-training-cards-para {
+  color: var(--positive-color);
+  font-size: 0.8rem;
+  transition: font-size 0.3s ease;
+  font-weight: bold;
+}
+
+/* Messages/notification */
+#message-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #444;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.3);
+  text-align: center;
+  font-size: 16px;
+}
+
+.success {
+  background-color: #4CAF50 !important; /* Green */
+}
+
+.information {
+  background-color: lightgray !important; /* Green */
+}
+
+.error {
+  background-color: #F44336 !important; /* Red */
+}
+
+

@@ -1,0 +1,124 @@
+@import url("../../css/constants.css");
+
+.previous-questions-container {
+  margin-top: 3.5%;
+  width: 70%;
+  justify-content: start;
+  align-items: start;
+  gap: 1rem;
+  max-height: 45rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background-color: var(--tertiary-color);
+  border-radius: 2rem;
+  padding: 2rem;
+}
+
+.previous-questions {
+  height: 3rem;
+  min-height: 3rem;
+  max-height: 3rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  justify-content: start;
+}
+
+.selected-tab {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.question-answer-image {
+  height: 60%;
+}
+
+.next-button {
+  height: 40%;
+}
+
+.question-answer-text {
+  width: 82%;
+  overflow: hidden;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.button-container {
+  justify-content: end;
+  gap: 10px;
+}
+
+
+
+.pagination-container {
+  height: 2.5rem;
+  justify-content: end;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.pagination {
+  width: 70%;
+  height: auto;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: var(--primary-color);
+  color: white;
+  border: 1px solid var(--primary-color);
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+/* Style the 'Back' and 'Next' links */
+.pagination a:first-child, .pagination a:last-child {
+  border-radius: 4px;
+}
+
+@media screen and (1080px >= width >= 850px) {
+  .training-page {
+    min-height: 550px;
+  }
+}
+
+@media screen and (850px >= width >= 720px) {
+  .training-page {
+    min-height: 450px;
+  }
+}
+
+@media screen and (1440px >= width >= 1080px) {
+  html {
+    font-size: 80%;
+  }
+
+  .training-page {
+    min-height: 580px;
+  }
+}
+
+@media screen and (width > 1440px) {
+  html {
+    font-size: 100%;
+  }
+
+  .training-page {
+    min-height: 800px;
+  }
+}

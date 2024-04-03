@@ -1,0 +1,293 @@
+@import url("constants.css");
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  height: 100vh;
+  font-family: "Inria Sans", sans-serif;
+  background-color: var(--tertiary-color);
+}
+
+.max-height {
+  height: 100%;
+}
+
+.max-width {
+  width: 100%;
+}
+
+.center-aligned-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.column-flex {
+  flex-direction: column;
+}
+
+.row-flex {
+  flex-direction: row;
+}
+
+.zero-width {
+  width: 0;
+}
+
+.click-button:hover {
+  cursor: pointer;
+}
+
+
+.arrow {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  cursor: pointer;
+  padding: 10px;
+  background-color: var(--tertiary-color);
+  border: 1px solid var(--primary-color);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-size: 1rem;
+  font-weight: bolder;
+  color: var(--primary-color);
+  user-select: none;
+}
+
+.sidebar {
+  width: 15vw;
+  background-color: white;
+  border-radius: 1rem;
+  justify-content: start;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+}
+
+.sidebar > img {
+  width: 60%;
+}
+
+.sidebar > h2 {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+.department-box {
+  background-color: var(--tertiary-color);
+  color: var(--primary-color);
+  fill: var(--primary-color);
+  width: 90%;
+  height: 7%;
+  margin: 5%;
+  border-radius: 0.5rem;
+}
+
+.department-box:hover {
+  cursor: pointer;
+}
+
+.department-box > object {
+  width: 15%;
+}
+
+.department-title {
+  width: 70%;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.selected-department-box {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.free-space {
+  height: 17%;
+}
+
+.admin-panel-box {
+  height: 20%;
+}
+
+.admin-panel-icon-container {
+  width: 35%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: white;
+  padding: 0.8rem;
+  box-sizing: border-box;
+}
+
+.admin-panel-icon-container > object {
+  width: 75%;
+}
+
+.admin-panel-box > h3 {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.logout-button {
+  background-color: var(--primary-color);
+  width: 10rem;
+  height: 3rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.first-heading {
+  justify-content: start;
+  height: auto;
+  width: 50%;
+  gap: 0.8rem;
+}
+
+.first-heading > h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  display: inline;
+}
+
+.first-heading > object {
+  width: 7%;
+}
+
+/* Styles for modifying question answer container */
+.previous-questions-answer-box {
+  margin-top: 5%;
+  width: 60%;
+  border: 0.15rem solid var(--primary-color);
+  padding: 5%;
+  border-radius: 2rem;
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  font-weight: bolder;
+  text-align: center;
+  cursor: pointer;
+}
+
+.previous-questions-answer-box:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Styles for modifying dropdown box */
+.dropdown-container {
+  width: 82%;
+  margin-top: 1rem;
+  font-family: "Inria Sans", sans-serif;
+}
+
+.custom-dropdown {
+  width: 12rem;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #cad9ff;
+  color: #2c2c2c;
+  font-size: 1.2rem;
+  appearance: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+#custom-dropdown {
+  font-family: "Inria Sans", sans-serif;
+  color: #2c2c2c88;
+  font-weight: 600;
+}
+
+.custom-dropdown:hover {
+  background-color: var(--tertiary-color);
+  font-family: "Inria Sans", sans-serif;
+}
+
+/* This is optional: for the arrow on the right */
+.custom-dropdown::-ms-expand {
+  display: none;
+  font-family: "Inria Sans", sans-serif;
+}
+
+.dropdown-container::after {
+  content: "▼"; /* Added arrow character */
+  position: relative;
+  right: 2rem;
+  font-family: "Inria Sans", sans-serif;
+  color: #2c2c2c88; /* Adjust color as needed */
+  pointer-events: none;
+}
+
+/* Modify the scrollbar track */
+/* For WebKit (Chrome, Safari, Opera) */
+::-webkit-scrollbar {
+  width: 0.4rem; /* Set the width of the scrollbar */
+  scroll-behavior: auto;
+}
+
+/* For WebKit (Chrome, Safari, Opera) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Set the background color of the track */
+}
+
+/* Modify the scrollbar thumb */
+/* For WebKit (Chrome, Safari, Opera) */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Set the color of the thumb */
+  border-radius: 6px; /* Round the corners of the thumb */
+}
+
+/* Modify the scrollbar track when hovering over it */
+/* For WebKit (Chrome, Safari, Opera) */
+::-webkit-scrollbar-track:hover {
+  background: #d4d4d4;
+}
+
+/* Modify the scrollbar thumb when hovering over it */
+/* For WebKit (Chrome, Safari, Opera) */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Media Queries for Tablets */
+@media screen and (850px >= width >= 680px) {
+  .sidebar {
+    width: 20vw;
+  }
+}
+
+/* Media Queries for Mobiles */
+@media screen and (width <= 680px) {
+  .sidebar {
+    overflow: hidden;
+    position: fixed;
+  }
+
+  .department-box {
+    height: 8%;
+  }
+
+  .admin-panel-box {
+    height: 22%;
+  }
+}
+
+/* Media Query for Sidebar Arrow */
+@media only screen and (min-width: 681px) {
+  .arrow {
+    display: none;
+  }
+}

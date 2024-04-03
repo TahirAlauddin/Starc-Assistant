@@ -1,0 +1,285 @@
+@import url("../css/constants.css");
+
+/* Scrollable history container */
+.chatbot-history-container {
+  padding: 20px; /* Padding inside the container for spacing */
+  line-height: 1.6; /* Improve line spacing for readability */
+  letter-spacing: 0.1px; /* Adjust letter spacing slightly for clarity */
+  
+}
+
+/* Ensure images do not overpower text */
+.query-container > img,
+.answer-container > img {
+  width: 2rem; /* Smaller images */
+  height: 2rem; /* Fixed height for consistency */
+  margin-right: 10px; /* Space between image and text */
+}
+
+
+.home-page {
+  background-color: var(--tertiary-color);
+  padding: 1%;
+  gap: 1%;
+  box-sizing: border-box;
+  min-height: 380px;
+  overflow: hidden;
+}
+
+.main {
+  width: 80vw;
+  border-radius: 1rem;
+  background-color: white;
+}
+
+.chatbot-title {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+}
+
+.default-main > img {
+  width: 100%;
+}
+
+.sub-main {
+  justify-content: start;
+}
+
+.departments-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.sub-main > img {
+  width: 100%;
+}
+
+.chat-input {
+  margin-bottom: 1rem;
+  margin-top: 1.6rem;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  padding: 0.7rem;
+  background-color: #cad9ff;
+  color: white;
+  width: 80%;
+}
+
+.message-input {
+  border: none;
+  outline: none;
+  padding: 0.8rem;
+  flex: 1;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #6d6d6d;
+  background-color: #cad9ff;
+}
+
+.message-input::placeholder {
+  color: #6d6d6d;
+}
+
+.send-message-button-container {
+  background-color: #fff;
+  width: 5%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4rem;
+}
+
+.send-message-button {
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Create a 2x3 grid */
+.recommendations-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  justify-self: center;
+  align-self: center;
+  gap: 10% 0;
+  padding: 1.5rem;
+  width: 70%;
+  height: 100%;
+}
+
+/* Style the grid items (divs) */
+.recommendations-item {
+  background-color: #c8eaff;
+  border-radius: 0.5rem; /* Adjust the border radius as needed */
+  width: 90%;
+  padding: 1rem;
+  height: 4rem;
+  box-sizing: border-box;
+  aspect-ratio: 4 / 1;
+}
+
+.recommendations-item > div {
+  width: 90%;
+  color: #101010c4;
+  font-weight: bold;
+}
+
+.chatbot-image-container {
+  position: relative;
+  width: 100%;
+}
+
+.chatbot-image-container > img {
+  width: 100%;
+}
+
+.chat-message {
+  width: fit-content;
+  /* max-width: 150px; */
+  padding: 10px 15px;
+  top: 13%;
+  left: 15%;
+  /* min-height: 7rem; */
+  /* min-width: 15rem; */
+  background-color: #007bff; /* This is a shade of blue */
+  color: white;
+  border-radius: 10px; /* Rounded corners except bottom-left */
+  position: absolute;
+  z-index: 9999;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Arrow pointing to the bot */
+.chat-message::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 25px 25px 0;
+  border-color: transparent transparent #007bff transparent;
+  border-radius: 5px;
+  position: absolute;
+  right: -15px;
+  bottom: 10px;
+  margin: 0;
+}
+
+.chat-message p {
+  margin: 0 0 10px;
+  word-wrap: break-word;
+}
+
+.chatbot-history-container {
+  height: 100%;
+  width: 100%;
+  font-size: 1.2rem;
+  overflow-y: auto;
+}
+
+.query-container {
+  height: auto;
+  width: 100%;
+  justify-content: start;
+  gap: 1rem;
+  box-sizing: border-box;
+  font-weight: bold;
+  padding: 2rem;
+  border-bottom: 1px solid #bbb;
+}
+
+.answer-container {
+  height: auto;
+  width: 100%;
+  justify-content: start;
+  gap: 1rem;
+  box-sizing: border-box;
+  padding: 2rem;
+  font-weight: bold;
+  background-color: #eee;
+  border-bottom: 1px solid #bbb;
+}
+
+
+.chatbot-container {
+  width: 95%;
+  height: 95%;
+  justify-content: end;
+  /* padding: 2rem; */
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: white;
+  margin: 2rem;
+  border-radius: 0.7rem;
+}
+
+.animation-vid {
+  width: 100%;
+  height: 25rem;
+}
+
+
+@media screen and (width <= 680px) {
+  .main {
+    width: 95vw;
+  }
+    
+}
+
+
+@media screen and (720px >= width >= 600px) {
+  .home-page {
+    min-height: 450px;
+  }
+
+  .animation-vid {
+    width: 100%;
+    height: 18rem;
+  }
+}
+
+@media screen and (1080px >= width >= 850px) {
+  .home-page {
+    min-height: 550px;
+  }
+}
+
+@media screen and (850px >= width >= 720px) {
+  .home-page {
+    min-height: 500px;
+  }
+  .animation-vid {
+    width: 100%;
+    height: 22rem;
+  }
+}
+
+@media screen and (1440px >= width >= 1080px) {
+  html {
+    font-size: 80%;
+  }
+
+  .home-page {
+    min-height: 650px;
+  }
+}
+
+@media screen and (width > 1440px) {
+  html {
+    font-size: 100%;
+  }
+
+  .home-page {
+    min-height: 800px;
+  }
+}

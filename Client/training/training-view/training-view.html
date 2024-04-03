@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)http://localhost:8000/training/1/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/normalize.css" />
+  <link rel="stylesheet" href="../training.css" />
+
+  <title>STARC - Training</title>
+</head>
+
+<body>
+  <div class="training-main max-height max-width">
+    <div class="training-page center-aligned-flex row-flex max-height max-width">
+      <div id="sidebar-div" class="sidebar max-height center-aligned-flex column-flex">
+        <img onclick="redirectToPage('../../home/home.html')" src="../../images/starc-logo.png" style="cursor: pointer" alt="" />
+
+        <h2>Departments</h2>
+
+        <div class="department-box center-aligned-flex row-flex" id="department-tornitura">
+          <object data="../../images/Tornitura.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Tornitura</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex" id="department-rettifiche">
+          <object data="../../images/Rettifiche.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Rettifiche</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex" id="department-qualita">
+          <object data="../../images/Qualita.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Qualita</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex" id="training-button"
+          onclick="redirectToPage('../training.html')">
+          <object data="../../images/Training.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Training</div>
+        </div>
+
+        <div class="free-space"></div>
+
+        <div class="department-box admin-panel-box center-aligned-flex column-flex" id="admin-panel-button"
+          onclick="redirectToPage('../../login/login.html')">
+          <div class="center-aligned-flex admin-panel-icon-container">
+            <object data="../../images/Admin.svg" type="image/svg+xml"></object>
+          </div>
+
+          <h3>Admin Panel</h3>
+        </div>
+      </div>
+
+      <div class="center-aligned-flex column-flex training-container max-height">
+        <div class="training-heading center-aligned-flex">
+          <div class="first-heading center-aligned-flex">
+            <object data="../../images/Training-Heading.svg" type="image/svg+xml"></object>
+            <h2>Training</h2>
+          </div>
+
+          <div class="logout-button center-aligned-flex" onclick="sendLogOutRequest()">
+            Log Out
+          </div>
+        </div>
+        <div class="center-aligned-flex column-flex training-vids-sub-container" id="training-vids-sub-container">
+          <div class="training-vids center-aligned-flex" id="training-vids">
+           
+            <div class="add-training-cards-container center-aligned-flex" id="add-training-cards-container">
+              <div class="add-training-cards center-aligned-flex column-flex">
+                <div>
+                  <img src="../images/Add.png" />
+                </div>
+                <div class="add-training-cards-para">
+                  Add Videos and Documents
+                </div>
+              </div>
+            </div>
+
+            <form id="uploadForm" style="display: none;">
+              <input type="hidden" name="csrfmiddlewaretoken"
+                value="udeKXxJ2U07gkdoAbj8WwxNLDfpnc1xh8CJFvoggHDvTTjRslTZMw0h4AGGTe8cb" />
+              <input type="file" id="fileInput" accept="image/*,video/*,.pdf" multiple=""
+                style="display: none" />
+            </form>
+          </div>
+          
+          <div id="title" contenteditable="true" class="training-vids-title">
+            <!-- <div id="edit-title" class="edit-para">
+              <img src="../images/edit.png" alt="" />
+            </div> -->
+          </div>
+
+          <div id="content" contenteditable="true" class="training-vids-para">
+            <!-- <div id="edit-para" class="edit-para">
+              <img src="../images/edit.png" alt="" />
+            </div> -->
+          </div>
+
+          <div id="save-training-button-container" class="button-container">
+            <div id="save-training-button" class="save-training-button center-aligned-flex">
+              Save
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="message-container" style="display: none;"></div>
+
+  <div class="lightbox">
+    <div class="lightbox-content">
+      <div class="close-button">x</div>
+      <video controls="" muted="" preload="auto" id="lightbox-video">
+        <!-- Video source will be dynamically set here -->
+      </video>
+    </div>
+  </div>
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script> -->
+  <script src="pdf-library.js"></script>
+
+  <script src="../../scripts/script.js"></script>
+  <script src="../../scripts/sidebar-responsiveness.js"></script>
+  <script src="training-view.js"></script>
+</body>
+
+</html>

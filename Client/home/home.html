@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="home.css">
+
+    <title>
+        STARC - Home
+    </title>
+</head>
+
+<body>
+
+
+    <div class="home-page center-aligned-flex row-flex max-height max-width">
+
+        <div class="sidebar max-height center-aligned-flex column-flex">
+            <img src="../images/starc-logo.png" style="cursor: pointer;"
+                alt="">
+
+            <h2>Departments</h2>
+
+            <div class="department-box center-aligned-flex row-flex" id="department-tornitura"
+                onclick="redirectToPage('../chatbot/main.html?tab=tornitura')">
+                <object data="../images/Tornitura.svg" type="image/svg+xml"></object>
+
+                <div class="department-title center-aligned-flex">Tornitura</div>
+            </div>
+
+            <div class="department-box center-aligned-flex row-flex" id="department-rettifiche"
+                onclick="redirectToPage('../chatbot/main.html?tab=rettifiche')">
+                <object data="../images/Rettifiche.svg" type="image/svg+xml"></object>
+
+                <div class="department-title center-aligned-flex">Rettifiche</div>
+            </div>
+
+            <div class="department-box center-aligned-flex row-flex" id="department-qualita"
+                onclick="redirectToPage('../chatbot/main.html?tab=qualita')">
+                <object data="../images/Qualita.svg" type="image/svg+xml"></object>
+
+                <div class="department-title center-aligned-flex">Qualita</div>
+            </div>
+
+            <div class="department-box center-aligned-flex row-flex" id="training-button"
+                onclick="redirectToPage('../training/training.html')">
+                <object data="../images/Training.svg" type="image/svg+xml"></object>
+
+                <div class="department-title center-aligned-flex">Training</div>
+            </div>
+
+
+
+            <div class="free-space"></div>
+
+            <div class="department-box admin-panel-box center-aligned-flex column-flex" id="admin-panel-button"
+                onclick="redirectToPage('../login/login.html')">
+                <div class="center-aligned-flex admin-panel-icon-container">
+                    <object data="../images/Admin.svg" type="image/svg+xml"></object>
+                </div>
+
+                <h3>Admin Panel</h3>
+            </div>
+        </div>
+
+        <div class="main max-height center-aligned-flex column-flex">
+            <div class="default-main max-height center-aligned-flex column-flex" id="default-main">
+                <h2 class="chatbot-title">Hi, I'm Tarsia! How can I help you?</h2>
+                <div style="position: relative;">
+                    <video id="animation-vid" style="width: 100%" src="../images/waves.mp4" autoplay="" muted="" loop=""
+                        disablepictureinpicture="">
+                    </video>
+                    <img src="../images/robot.png"
+                        style="position: absolute; top: 50%; left: 50%; width: 30%;  transform: translate(-50%, -50%)"
+                        alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="../scripts/sidebar-responsiveness.js"></script>
+    <script src="../scripts/script.js"></script>
+    <script src="home.js"></script>
+
+    <script>
+        let user = ``;
+        document.cookie = "isAdmin=true; path=/; max-age=3600";
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+/* Regular */
+@font-face {
+  font-family: "Inria Sans";
+  src: url("../fonts/InriaSans-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Light */
+@font-face {
+  font-family: "Inria Sans";
+  src: url("../fonts/InriaSans-Light.woff") format("woff");
+  font-weight: light;
+  font-style: normal;
+}
+
+/* Italic */
+@font-face {
+  font-family: "Inria Sans";
+  src: url("../fonts/InriaSans-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* Bold */
+@font-face {
+  font-family: "Inria Sans";
+  src: url("../fonts/InriaSans-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Bold Italic */
+@font-face {
+  font-family: "Inria Sans";
+  src: url("../fonts/InriaSans-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+}
+
+:root {
+  --primary-color: #0161db;
+  --secondary-color: #e34041;
+  --tertiary-color: #C8EAFF;
+  --positive-color: #00BA34;
+}

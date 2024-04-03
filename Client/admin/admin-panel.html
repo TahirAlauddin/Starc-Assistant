@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://localhost:8000/admin-panel/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    
+    
+<link rel="stylesheet" href="admin_panel.css">
+
+    <title>
+        STARC - Admin
+    </title>
+</head>
+<body>
+    
+
+<div class="training-main max-height max-width">
+  <div class="training-page center-aligned-flex row-flex max-height max-width">
+    
+
+<div class="sidebar max-height center-aligned-flex column-flex">
+  <img onclick="redirectToPage('../home/home.html')" src="../images/starc-logo.png" style="cursor: pointer;" alt="">
+
+  <h2>Departments</h2>
+
+  <div class="department-box center-aligned-flex row-flex selected-department-box" id="department-tornitura">
+    <object data="../images/Tornitura-Selected.svg" type="image/svg+xml"></object>
+
+    <div class="department-title center-aligned-flex">Tornitura</div>
+  </div>
+
+  <div class="department-box center-aligned-flex row-flex" id="department-rettifiche">
+    <object data="../images/Rettifiche.svg" type="image/svg+xml"></object>
+
+    <div class="department-title center-aligned-flex">Rettifiche</div>
+  </div>
+
+  <div class="department-box center-aligned-flex row-flex" id="department-qualita">
+    <object data="../images/Qualita.svg" type="image/svg+xml"></object>
+
+    <div class="department-title center-aligned-flex">Qualita</div>
+  </div>
+
+  <div class="department-box center-aligned-flex row-flex" id="training-button" onclick="redirectToPage('../training/training.html')">
+    <object data="../images/Training.svg" type="image/svg+xml"></object>
+
+    <div class="department-title center-aligned-flex">Training</div>
+  </div>
+
+  
+  <div class="previous-questions-answer-box" id="previous-question-answers">
+    Previous Q / A</div>
+  
+</div>
+
+    <div class="max-height max-width center-aligned-flex admin-main column-flex">
+      <div class="admin-heading center-aligned-flex">
+        <div class="first-heading center-aligned-flex">
+          <object data="../images/Tornitura.svg" type="image/svg+xml"></object>
+          <h2 id="admin-heading">Tornitura</h2>
+          <object class="right-arrow-object" data="images/GT.svg" type="image/svg+xml"></object>
+          <h2>Q/A</h2>
+        </div>
+
+        <div class="logout-button center-aligned-flex" onclick="sendLogOutRequest()">
+          Log Out
+        </div>
+      </div>
+      <div id="label-save-container" class="center-aligned-flex label-save-container">
+        <div class="label-container">
+          <div class="center-aligned-flex blue-line max-width">Label</div>
+          <div class="center-aligned-flex label-input">
+            <input type="text" name="label" id="label-input">
+          </div>
+        </div>
+        <div class="dropdown-container">
+          <select class="custom-dropdown" id="custom-dropdown"><option value="Graziano">Graziano</option><option value="Mori Seiki">Mori Seiki</option><option value="Okuma">Okuma</option><option value="Puma SMX">Puma SMX</option><option value="Doosan TT">Doosan TT</option><option value="DMG Mori">DMG Mori</option></select>
+        </div>
+        <div class="center-aligned-flex save-button" id="save-button">
+          Save
+        </div>
+      </div>
+      <div class="center-aligned-flex question-answers-container">
+        <div class="center-aligned-flex column-flex questions-container" id="questions-container">
+          
+
+        </div>
+        <div class="center-aligned-flex column-flex answers-container" id="answers-container">
+
+          
+
+        </div>
+      </div>
+      <div class="center-aligned-flex add-questions-answers-container">
+        <div class="center-aligned-flex add-questions" data-text="Question">
+          <input type="text" name="" id="question-input">
+          <img src="images/Add.svg" alt="" onclick="addQuestion()">
+        </div>
+        <div class="center-aligned-flex add-answers" data-text="Answer">
+          <input type="text" name="" id="answer-input">
+          <img src="images/Add.svg" alt="" onclick="addAnswer()">
+        </div>
+      </div>
+      <div class="center-aligned-flex row-flex videos-container">
+
+      
+        <div class="center-aligned-flex column-flex training-vids-sub-container" id="training-vids-sub-container">
+          <div class="training-vids center-aligned-flex" id="training-vids">
+      
+            
+            <div class="add-training-cards-container center-aligned-flex" id="add-training-cards-container">
+              <div class="add-training-cards center-aligned-flex column-flex">
+                  <img src="images/Add.svg">
+                <div class="add-training-cards-para">Add Videos and Documents</div>
+              </div>
+            </div>
+  
+            <form id="uploadForm">
+              <input type="hidden" name="csrfmiddlewaretoken" value="udeKXxJ2U07gkdoAbj8WwxNLDfpnc1xh8CJFvoggHDvTTjRslTZMw0h4AGGTe8cb">
+              <input type="file" id="fileInput" accept="image/*,video/*,.pdf" multiple="" style="display: none;">
+            </form>
+  
+          </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="message-container" style="display: none;"></div>
+    
+<script src="pdf-library.js"></script>
+<script src="../scripts/script.js"></script>
+<script src="../scripts/sidebar-responsiveness.js"></script>
+
+<script src="admin.js"></script>
+<script src="tab-change.js"></script>
+<script>
+  addOptionsToDropdown("Tornitura");
+</script>
+
+
+</body></html>
+
+

@@ -1,0 +1,76 @@
+@import url("../../css/constants.css");
+
+body {
+  background-color: white;
+}
+
+.welcome-logo > img {
+  width: 30%;
+}
+
+.logo-gif {
+  aspect-ratio: 4 / 3;
+}
+
+.welcome-logo {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.welcome-page {
+  overflow: hidden;
+  position: relative;
+}
+
+.welcome-bot {
+  align-items: top;
+  flex-direction: column;
+  position: absolute;
+  bottom: -100%;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+}
+
+.welcome-bot > img {
+  width: 100%;
+  height: 75%;
+}
+
+.welcome-message {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.welcome-start-button {
+  width: 10%;
+  height: 5%;
+  background-color: var(--primary-color);
+  color: white;
+  font-family: "Inria Sans", sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 0.8% 3%;
+  border-radius: 0.5rem;
+  transition-duration: 0.4s;
+  text-decoration: none;
+}
+
+.welcome-start-button:hover {
+  background-color: #023f8e;
+  box-shadow: 0 0 5px 5px #347edfb2;
+}
+
+@media screen and (1440px >= width >= 1080px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media screen and (width > 1440px) {
+  html {
+    font-size: 100%;
+  }
+}
