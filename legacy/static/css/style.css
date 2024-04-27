@@ -1,0 +1,131 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
+
+.navigation-bar {
+  border: 2px solid #0e2954;
+  background-color: #0e2954;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+
+.title-container {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-size: 40px;
+  color: #2b2730;
+}
+
+.selector-conatiner {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  margin: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  appearance: none;
+}
+
+select[disabled] {
+  background-color: #eeeeee;
+  cursor: not-allowed;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.chat-input input[type="text"] {
+  flex-grow: 1;
+  border: 2px solid #2b2730;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0 100px;
+  font-size: 14px;
+}
+
+.chat-input button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 70px;
+}
+
+.chat-input button:hover {
+  background-color: #45a049;
+}
+
+.message {
+  background-color: #f8f8f8;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.close-btn {
+  float: right;
+  cursor: pointer;
+}
+
+.red-message {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.link-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #d90000;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  margin: 0px 30px;
+}
+
+.link-button:hover {
+  background-color: #b80000;
+}
+
+.link-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(217, 0, 0, 0.4);
+}
+
+.link-button:active {
+  transform: translateY(1px);
+}

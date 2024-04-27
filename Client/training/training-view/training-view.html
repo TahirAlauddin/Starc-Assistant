@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0033)http://localhost:8000/training/1/ -->
 <html lang="en">
 
 <head>
@@ -17,7 +16,7 @@
   <div class="training-main max-height max-width">
     <div class="training-page center-aligned-flex row-flex max-height max-width">
       <div id="sidebar-div" class="sidebar max-height center-aligned-flex column-flex">
-        <img onclick="redirectToPage('../../home/home.html')" src="../../images/starc-logo.png" style="cursor: pointer" alt="" />
+        <img src="../../images/starc-logo.png" alt="" />
 
         <h2>Departments</h2>
 
@@ -63,11 +62,17 @@
           <div class="first-heading center-aligned-flex">
             <object data="../../images/Training-Heading.svg" type="image/svg+xml"></object>
             <h2>Training</h2>
+
+            <div class="dropdown-container">
+              <select class="custom-dropdown" id="custom-dropdown">
+                <option value="Tornitura">Tornitura</option>
+                <option value="Qualita">Qualita</option>
+                <option value="Rettifiche">Rettifiche</option>
+              </select>
+            </div>
+
           </div>
 
-          <div class="logout-button center-aligned-flex" onclick="sendLogOutRequest()">
-            Log Out
-          </div>
         </div>
         <div class="center-aligned-flex column-flex training-vids-sub-container" id="training-vids-sub-container">
           <div class="training-vids center-aligned-flex" id="training-vids">
@@ -91,10 +96,14 @@
             </form>
           </div>
           
-          <div id="title" contenteditable="true" class="training-vids-title">
-            <!-- <div id="edit-title" class="edit-para">
-              <img src="../images/edit.png" alt="" />
-            </div> -->
+          <div>
+            <div id="title" contenteditable="true" class="training-vids-title">
+              <!-- <div id="edit-title" class="edit-para">
+                <img src="../images/edit.png" alt="" />
+              </div> -->
+            </div>
+            <div id="department" contenteditable="true" class="training-vids-title">
+            </div>
           </div>
 
           <div id="content" contenteditable="true" class="training-vids-para">
@@ -124,12 +133,27 @@
     </div>
   </div>
 
+  <script>
+    // Object to track file state
+    const fileState = {
+      addedFiles: [],
+      removedFiles: [],
+      unchangedFiles: []
+    }
+    let uploadedFiles = []
+
+  </script>
+
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script> -->
   <script src="pdf-library.js"></script>
 
+  <script src="../../scripts/config.js"></script>
   <script src="../../scripts/script.js"></script>
   <script src="../../scripts/sidebar-responsiveness.js"></script>
+  <script src="../../scripts/notification.js"></script>
+  <script src="../../scripts/ui.js"></script>
   <script src="training-view.js"></script>
+  <script src="crud.js"></script>
 </body>
 
 </html>

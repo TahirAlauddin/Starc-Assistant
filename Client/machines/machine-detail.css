@@ -1,0 +1,218 @@
+
+    .one-heading h2{
+        font-weight:700;
+        font-size: 30px;
+        line-height: 40px;
+        color:#0161DB;
+        margin-bottom: 0;
+    }
+    .machinedetail-main {
+        padding: 1% 2%;
+        background-color: var(--tertiary-color);
+        box-sizing: border-box;
+    }
+    
+    .machinedetail-page {
+        background-color: var(--tertiary-color);
+        box-sizing: border-box;
+        min-height: 400px;
+        overflow: hidden;
+        border-radius: 1rem;
+        gap: 1%;
+    }
+    .machinedetail-container {
+        display: flex;
+        width: 85vw;
+        background-color: white;
+        align-items: center;
+        justify-content: start;
+        border-radius: 1rem;
+    }
+    
+    .welcome-bot {
+        width: 60%;
+    }
+    
+    .machinedetail-sub-container2{
+        background-color: var(--tertiary-color);
+        box-sizing: border-box;
+        width: 90%;
+        margin: 20px;
+        border-radius: 1rem;
+        display: flex;
+        align-items: left;
+        justify-content: left;
+    }
+    .machinedetail-box{
+        margin: 20px 0px 20px 70px;
+        width: 90%;
+    }
+    .machinedetail-lable{
+        font-weight:700;
+        font-size: 24px;
+        line-height:32px;
+        letter-spacing:-0.5%;
+        color:#0161DB;
+
+    }
+    .sub-box{
+        margin-bottom: 15px;
+    }
+
+    .sub-box input[type="text"] {
+        margin-right: 10px;
+        font-size: 14px; 
+        font-weight: 700;
+        line-height: 28px;
+        background: white;
+        border: 1px solid #ddd;
+        Width:200px;
+        Height:44px;
+        border-radius:8px;
+        padding: 0px 10px 0px 10px;
+        gap:8px;
+        margin-left: 115px;
+    
+    }
+    .sub-box input[type="text"]::placeholder {
+        color: #CBD5E1;
+    }
+    .sub-box select{
+        Width:200px;
+        Height:36px;
+        border-radius:8px;
+        Border:1px solid #CBD5E1;
+        padding: 0px 10px 0px 10px;
+        color: #0F172A;
+        font-weight:400;
+        font-size:14px;
+        line-height:22px;
+        margin-left: 50px;
+        Width:220px;
+        Height:30px;
+    }
+    input:focus,select:focus {
+        outline: none; 
+    }
+    .second-heading{
+        font-weight: 700;
+        font-size:30px;
+        line-height:44px;
+        letter-spacing:-1%;
+        color: #0161DB;
+        margin-bottom: 0px;
+        margin-top: 40px;
+
+    }
+    .button-container {
+        display: flex;
+        margin-left:750px;
+
+    }
+    button{
+        cursor: pointer;
+    } 
+    .detail-button{
+        background-color:#0161DB;
+        color:white;
+        border-radius:8px;
+        border: 1px solid transparent;
+        padding: 7px;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        Width:110px;
+        Height:44px;
+        Top:928px;
+        margin-left: 10px;
+        
+    }
+    .detail-button img{
+        margin-left: 5px;
+    }
+    .detail-button.del-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: red;
+      }
+      
+    @media screen and (1080px >= width >= 850px) {
+        html {
+          font-size: 75%;
+        }
+      
+        .machinedetail-page {
+          min-height: 550px;
+        }
+        .button-container{
+            margin-left: 450px;
+        }
+        .robot-img{
+            width: 23%;
+            height: 35%;
+        }
+        
+    }
+      
+    @media screen and (850px > width >= 580px) {
+        html {
+          font-size: 60%;
+        }
+      
+        .machinedetail-page {
+          min-height: 450px;
+        }
+        .button-container{
+            margin-left: 200px;
+        }
+        .machinedetail-sub-container {
+            grid-template-columns: repeat(4, 1fr);
+            height: 190px;
+        }
+        .sub-box input[type="text"]{
+            width:150px;
+        }
+        .sub-box select{
+            Width:150px;
+        }  
+        .robot-img{
+            width: 23%;
+            height: 33%;
+            left: 55%;
+        }  
+        
+    }
+      
+    @media screen and (1540px >= width >= 1080px) {
+        html {
+          font-size: 90%;
+        }
+      
+        .machinedetail-page {
+          min-height: 600px;
+        }
+        .button-container{
+            margin-left: 600px;
+        }
+        .robot-img{
+            width: 20%;
+            height: 33%;
+        }
+    }
+      
+    @media screen and (width > 1550px) {
+        html {
+          font-size: 90%;
+        }
+      
+        .machinedetail-page {
+          min-height: 800px;
+        }
+        
+    }
+      
+  
+      
+      
+    

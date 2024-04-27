@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://localhost:8000/training/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/normalize.css" />
+
+  <link rel="stylesheet" href="machine-detail.css" />
+
+  <title>STARC - Machine</title>
+ 
+</head>
+
+<body>
+  <input type="hidden" name="csrfmiddlewaretoken"
+    value="np198B3mVkuLQwKvxkpkGbp4ftbnodXWcsL4WyeIxqCrxDJFRX4zRtWbVM6l0PHI" />
+  <div class="machinedetail-main max-height max-width">
+    <div class="machinedetail-page center-aligned-flex row-flex max-height max-width">
+      <div class="sidebar max-height center-aligned-flex column-flex">
+        <img onclick="redirectToPage('../home/home.html')" src="../images/starc-logo.png" style="cursor: pointer"
+          alt="" />
+
+        <h2>Departments</h2>
+
+        <div class="department-box center-aligned-flex row-flex" id="department-tornitura">
+          <object data="../images/Tornitura.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Tornitura</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex" id="department-rettifiche">
+          <object data="../images/Rettifiche.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Rettifiche</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex" id="department-qualita">
+          <object data="../images/Qualita.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Qualita</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex" id="trainings-button"
+        onclick="redirectToPage('../training/training.html')">
+          <object data="../images/Training.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Training</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex selected-department-box" id="machine-detail-button"
+          onclick="redirectToPage('machine.html')">
+          <img src="../images/machine.png" alt="" srcset="" width="25px" height="25px"/>
+
+          <div class="department-title center-aligned-flex">Machines</div>
+        </div>
+
+        <div class="free-space"></div>
+
+
+        <div class="department-box admin-panel-box center-aligned-flex column-flex" id="admin-panel-button"
+          onclick="redirectToPage('../login/login.html')">
+          <div class="center-aligned-flex admin-panel-icon-container">
+            <object data="../images/Admin.svg" type="image/svg+xml"></object>
+          </div>
+
+          <h3>Admin Panel</h3>
+        </div>
+
+
+      </div>
+
+      <div class="center-aligned-flex column-flex machinedetail-container max-height">
+        <div class="one-heading column-flex">
+          <h2>Change Machine</h2>
+        </div>
+        
+        <img class="welcome-bot" src="images/welcome-bot.png" alt="">
+        <h2 class="second-heading">MACHINE NAME: <span id="heading-name"></span></h2>
+        <div class="machinedetail-sub-container2">
+          <form class="machinedetail-box" id="machineedit-form">
+            <div class="sub-box">
+              <label for="machine-name" class="machinedetail-lable">Name:</label>
+              <input width="50px" type="text" id="machine-name" name="machine-name">
+            </div>
+            <div class="sub-box">
+              <label for="department" class="machinedetail-lable">Department:</label>
+              <select id="department" name="department">
+                <option value="file1.txt">Select Any</option>
+                <option value="file2.txt">File 2</option>
+                <option value="file3.txt">File 3</option>
+              </select>  
+            </div>
+          </form>
+        </div>
+        <div class="button-container">
+          <button onclick="redirectToPage('machine-detail.html')"  class="detail-button del-btn">Delete<img src="images/cancel.png" alt="" srcset="" /></button>
+          <button onclick="redirectToPage('machine-detail.html')"  class="detail-button">Edit<img src="images/pen.png" alt="" srcset="" /></button>         
+        </div>  
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script src="../scripts/script.js"></script>
+  <script src="../scripts/sidebar-responsiveness.js"></script>
+  <script src="machine-detail.js"></script>
+</body>
+
+</html>

@@ -135,7 +135,7 @@ body {
   font-size: 1.1rem;
 }
 
-.logout-button {
+.logout-button, .add-new-topic-button {
   background-color: var(--primary-color);
   width: 10rem;
   height: 3rem;

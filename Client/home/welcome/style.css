@@ -12,6 +12,15 @@ body {
   aspect-ratio: 4 / 3;
 }
 
+
+.update-ip {
+  display: block;
+  text-align: right;
+  margin-bottom: 2rem;
+  color: #0066cc;
+  text-decoration: underline;
+}
+
 .welcome-logo {
   height: 100%;
   width: 100%;
@@ -74,3 +83,5 @@ body {
     font-size: 100%;
   }
 }
+
+

@@ -24,7 +24,7 @@ function redirectToPage(page) {
 function populatePreviousTopics() {
     document.getElementById('topic-container').innerHTML = "";
     
-    fetch(`http://localhost:8000/topic/?machine__department=${selectedDepartment}`) 
+    fetch(`${BASE_URL}/topic/?machine__department=${selectedDepartment}`) 
         .then(response => response.json())
         .then(data => {
             data.results.forEach(topic => {
@@ -72,7 +72,7 @@ window.onload = populatePreviousTopics
 async function setupPagination() {
   
     
-    let response = await fetch(`http://localhost:8000/topic/?machine__department=${selectedDepartment}`) 
+    let response = await fetch(`${BASE_URL}/topic/?machine__department=${selectedDepartment}`) 
     let data = await response.json()
   
   
@@ -102,7 +102,7 @@ async function generatePagination(currentPage, totalPages) {
             document.getElementById('topic-container').innerHTML = ''; // Clear topics container
     
             // Fetch topics for clicked page
-            let response = await fetch(`http://localhost:8000/topic/?machine__department=${selectedDepartment}&page=${prevPage}`);
+            let response = await fetch(`${BASE_URL}/topic/?machine__department=${selectedDepartment}&page=${prevPage}`);
             let topics = await response.json();
             topics.results.forEach(topic => {
                 addTopicItem(topic.id, topic.label);
@@ -136,7 +136,7 @@ async function generatePagination(currentPage, totalPages) {
             document.getElementById('topic-container').innerHTML = ''; // Clear topics container
 
             // Fetch topics for clicked page
-            let response = await fetch(`http://localhost:8000/topic/?machine__department=${selectedDepartment}&page=${pageNumber}`);
+            let response = await fetch(`${BASE_URL}/topic/?machine__department=${selectedDepartment}&page=${pageNumber}`);
             let topics = await response.json();
             topics.results.forEach(topic => {
                 addTopicItem(topic.id, topic.label);
@@ -157,7 +157,7 @@ async function generatePagination(currentPage, totalPages) {
             document.getElementById('topic-container').innerHTML = ''; // Clear topics container
     
             // Fetch topics for clicked page
-            let response = await fetch(`http://localhost:8000/topic/?machine__department=${selectedDepartment}&page=${nextPage}`);
+            let response = await fetch(`${BASE_URL}/topic/?machine__department=${selectedDepartment}&page=${nextPage}`);
             let topics = await response.json();
             topics.results.forEach(topic => {
                 addTopicItem(topic.id, topic.label);

@@ -27,3 +27,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
   
+  const { ipcRenderer } = require('electron');
+
+  document.getElementById('updateIpAddress').addEventListener('click', () => {
+    ipcRenderer.send('update-ip');
+  });

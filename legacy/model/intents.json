@@ -1,0 +1,146 @@
+{
+  "intents": [
+    {
+      "tag": "VibrazioniTornio",
+      "patterns": [
+        "Quali sono le cause comuni delle vibrazioni su un tornio?",
+        "È normale che un tornio produca suoni di vibrazione?",
+        "Qual è l'effetto delle vibrazioni sulla macchina tornio?",
+        "Esiste una tecnica di lubrificazione per ridurre le vibrazioni?",
+        "In che modo il materiale lavorato influenza le vibrazioni?",
+        "C'è un modo per eliminare le vibrazioni durante la filettatura?",
+        "Le vibrazioni indicano un disallineamento dei componenti del tornio?",
+        "Gli smorzatori di vibrazioni possono aiutare a ridurre le vibrazioni del tornio?",
+        "Come posso risolvere un problema di vibrazioni sulla macchina tornio?"
+      ],
+      "responses": [
+        "Controlla la geometria degli utensili, la tensione delle viti di fissaggio e la concentricità dell'albero. Se il problema persiste, controlla l'allineamento della macchina e l'integrità dei componenti."
+      ]
+    },
+    {
+      "tag": "VelocitàDiTaglio",
+      "patterns": [
+        "Come posso calcolare la velocità di taglio ottimale per il mio tornio?",
+        "Una velocità di taglio più alta è sempre migliore nella tornitura?",
+        "Come il materiale del pezzo influisce sulla velocità di taglio?",
+        "Cambiare la velocità di taglio può migliorare la durata dell'utensile?",
+        "Come faccio a sapere se la velocità di taglio è troppo alta?",
+        "Esiste un intervallo standard di velocità di taglio per diversi materiali?",
+        "Come il materiale dell'utensile influenza la velocità di taglio su un tornio?",
+        "Come posso regolare la velocità di taglio sul tornio?"
+      ],
+      "responses": [
+        "La velocità di taglio può essere regolata tramite il pannello di controllo della macchina o utilizzando un software di programmazione. Assicurati che la velocità scelta sia adatta alle condizioni di lavoro e all'utensile in uso."
+      ]
+    },
+    {
+      "tag": "UsuraUtensili",
+      "patterns": [
+        "Come posso risolvere un problema di usura prematura degli utensili?",
+        "Quali sono i segni comuni di usura degli utensili su un tornio?",
+        "Come posso ridurre il tasso di usura degli utensili?",
+        "Come faccio a sapere quando è il momento di sostituire gli utensili?",
+        "Gli utensili usurati possono influenzare la precisione del tornio?",
+        "Quali materiali sono i migliori per gli utensili per ridurre l'usura?",
+        "Come valutare l'adeguatezza degli utensili per le condizioni di lavoro?",
+        "Posso affilare gli utensili per ridurre l'usura?"
+      ],
+      "responses": [
+        "Controlla la qualità degli utensili, la loro affilatura e la loro adeguatezza per le condizioni di lavoro. Inoltre, controlla le impostazioni della macchina per assicurarti che siano ottimali per l'uso dell'utensile."
+      ]
+    },
+    {
+      "tag": "ProduttivitàTornio",
+      "patterns": [
+        "Come posso ottimizzare la produttività del tornio?",
+        "Quali metodi posso utilizzare per migliorare la produttività del tornio?",
+        "Come l'utilizzo di utensili di alta qualità può migliorare la produttività del mio tornio?",
+        "Quale ruolo svolge la pianificazione della lavorazione nella produttività del tornio?",
+        "Come posso migliorare i tempi di ciclo sul mio tornio?",
+        "L'ottimizzazione dei parametri di taglio aumenta la produttività del tornio?",
+        "Ridurre il tempo di inattività del tornio può migliorare la produttività?",
+        "La manutenzione regolare influisce sulla produttività di una macchina tornio?"
+      ],
+      "responses": [
+        "Usa utensili di alta qualità, ottimizza le impostazioni della macchina, pianifica in modo efficiente le operazioni di lavorazione e utilizza software di programmazione avanzati."
+      ]
+    },
+    {
+      "tag": "ProblemiMandrino",
+      "patterns": [
+        "Ho un problema con il mio mandrino, non si accende.",
+        "Perché il mio mandrino del tornio non si accende?",
+        "Esiste un problema elettrico comune che impedisce al mandrino di accendersi?",
+        "Come posso risolvere il problema del mandrino del mio tornio che non si accende?",
+        "Ci sono controlli rapidi per diagnosticare un mandrino che non si accende?",
+        "Un fusibile potrebbe essere la ragione per cui il mio mandrino non si accende?",
+        "Cosa dovrei fare se il mandrino del mio tornio non funziona?",
+        "È sicuro risolvere da soli un problema di mandrino che non si accende?",
+        "Un problema software può causare il mancato accensione del mandrino?",
+        "L'alimentazione elettrica potrebbe influire sull'accensione del mandrino?"
+      ],
+      "responses": [
+        "Controlla che il mandrino sia correttamente collegato all'alimentazione elettrica e che non ci siano problemi con i fusibili. Se il problema persiste, contatta il supporto tecnico per una valutazione più approfondita."
+      ]
+    },
+    {
+      "tag": "ProduzioneFuoriSpecifica",
+      "patterns": [
+        "La mia macchina sta producendo pezzi fuori specifica, cosa posso fare?",
+        "Quali passi posso fare se la mia macchina produce pezzi che sono fuori specifica?",
+        "Come la calibrazione può influenzare la produzione di pezzi fuori specifica?",
+        "Come l'usura degli utensili influisce sulla produzione di pezzi fuori specifica?",
+        "La qualità del materiale può portare a una produzione fuori specifica?",
+        "Ci sono parametri di lavorazione comuni che possono portare a pezzi fuori specifica?",
+        "Come faccio a garantire una produzione costante entro le specifiche?",
+        "Qual è il ruolo della manutenzione della macchina nel prevenire la produzione fuori specifica?",
+        "Le condizioni ambientali possono portare alla produzione di pezzi fuori specifica?",
+        "Come la velocità di avanzamento influisce sulla produzione di pezzi fuori specifica?"
+      ],
+      "responses": [
+        "Controlla che i parametri di lavorazione siano corretti e che la macchina sia ben calibrata. Potresti anche controllare l'usura degli utensili o la qualità del materiale in lavorazione. Se il problema persiste, contatta il supporto tecnico per una valutazione più approfondita."
+      ]
+    },
+    {
+      "tag": "CodiceErroreMacchina",
+      "patterns": [
+        "Ho un codice di errore sulla mia macchina, come posso risolverlo?",
+        "Ho ricevuto un codice di errore sulla mia macchina CNC, come lo risolvo?",
+        "Quali passi dovrei seguire quando vedo un codice di errore sulla mia fresatrice?",
+        "Posso risolvere un codice di errore sulla mia macchina da solo?",
+        "Cosa indica questo codice di errore sulla mia macchina?",
+        "Come posso cercare il significato di un codice di errore sulla mia macchina?",
+        "Esiste una directory o un manuale che contiene spiegazioni dei codici di errore della macchina?",
+        "Qual è il processo per risolvere i codici di errore su macchine industriali?",
+        "Come faccio a resettare la mia macchina dopo aver cancellato un codice di errore?",
+        "I codici di errore possono indicare un problema hardware sulla mia macchina?",
+        "Dove posso ottenere aiuto se non riesco a risolvere un codice di errore sulla mia macchina?"
+      ],
+      "responses": [
+        "Consulta il manuale utente o il database degli errori della tua macchina per trovare la descrizione dell'errore. Se non riesci a risolvere il problema, contatta il supporto tecnico per una valutazione più approfondita."
+      ]
+    },
+    {
+      "tag": "ConsumoEnergiaMacchina",
+      "patterns": [
+        "La mia macchina sta consumando troppa energia, cosa posso fare?",
+        "Perché la mia macchina sta consumando più energia del solito?",
+        "Quali passi posso fare per ridurre il consumo energetico della mia macchina?",
+        "Gli utensili usurati possono aumentare il consumo di energia nelle macchine?",
+        "L'ottimizzazione dei parametri di lavorazione aiuta a ridurre il consumo di energia?",
+        "Come il sovraccarico della macchina influisce sul consumo di energia?",
+        "Quali pratiche di manutenzione possono ridurre il consumo di energia della mia macchina?",
+        "Le macchine obsolete possono causare un aumento del consumo di energia?",
+        "Esiste un software che può aiutarmi a monitorare e ridurre il consumo di energia della mia macchina?",
+        "La scelta del materiale influisce sul consumo di energia durante la lavorazione?",
+        "Come posso calcolare il consumo di energia della mia macchina?"
+      ],
+      "responses": [
+        "Verifica che la macchina non sia sovraccarica o che gli utensili non siano usurati. Potresti anche verificare che i parametri di lavorazione siano ottimizzati per la massima efficienza energetica. Se il problema persiste, consulta un esperto o il supporto tecnico per ulteriori consigli."
+      ]
+    }
+  ],
+  "unknown": [
+    "Non sono sicuro della tua domanda. Potresti fornire ulteriori dettagli o chiarimenti?"
+  ]
+}

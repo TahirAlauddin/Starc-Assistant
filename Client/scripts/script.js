@@ -4,9 +4,9 @@ function redirectToPage(page) {
 
 
   let isAdmin = sessionStorage.getItem("isAdmin");
-
-  if (page == 'login.html' && isAdmin == 'true') {
-    targetPageURL = 'admin-panel.html'
+ 
+  if (page.includes('login') && isAdmin == 'true') {
+    targetPageURL = '../admin/admin-panel.html'
   }
 
   window.location.href = targetPageURL;
@@ -16,7 +16,7 @@ function redirectToPage(page) {
 function sendLogOutRequest() {
   // let csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-  fetch('http://localhost:8000/logout/', {
+  fetch(`${BASE_URL}/logout/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -29,7 +29,8 @@ function sendLogOutRequest() {
     .then(data => {
       if (data.status == 'success') {
         sessionStorage.setItem("isAdmin", "false")
-        window.location.replace("index.html");
+        sessionStorage.removeItem("isAdmin")
+        window.location.replace("../home/home.html");
       } else {
         console.log('data', data)
       }

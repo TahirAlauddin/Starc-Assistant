@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://localhost:8000/training/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/normalize.css" />
+
+  <link rel="stylesheet" href="machine.css" />
+
+  <title>STARC - Machine</title>
+</head>
+
+<body>
+  <input type="hidden" name="csrfmiddlewaretoken"
+    value="np198B3mVkuLQwKvxkpkGbp4ftbnodXWcsL4WyeIxqCrxDJFRX4zRtWbVM6l0PHI" />
+  <div class="machine-main max-height max-width">
+    <div class="machine-page center-aligned-flex row-flex max-height max-width">
+      <div class="sidebar max-height center-aligned-flex column-flex">
+        <img onclick="redirectToPage('../home/home.html')" src="../images/starc-logo.png" style="cursor: pointer"
+          alt="" />
+
+        <h2>Departments</h2>
+
+        <div class="department-box center-aligned-flex row-flex" id="department-tornitura">
+          <object data="../images/Tornitura.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Tornitura</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex" id="department-rettifiche">
+          <object data="../images/Rettifiche.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Rettifiche</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex" id="department-qualita">
+          <object data="../images/Qualita.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Qualita</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex" id="trainings-button"
+        onclick="redirectToPage('../training/training.html')">
+          <object data="../images/Training.svg" type="image/svg+xml"></object>
+          <div class="department-title center-aligned-flex">Training</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex selected-department-box" id="machine-button"
+          onclick="redirectToPage('machine.html')">
+          <img src="../images/machine.png" alt="" srcset="" width="25px" height="25px"/>
+          <div class="department-title center-aligned-flex">Machines</div>
+        </div>
+
+        <div class="free-space"></div>
+
+        <div class="department-box admin-panel-box center-aligned-flex column-flex" id="admin-panel-button"
+          onclick="redirectToPage('../login/login.html')">
+          <div class="center-aligned-flex admin-panel-icon-container">
+            <object data="../images/Admin.svg" type="image/svg+xml"></object>
+          </div>
+
+          <h3>Admin Panel</h3>
+        </div>
+      </div>
+
+      <div class="center-aligned-flex column-flex machine-container max-height">
+        <div class="machine-heading center-aligned-flex">
+          <div class="first-heading center-aligned-flex">
+            <h2>Machines</h2>
+          </div>
+        </div>
+        <div class="machine-sub-container1">
+          <div class="search-container">
+            <img src="images/search.png" alt="" srcset="" height="20px" width="20px" onclick="searchbar()" />
+            <input type="text" id="searchInput" placeholder="Search here">
+          </div>
+          <div class="button-container">
+            <button type="submit" onclick="redirectToPage('machine-detail.html')"><span>Add Machine</span> <img src="images/plus.png" alt="" srcset="" /></button>
+          </div>
+        </div> 
+        
+
+        <div class="machine-sub-container" id="machine-sub-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Machine</th>
+                <th>Department</th>
+                <th>Last update</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="machineTableBody">
+              <tr>
+                <td>Lizzini</td>
+                <td>Department</td>
+                <td width="10%">6 Mar, 2023</td>
+                <td width="15%">
+                  <a href="#"  onclick="redirectToPage('machine-detail.html')"  class="edit-button" >Edit</a>
+                  <a href="#" class="delete-button">Delete</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Kop</td>
+                <td>2 - Department</td>
+                <td width="10%">1 May, 2023</td>
+                <td width="15%">
+                  <a href="#"  onclick="redirectToPage('machine-detail.html')"  class="edit-button">Edit</a>
+                  <a href="#" class="delete-button">Delete</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Sagitech</td>
+                <td>Department</td>
+                <td width="10%">20 Feb, 2023</td>
+                <td width="15%">
+                  <a href="#"  onclick="redirectToPage('machine-detail.html')"  class="edit-button">Edit</a>
+                  <a href="#" class="delete-button">Delete</a>
+                </td>
+              </tr>
+              <tr id="noResultRow" style="display: none;">
+                <td>No result found</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination center-aligned-flex">
+          <a href="#">Back</a>
+          <a href="#">1</a>
+          <a class="active" href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">Next</a>
+        </div>
+        <div class="pagination center-aligned-flex" id="pagination-container"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script src="../scripts/script.js"></script>
+  <script src="../scripts/sidebar-responsiveness.js"></script>
+  <script src="machine.js"></script>
+</body>
+
+</html>

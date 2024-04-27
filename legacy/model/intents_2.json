@@ -1,0 +1,194 @@
+{
+  "intents": [
+    {
+      "tag": "LatheChattering",
+      "patterns": [
+        "What are the common causes of chattering on a lathe machine?",
+        "Is it normal for a lathe machine to produce chattering sounds?",
+        "What effect does chattering have on the lathe machine?",
+        "Is there any lubrication technique to reduce chattering?",
+        "How does the material being machined affect chattering?",
+        "Is there a way to eliminate chattering during threading?",
+        "Does chattering indicate a misalignment of the lathe components?",
+        "Can vibration dampeners help in reducing lathe chattering?",
+        "How can I solve a chattering problem on the lathe machine?"
+      ],
+      "responses": [
+        "Check the geometry of the tools, the tension of the fixing screws, and the concentricity of the shaft. If the problem persists, check the machine alignment and the integrity of the components."
+      ]
+    },
+    {
+      "tag": "CuttingSpeed",
+      "patterns": [
+        "How can I calculate the optimal cutting speed for my lathe?",
+        "Is higher cutting speed always better in lathe machining?",
+        "How does the material of the workpiece affect the cutting speed?",
+        "Can changing the cutting speed improve tool life?",
+        "How do I know if the cutting speed is too high?",
+        "Is there a standard range of cutting speeds for different materials?",
+        "How does the tool material affect the cutting speed on a lathe?",
+        "How can I adjust the cutting speed on the lathe?"
+      ],
+      "responses": [
+        "The cutting speed can be adjusted through the machine control panel or by using programming software. Make sure the speed chosen is suitable for the working conditions and the tool in use."
+      ]
+    },
+    {
+      "tag": "ToolWear",
+      "patterns": [
+        "How can I solve a problem of premature wear of the tools?",
+        "What are common signs of tool wear on a lathe?",
+        "How can I reduce the rate of tool wear?",
+        "How do I know when it's time to replace the tools?",
+        "Can worn-out tools affect the precision of the lathe?",
+        "What materials are best for tools to reduce wear?",
+        "How to assess the adequacy of tools for working conditions?",
+        "Can I sharpen the tools to reduce wear?"
+      ],
+      "responses": [
+        "Check the quality of the tools, their sharpness, and their adequacy for the working conditions. Also, check the machine settings to make sure they are optimal for tool use."
+      ]
+    },
+    {
+      "tag": "LatheProductivity",
+      "patterns": [
+        "How can I optimize the productivity of the lathe?",
+        "What methods can I use to enhance lathe productivity?",
+        "How can using high-quality tools improve the productivity of my lathe?",
+        "What role does machining planning play in lathe productivity?",
+        "How can I improve cycle times on my lathe?",
+        "Does optimizing cutting parameters increase lathe productivity?",
+        "Can reducing idle time on the lathe improve productivity?",
+        "Does regular maintenance affect the productivity of a lathe machine?"
+      ],
+      "responses": [
+        "Use high-quality tools, optimize the machine settings, efficiently plan the machining operations, and use advanced programming software."
+      ]
+    },
+    {
+      "tag": "SpindleIssues",
+      "patterns": [
+        "I have a problem with my spindle, it won't turn on.",
+        "Why is my lathe spindle not turning on?",
+        "Is there a common electrical issue that prevents the spindle from turning on?",
+        "How can I troubleshoot my lathe spindle not turning on?",
+        "Are there any quick checks to diagnose a spindle that won't turn on?",
+        "Could a fuse be the reason my spindle isn't turning on?",
+        "What should I do if my lathe spindle is not working?",
+        "Is it safe to troubleshoot a spindle not turning on by myself?",
+        "Can a software issue cause the spindle not to turn on?",
+        "Could the power supply be affecting the spindle turning on?"
+      ],
+      "responses": [
+        "Check that the spindle is correctly connected to the electrical power supply and that there are no problems with the fuses. If the problem persists, contact technical support for a more in-depth assessment."
+      ]
+    },
+    {
+      "tag": "OutOfSpecProduction",
+      "patterns": [
+        "My machine is producing out-of-spec parts, what can I do?",
+        "What steps can I take if my machine is producing parts that are out of specification?",
+        "How can calibration affect parts being produced out of spec?",
+        "How does tool wear affect the production of out-of-spec parts?",
+        "Can the quality of the material lead to out-of-spec production?",
+        "Are there common machining parameters that can lead to out-of-spec parts?",
+        "How do I ensure consistent production within specifications?",
+        "What role does machine maintenance play in preventing out-of-spec production?",
+        "Can environmental conditions lead to out-of-spec part production?",
+        "How does feed rate affect the production of out-of-spec parts?"
+      ],
+      "responses": [
+        "Check that the machining parameters are correct and that the machine is well calibrated. You could also check the wear of the tools or the quality of the material being processed. If the problem persists, contact technical support for a more in-depth assessment."
+      ]
+    },
+    {
+      "tag": "MachineErrorCode",
+      "patterns": [
+        "I have an error code on my machine, how can I solve it?",
+        "I got an error code on my CNC machine, how do I fix it?",
+        "What steps should I take when I see an error code on my milling machine?",
+        "Can I resolve an error code on my machine by myself?",
+        "What does this error code on my machine indicate?",
+        "How do I look up the meaning of an error code on my machine?",
+        "Is there a directory or manual that contains explanations of machine error codes?",
+        "What is the process for troubleshooting error codes on industrial machines?",
+        "How do I reset my machine after clearing an error code?",
+        "Can error codes indicate a hardware problem on my machine?",
+        "Where can I get help if I'm unable to resolve an error code on my machine?"
+      ],
+      "responses": [
+        "Check the user manual or the error database of your machine to find the description of the error. If you cannot solve the problem, contact technical support for a more in-depth assessment."
+      ]
+    },
+    {
+      "tag": "MachineEnergyConsumption",
+      "patterns": [
+        "My machine is consuming too much energy, what can I do?",
+        "Why is my machine consuming more energy than usual?",
+        "What steps can I take to reduce my machine's energy consumption?",
+        "Can worn out tools increase energy consumption in machines?",
+        "Does optimizing machining parameters help in reducing energy consumption?",
+        "How does machine overload affect energy consumption?",
+        "What maintenance practices can reduce my machine's energy consumption?",
+        "Can outdated machinery cause increased energy consumption?",
+        "Is there any software that can help me monitor and reduce my machine's energy consumption?",
+        "Does the choice of material affect energy consumption during machining?",
+        "How can I calculate the energy consumption of my machine?"
+      ],
+      "responses": [
+        "Check that the machine is not overloaded or that the tools are not worn. You might also check that the machining parameters are optimized for maximum energy efficiency. If the problem persists, contact technical support for a more in-depth assessment."
+      ]
+    },
+    {
+      "tag": "DoosanMachineAlarm",
+      "patterns": [
+        "What does alarm no. 20654 on the Doosan machine mean?",
+        "What does the alarm number 20654 indicate on my Doosan machine?",
+        "Is alarm no. 20654 on a Doosan machine related to maintenance?",
+        "How do I clear alarm no. 20654 on my Doosan machine?",
+        "What steps should I take if I get alarm no. 20654 on my Doosan machine?",
+        "Is alarm no. 20654 on a Doosan machine a critical alarm?",
+        "What components does alarm no. 20654 on a Doosan machine refer to?",
+        "Can I continue to operate my Doosan machine with alarm no. 20654 showing?",
+        "How often does alarm no. 20654 occur on Doosan machines?",
+        "What's the reason behind alarm no. 20654 on Doosan machines?",
+        "Should I call a technician if I see alarm no. 20654 on my Doosan machine?"
+      ],
+      "responses": [
+        "Alarm no. 20654 on the Doosan machine is an alarm that signals the cleaning of the filters of the cooling tanks. Resolution: change the filter by cleaning it thoroughly and after cleaning, record the date of filter cleaning."
+      ]
+    },
+    {
+      "tag": "AmericanSymmetryCorrection",
+      "patterns": [
+        "I can't correct the American symmetry, can you help me?",
+        "How do I correct American symmetry in a CNC program?",
+        "Can you assist me in fixing American symmetry on my machine?",
+        "What does it mean to correct American symmetry?",
+        "What codes should I use to correct American symmetry in CNC programming?",
+        "Is there a standard procedure for correcting American symmetry?",
+        "What tools are needed to correct American symmetry?",
+        "What is the role of G52 in correcting American symmetry?"
+      ],
+      "responses": [
+        "American symmetry is corrected by acting on the program: (T1111 tool Disc Mill) Code for the change: act on G52 in “X”. Resolution: if the measurement result is outside the negative tolerance, act on x in negative giving double the measurement found as a correction to bring the symmetry to 0 from comparator."
+      ]
+    },
+    {
+      "tag": "FindingMaterials",
+      "patterns": [
+        "Where can I find 60mm diameter bars to work on code 18840?",
+        "Where can I source 60mm diameter bars for my machining project?",
+        "I need 60mm diameter bars for code 18840, where should I look?",
+        "What's the best place to find 60mm bars needed for code 18840?",
+        "Is there a specific warehouse or station where I can find 60mm diameter bars?",
+        "How do I find specific materials like 60mm diameter bars in a large warehouse?",
+        "Are 60mm diameter bars for code 18840 commonly available?",
+        "How do I request 60mm diameter bars for code 18840 from a warehouse?"
+      ],
+      "responses": [
+        "You can find 60mm diameter bars for working on code 18840 in the warehouse at station 18 (b)."
+      ]
+    }
+  ]
+}

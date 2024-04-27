@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .logo {
+          margin: 15px;
+          background: url("{% static 'img/logo_no_bg.png' %}") no-repeat;
+          background-size: contain;
+          position: relative;
+          width: 160px;
+          height: 45px;
+        }
+      </style>
+
+    <div class="navigation-bar">
+        <div class="logo">
+        </div>
+        <a href="#" class="link-button">Training</a>
+    </div>
+    
+    <div id="message-container"></div>
+
+    <div class="button-container">
+
+    </div>
+
+    <div class="selector-conatiner">
+        <div class="selector" id="machine_selector">
+        </div>
+    </div>
+
+    <div class="chat-input">
+        <input id='chatbox' type="text" placeholder="Type your message...">
+        <button id="sendMessageButton">Send</button>
+    </div>
+</body>
+<script src="{% static 'js/chatbotscript.js' %}"></script>
+</html>

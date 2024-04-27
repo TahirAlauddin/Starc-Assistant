@@ -20,8 +20,7 @@
   <div class="training-main max-height max-width">
     <div class="training-page center-aligned-flex row-flex max-height max-width">
       <div class="sidebar max-height center-aligned-flex column-flex">
-        <img onclick="redirectToPage('../home/home.html')" src="../images/starc-logo.png" style="cursor: pointer"
-          alt="" />
+        <img src="../images/starc-logo.png" alt="" />
 
         <h2>Departments</h2>
 
@@ -71,7 +70,12 @@
             <object data="../images/Training-Heading.svg" type="image/svg+xml"></object>
             <h2>Training</h2>
           </div>
+          
+            <div id="logout-button" class="logout-button center-aligned-flex" onclick="sendLogOutRequest()">
+              Log Out
+          </div>
         </div>
+
 
         <div class="training-sub-container" id="training-sub-container">
         </div>
@@ -93,6 +97,8 @@
   </div>
   </div>
 
+  <div id="message-container" style="display: none;"></div>
+
   <div class="lightbox">
     <div class="lightbox-content">
       <div class="close-button">x</div>
@@ -102,6 +108,9 @@
     </div>
   </div>
 
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/notification.js"></script>
+  <script src="../scripts/ui.js"></script>
   <script src="../scripts/script.js"></script>
   <script src="../scripts/sidebar-responsiveness.js"></script>
   <script src="training.js"></script>

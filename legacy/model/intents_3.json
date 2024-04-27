@@ -1,0 +1,45 @@
+{
+    "intents": [
+        {
+            "tag": "Machines",
+            "patterns": [
+                "Come posso risolvere un problema di rigatura sulla macchina tornio?",
+                "Come posso regolare la velocità di taglio sul tornio?",
+                "Come posso risolvere un problema di usura prematura degli utensili?",
+                "Come posso ottimizzare la produttività del tornio?",
+                "Ho un problema con il mio mandrino, non si accende.",
+                "La mia macchina sta producendo pezzi fuori specifica, cosa posso fare?",
+                "Ho un errore di codice sulla mia macchina, come posso risolverlo?",
+                "La mia macchina sta consumando troppa energia, cosa posso fare?",
+                "Cosa significa l’allarme n.20654 sulla macchina doosan?",
+                "Non riesco a correggere la simmetria americana puoi aiutarmi?",
+                "Dove trovo le barre di diametro 60 per lavorare il codice 18840?"
+                               
+            ],
+            "responses": [
+                "Controllare la geometria degli utensili, la tensione delle viti di fissaggio e la concentricità dell'albero. Se il problema persiste, verificare l'allineamento della macchina e l'integrità dei componenti.",
+                
+                "La velocità di taglio può essere regolata attraverso il pannello di controllo della macchina o utilizzando il software di programmazione. Assicurarsi che la velocità scelta sia adatta alle condizioni di lavoro e all'utensile in uso.",
+                
+                "Verificare la qualità degli utensili, la loro affilatura e la loro adeguatezza per le condizioni di lavoro. Inoltre, controllare le impostazioni della macchina per assicurarsi che siano ottimali per l'uso degli utensili.",
+                
+                "Utilizzare utensili di alta qualità, ottimizzare le impostazioni della macchina, pianificare in modo efficiente le lavorazioni e utilizzare software di programmazione avanzato.",
+                
+                "Verifica che il mandrino sia correttamente collegato all'alimentazione elettrica e che non ci siano problemi con i fusibili. Se il problema persiste, contatta il supporto tecnico per una valutazione più approfondita.",
+                
+                "Verifica che i parametri di lavorazione siano corretti e che la macchina sia ben tarata. Potresti anche controllare l'usura degli utensili o la qualità del materiale in lavorazione. Se il problema persiste, contatta il supporto tecnico per una valutazione più approfondita.", 
+                
+                "Verifica il manuale d'uso o il database di errore della tua macchina per trovare la descrizione dell'errore. Se non riesci a risolvere il problema, contatta il supporto tecnico per una valutazione più approfondita.",
+                
+                "Verifica che la macchina non sia in sovraccarico o che gli utensili non siano usurati. Potresti anche controllare che i parametri di lavorazione siano ottimizzati per la massima efficienza energetica. Se il problema persiste, contatta il supporto tecnico per una valutazione più approfondita.",
+                
+                "l’allarme n.20654 sulla macchina doosan è un allarme che segnala la pulizia dei filtri delle vasche refrigeranti Risoluzione: cambiare il filtro pulendolo accuratamente e dopo aver effettuato la pulizia segnalare la data di avvenuta pulizia dei filtri.",
+                
+                "la simmetria americana si corregge agendo sul programma: (T1111 utensile Fresa a disco) Codice per la modifica: agire sulla G52 in “X” Risoluzione: se il risultato della misura è fuori dalla tolleranza in negativo, agire sulla x in negativo dando come correzione il doppio della misura riscontrata per portare la simmetria allo 0 da comparatore.",
+                
+                "Le barre di diametro 60 per la lavorazione del codice 18840 le puoi trovare in magazzino nella postazione 18 (b)."
+
+            ]
+        }
+    ]
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://localhost:8000/training/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/normalize.css" />
+
+  <link rel="stylesheet" href="training.css" />
+
+  <title>STARC - Training</title>
+</head>
+
+<body>
+  <input type="hidden" name="csrfmiddlewaretoken"
+    value="np198B3mVkuLQwKvxkpkGbp4ftbnodXWcsL4WyeIxqCrxDJFRX4zRtWbVM6l0PHI" />
+  <div class="training-main max-height max-width">
+    <div class="training-page center-aligned-flex row-flex max-height max-width">
+      <div class="sidebar max-height center-aligned-flex column-flex">
+        <img src="../images/starc-logo.png" alt="" />
+
+        <h2>Departments</h2>
+
+        <div class="department-box center-aligned-flex row-flex" id="department-tornitura">
+          <object data="../images/Tornitura.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Tornitura</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex" id="department-rettifiche">
+          <object data="../images/Rettifiche.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Rettifiche</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex" id="department-qualita">
+          <object data="../images/Qualita.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Qualita</div>
+        </div>
+
+        <div class="department-box center-aligned-flex row-flex selected-department-box" id="training-button"
+          onclick="redirectToPage('training.html')">
+          <object data="../images/Training-Selected.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Training</div>
+        </div>
+
+        <div class="free-space"></div>
+
+
+        <div class="department-box admin-panel-box center-aligned-flex column-flex" id="admin-panel-button"
+          onclick="redirectToPage('../login/login.html')">
+          <div class="center-aligned-flex admin-panel-icon-container">
+            <object data="../images/Admin.svg" type="image/svg+xml"></object>
+          </div>
+
+          <h3>Admin Panel</h3>
+        </div>
+
+
+      </div>
+
+      <div class="center-aligned-flex column-flex training-container max-height">
+        <div class="training-heading center-aligned-flex">
+          <div class="first-heading center-aligned-flex">
+            <object data="../images/Training-Heading.svg" type="image/svg+xml"></object>
+            <h2>Training</h2>
+          </div>
+        </div>
+
+        <div class="training-sub-container" id="training-sub-container">
+        </div>
+
+        <!-- <div class="pagination center-aligned-flex">
+          <a href="#">Back</a>
+          <a href="#">1</a>
+          <a class="active" href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">Next</a>
+        </div> -->
+
+        <div class="pagination center-aligned-flex" id="pagination-container"></div>
+
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div id="message-container" style="display: none;"></div>
+
+  <div class="lightbox">
+    <div class="lightbox-content">
+      <div class="close-button">x</div>
+      <video controls="" muted="" autoplay="" id="lightbox-video">
+        <!-- Video source will be dynamically set here -->
+      </video>
+    </div>
+  </div>
+
+  <script src="../scripts/notification.js"></script>
+  <script src="../scripts/ui.js"></script>
+  <script src="../scripts/script.js"></script>
+  <script src="../scripts/sidebar-responsiveness.js"></script>
+  <script src="training.js"></script>
+</body>
+
+</html>

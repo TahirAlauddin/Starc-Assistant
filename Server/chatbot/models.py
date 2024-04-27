@@ -102,9 +102,12 @@ class Training(models.Model):
     """
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True, null=True)
-
+    # category = models.ForeignKey('chatbot.Department', 
+    #                              on_delete=models.SET_NULL,
+    #                              null=True)
     def __str__(self) -> str:
         return f"Training#{self.id} ({self.title})"
+
     class Meta:
         ordering = ['id']  # Choose an appropriate field to order by
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://localhost:8000/login/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="login.css">
+
+  <title>
+    STARC - Login
+  </title>
+</head>
+
+<body>
+
+  <div class="center-aligned-flex row-flex max-height max-width">
+    <div class="center-aligned-flex registration-side-image max-height">
+      <img src="images/registration-bot.png" alt="">
+    </div>
+
+    <div class="center-aligned-flex column-flex registration-side max-height">
+
+      <img style="cursor: pointer;" onclick="redirectToPage('../home/home.html')" src="../images/starc-logo.png" alt="">
+
+      <div class="login-message">Login</div>
+
+      <div class="center-aligned-flex column-flex registration-card">
+        <div class="welcome-message">Hi, Welcome Back to STARC</div>
+
+        <form class="center-aligned-flex column-flex register-form" action="http://localhost:8000/login/" method="post">
+          <input type="hidden" name="csrfmiddlewaretoken"
+            value="3dp5GFwRd5NvhaVKkp13IENy1tVBaFqaSg90uCHdPbVbYhUUE2GiTWkFHMQzMhaW">
+          <input class="username-input" placeholder="Username" type="text" name="username" id="username-input">
+          <input class="password-input" placeholder="Password" type="password" name="password" id="password-input">
+        </form>
+
+        <a id="login-btn" class="login-button center-aligned-flex click-button" onclick="loginUser()">
+          Login
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="message-container" style="display: none;"></div>
+
+  <script src="../scripts/script.js"></script>
+
+  <script src="../scripts/notification.js"></script>
+  <script src="login.js"></script>
+
+</body>
+
+</html>

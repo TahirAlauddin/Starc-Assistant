@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<!-- saved from url=(0034)http://localhost:8000/admin-panel/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/normalize.css">
     
     
 <link rel="stylesheet" href="admin_panel.css">
-
     <title>
         STARC - Admin
     </title>
@@ -21,7 +20,7 @@
     
 
 <div class="sidebar max-height center-aligned-flex column-flex">
-  <img onclick="redirectToPage('../home/home.html')" src="../images/starc-logo.png" style="cursor: pointer;" alt="">
+  <img src="../images/starc-logo.png" alt="">
 
   <h2>Departments</h2>
 
@@ -48,6 +47,13 @@
 
     <div class="department-title center-aligned-flex">Training</div>
   </div>
+  
+  <div class="department-box center-aligned-flex row-flex" id="machine-button"
+    onclick="redirectToPage('../machines/machine.html')">
+    <img src="../images/machine-blue.png" alt="" srcset="" width="25px" height="25px"/>
+
+    <div class="department-title center-aligned-flex">Machines</div>
+  </div>
 
   
   <div class="previous-questions-answer-box" id="previous-question-answers">
@@ -63,7 +69,11 @@
           <object class="right-arrow-object" data="images/GT.svg" type="image/svg+xml"></object>
           <h2>Q/A</h2>
         </div>
-
+        
+        
+        <div class="logout-button center-aligned-flex" onclick="goToChatbot()">
+          Ask Anything
+        </div>
         <div class="logout-button center-aligned-flex" onclick="sendLogOutRequest()">
           Log Out
         </div>
@@ -118,7 +128,6 @@
             </div>
   
             <form id="uploadForm">
-              <input type="hidden" name="csrfmiddlewaretoken" value="udeKXxJ2U07gkdoAbj8WwxNLDfpnc1xh8CJFvoggHDvTTjRslTZMw0h4AGGTe8cb">
               <input type="file" id="fileInput" accept="image/*,video/*,.pdf" multiple="" style="display: none;">
             </form>
   
@@ -131,11 +140,20 @@
 
 
 <div id="message-container" style="display: none;"></div>
-    
+
+<script>
+  function goToChatbot() {
+    redirectToPage('../home/home.html')
+  }
+</script>
+
 <script src="pdf-library.js"></script>
+<script src="../scripts/config.js"></script>
 <script src="../scripts/script.js"></script>
 <script src="../scripts/sidebar-responsiveness.js"></script>
 
+<script src="../scripts/notification.js"></script>
+<script src="../scripts/ui.js"></script>
 <script src="admin.js"></script>
 <script src="tab-change.js"></script>
 <script>

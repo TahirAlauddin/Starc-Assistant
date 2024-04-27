@@ -25,14 +25,14 @@
 
     <div class="center-aligned-flex column-flex registration-side max-height">
 
-      <img onclick="redirectToPage('../home/home.html')" src="../images/starc-logo.png" alt="">
+      <img style="cursor: pointer;" onclick="redirectToPage('../home/home.html')" src="../images/starc-logo.png" alt="">
 
       <div class="login-message">Login</div>
 
       <div class="center-aligned-flex column-flex registration-card">
         <div class="welcome-message">Hi, Welcome Back to STARC</div>
 
-        <form class="center-aligned-flex column-flex register-form" action="http://localhost:8000/login/" method="post">
+        <form class="center-aligned-flex column-flex register-form">
           <input type="hidden" name="csrfmiddlewaretoken"
             value="3dp5GFwRd5NvhaVKkp13IENy1tVBaFqaSg90uCHdPbVbYhUUE2GiTWkFHMQzMhaW">
           <input class="username-input" placeholder="Username" type="text" name="username" id="username-input">
@@ -48,9 +48,10 @@
 
   <div id="message-container" style="display: none;"></div>
 
-
+  <script src="../scripts/config.js"></script>
   <script src="../scripts/script.js"></script>
 
+  <script src="../scripts/notification.js"></script>
   <script src="login.js"></script>
 
 </body>

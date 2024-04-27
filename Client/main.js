@@ -1,14 +1,72 @@
-const { app, BrowserWindow, Menu, globalShortcut } = require('electron');
+const {ipcMain, app, BrowserWindow, Menu, globalShortcut } = require('electron');
+let resolve = require('path').resolve
+const fs = require('fs');
+const path = require('path');
+const os = require('os');
+
+let BASE_URL;
+
+// This will create a path to "ipAddress.txt" inside a ".JewelBox" directory within the user's home directory
+const ipFilePath = path.join(os.homedir(), 'StarcAssistant', 'ipAddress.txt');
 require('dotenv').config()
+
 let mainWindow;
 const isDev = process.env.NODE_ENV === 'development';
+let runningAsPackaged = false;
+
+if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) || /[\\/]electron[\\/]/.test(process.execPath)) {
+    // Running in development mode (with npm run or electron .)
+} else {
+    // Running as a packaged application
+    runningAsPackaged = true;
+}
+
+function updateIpAddress() {
+    if (fs.existsSync(ipFilePath)) {
+        fs.unlinkSync(ipFilePath);
+    }
+    createInputWindow()
+}
+
+
+function createInputWindow() {
+    let inputWin = new BrowserWindow({
+      width: 400,
+      height: 200,
+      icon: 'images/logo.ico',
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false, // For simplicity, disabled. Consider security implications.
+        enableRemoteModule:  true, // Explicitly enable the remote module
+      },
+    });
+  
+    inputWin.loadFile('config/index.html'); // Load the HTML file with your form
+  
+    ipcMain.once('save-ip', (event, ip) => {
+          fs.mkdirSync(path.dirname(ipFilePath), { recursive: true }); // Ensure the directory exists
+          fs.closeSync(fs.openSync(ipFilePath, 'a')); // Create the file if it doesn't exist
+  
+          fs.writeFileSync(ipFilePath, ip); // Save IP to a file
+          BASE_URL = `http://${ip}:8000`; // Use the function to set BASE_URL
+          createWindow(); // You should create the main window here only if it's not already created
+          inputWin.close(); // Close the window after saving
+      });
+  
+      inputWin.on('closed', () => {
+          inputWin = null; // Dereference the object to prevent memory leaks
+      });
+  }
+  
 
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 1000,
         height: 600,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false, // For simplicity, disabled. Consider security implications.
+            enableRemoteModule:  true, // Explicitly enable the remote module
         }
     });
 
@@ -57,10 +115,11 @@ const menu = Menu.buildFromTemplate(menuTemplate);
         mainWindow.webContents.openDevTools();
     }
 
-    // mainWindow.loadFile('training/training-view/training-view.html');
     mainWindow.loadFile('home/welcome/index.html');
+    // mainWindow.loadFile('training/training-view/training-view.html');
     // mainWindow.loadFile('training/training.html');
     // mainWindow.loadFile('admin/admin-panel.html');
+    // mainWindow.loadFile('login/login.html');
     mainWindow.on('closed', function () {
         mainWindow = null;
     });
@@ -78,7 +137,6 @@ const menu = Menu.buildFromTemplate(menuTemplate);
         globalShortcut.unregister('Ctrl+W');
     });
 
-    
     app.on('will-quit', () => {
         // Unregister all shortcuts
         globalShortcut.unregisterAll();
@@ -87,7 +145,19 @@ const menu = Menu.buildFromTemplate(menuTemplate);
 }
 
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+
+    if (fs.existsSync(ipFilePath)) {
+        // If the IP address file exists, read it (optional here)
+        const Ip = fs.readFileSync(ipFilePath, 'utf8');
+        BASE_URL = `http://${Ip}:8000`; // Use the function to set BASE_URL
+
+        createWindow(); // Open the main app window
+    } else {
+        createInputWindow(); // Open the input window to set the IP address
+    }
+});
+
 
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
@@ -104,7 +174,7 @@ app.on('activate', function () {
 
 // Listen for the navigate message from the renderer process
 app.on('navigate', (event, page, args) => {
-    
+        
     let path;
     if (runningAsPackaged == true) {
         base_path = './resources/app/src'
@@ -172,3 +242,33 @@ app.on('navigate', (event, page, args) => {
     }
 });
 
+
+app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
+});
+
+
+app.on('activate', function () {
+    // This logic assumes mainWindow is your main app window
+    // Adjust accordingly if your app has different requirements
+    if (mainWindow === null) {
+        if (fs.existsSync(ipFilePath)) {
+            createWindow();
+        } else {
+            createInputWindow();
+        }
+    }
+});
+
+ipcMain.on('update-ip', (event, ip) => {
+    updateIpAddress()
+    mainWindow.close()
+})
+
+ipcMain.on('show-message-box', (event, options) => {
+    dialog.showMessageBox(mainWindow, options).then((response) => {
+      event.reply('message-box-response', response);
+    });
+});

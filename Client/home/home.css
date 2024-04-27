@@ -135,6 +135,7 @@
 .chatbot-image-container {
   position: relative;
   width: 100%;
+  margin-top: 1rem;
 }
 
 .chatbot-image-container > img {
@@ -146,7 +147,7 @@
   /* max-width: 150px; */
   padding: 10px 15px;
   top: 13%;
-  left: 15%;
+  left: 20%;
   /* min-height: 7rem; */
   /* min-width: 15rem; */
   background-color: #007bff; /* This is a shade of blue */

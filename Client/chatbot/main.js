@@ -144,10 +144,29 @@ function createQueryContainer(text) {
   return queryContainer;
 }
 
+
+// Function to scroll to the bottom
+function scrollToBottom(targetElement) {
+  console.log('bottom')
+  targetElement.scrollTop = targetElement.scrollHeight;
+}
+
+
 function addQuestionHistory(query) {
   let queryContainer = createQueryContainer(query);
 
   let chatbotHistoryContainer = document.querySelector(".chatbot-history-container")
+  
+  // Create a ResizeObserver instance
+  var resizeObserver = new ResizeObserver(function(entries) {
+    for (let entry of entries) {
+      scrollToBottom(entry.target);
+    }
+  });
+
+  // Start observing the chatbotHistoryContainer
+  resizeObserver.observe(chatbotHistoryContainer);
+
 
   chatbotHistoryContainer.appendChild(queryContainer);
 }
@@ -156,6 +175,17 @@ async function addAnswerHistory(answer, files) {
   let answerContainer = createAnswerContainer();
 
   let chatbotHistoryContainer = document.querySelector(".chatbot-history-container")
+      
+  // Create a ResizeObserver instance
+  var resizeObserver = new ResizeObserver(function(entries) {
+    for (let entry of entries) {
+      scrollToBottom(chatbotHistoryContainer);
+    }
+  });
+  // Start observing the element
+  resizeObserver.observe(chatbotHistoryContainer);
+  resizeObserver.observe(answerContainer);
+
 
   chatbotHistoryContainer.appendChild(answerContainer);
 
@@ -184,13 +214,16 @@ async function addAnswerHistory(answer, files) {
   await typeAnswer();
   let fileString = ""
   
-  files.forEach(file => {
-    fileString += `
-    <br>
-    <a target="_blank" href="http://localhost:8000/media/${file}">${file.split('/')[1]}
-    </a>`
-  });
+  if (files) {
 
+    files.forEach(file => {
+      fileString += `
+      <br>
+      <a target="_blank" href="${BASE_URL}/media/${file}">${file.split('/')[1]}
+      </a>`
+    });
+  }
+    
   pElement.innerHTML = pElement.innerHTML + fileString;
 
 }
@@ -475,7 +508,7 @@ responsivePage()
 async function sendQuery() {
   let query = document.getElementById("message-input").value.trim();
   try {
-    const response = await fetch(`http://localhost:8000/chatbot_model/`, {
+    const response = await fetch(`${BASE_URL}/chatbot_model/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

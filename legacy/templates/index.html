@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .logo {
+        margin: 15px;
+        background: url("{% static 'img/logo_no_bg.png' %}") no-repeat;
+        background-size: contain;
+        position: relative;
+        width: 160px;
+        height: 45px;
+      }
+    </style>
+    <div class="navigation-bar">
+      <div class="logo"></div>
+      <a href="#" class="link-button">Training</a>
+    </div>
+    <div id="message-container"></div>
+    <div class="title-container">
+      <h1 class="title">Scegli il tuo reparto</h1>
+    </div>
+
+    <div class="button-container">
+      <a href="#" onclick="chatBotPage('TORNITURA')" class="link-button">TORNITURA</a>
+      <a href="#" onclick="chatBotPage('RETTIFICA')" class="link-button">RETTIFICA</a>
+      <a href="#" onclick="chatBotPage('PARCO ROBOT')" class="link-button">PARCO ROBOT</a>
+      <a href="#" onclick="chatBotPage('QUALITÀ')" class="link-button">QUALITÀ</a>
+    </div>
+
+    <div class="selector-conatiner">
+      <div class="selector">
+        <label for="department">Choose a department:</label>
+        <select name="department" id="department">
+          <option value="Select Option">Select Option</option>
+          <option value="TORNITURA">TORNITURA</option>
+          <option value="RETTIFICA">RETTIFICA</option>
+          <option value="PARCO ROBOT">PARCO ROBOT</option>
+          <option value="QUALITÀ">QUALITÀ</option>
+        </select>
+      </div>
+    </div>
+    <div class="button-container">
+        <a href="#" class="link-button" id="next-button">Next</a>
+    </div>
+  </body>
+  <script src="{% static 'js/script.js' %}"></script>
+</html>

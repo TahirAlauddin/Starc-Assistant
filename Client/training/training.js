@@ -3,127 +3,10 @@ const trainings = '';
 
 let user = sessionStorage.getItem('isAdmin')
 
-
-// Call this function when the user clicks the "Upload" button in the modal
-function uploadFiles() {
-  // Retrieve data from the modal form
-  const title = document.getElementById('title-input').value;
-  const content = document.getElementById('content-input').value;
-  const files = document.getElementById('file-input').files;
-  const formData = new FormData();
-  formData.append('title', title);
-  formData.append('content', content);
-  for (let i = 0; i < files.length; i++) {
-    formData.append('files', files[i]);
-  }
-
-  // Make a POST request to your backend endpoint using Axios
-  axios.post('http://localhost:8000/upload/', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  })
-  .then(response => {
-    console.log('Files uploaded successfully');
-    // Optionally handle response from the backend
-  })
-  .catch(error => {
-    console.error('Error uploading files:', error);
-    // Handle errors
-  })
-  .finally(() => {
-    closeModal();
-  });
+let logoutButton = document.getElementById('logout-button')
+if (!user) {
+  logoutButton.remove()
 }
-    
-
-function generateThumbnail(url) {
-  // Determine if the URL is for an image or a video based on file extension
-  if (url.match(/\.(jpeg|jpg|gif|png)$/)) {
-    // It's an image, so return the URL directly
-    return Promise.resolve(url);
-  } else if (url.match(/\.(mp4|webm|ogg)$/)) {
-    // It's a video, so generate a thumbnail
-    return new Promise((resolve, reject) => {
-      const video = document.createElement('video');
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-
-      video.setAttribute('src', url);
-      video.load();
-      video.addEventListener('loadeddata', () => {
-        try {
-          // Set canvas size to video size
-          canvas.width = video.videoWidth;
-          canvas.height = video.videoHeight;
-
-          // Draw the video frame to canvas
-          context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-
-          // Convert canvas to image URL and resolve promise
-          resolve(canvas.toDataURL('image/png'));
-        } catch (e) {
-          reject(e);
-        }
-      }, false);
-
-      video.addEventListener('error', (e) => {
-        reject(e);
-      });
-    });
-  } else {
-    // URL does not match known image or video extensions
-    return Promise.reject(new Error('URL must be for an image or a video file.'));
-  }
-}
-
-
-function useDocumentPlaceholder(file) {
-  // Assuming you have a parent container with the class 'documents-container'
-  const container = document.querySelector('.training-vids');
-  let addNewVideoDiv = document.getElementById(
-    "add-training-cards-container"
-  );
-
-  // Create the main div
-  const div = document.createElement("div");
-  div.className = "training-document center-aligned-flex column-flex";
-
-  // Create the remove-video div
-  const removeDiv = document.createElement("div");
-  removeDiv.className = "remove-video";
-
-  // Create the img inside the remove-video div
-  const removeImg = document.createElement("img");
-  removeImg.src = "images/substract.png";
-  removeImg.alt = "";
-
-  // Append the remove image to the remove-video div
-  removeDiv.appendChild(removeImg);
-
-  // Create the document thumbnail
-  const docImg = document.createElement("img");
-  docImg.src = "images/document-thumbnail.png";
-  docImg.alt = "";
-
-  // Create the document name
-  const p = document.createElement("p");
-  const u = document.createElement("u");
-
-  // Replace 'Document Name' with the name of the uploaded file
-  u.textContent = file.name;
-
-  p.appendChild(u);
-
-  // Append all child elements to the main div
-  div.appendChild(removeDiv);
-  div.appendChild(docImg);
-  div.appendChild(p);
-
-  // Append the main div to the parent container
-  container.insertBefore(div, addNewVideoDiv);
-}
-
 
 // Check if the user is an admin
 let tornituraTab = document.getElementById("department-tornitura");
@@ -133,53 +16,20 @@ let trainingTab = document.getElementById("training-button");
 
 var trainingObject = document.querySelector('#training-button object');
 
-function createLogoutButton() {
-
-  let mainBody = document.querySelector(".training-heading");
-  // Create the main div
-  const logoutDiv = document.createElement('div');
-  logoutDiv.className = 'logout-button center-aligned-flex';
-  logoutDiv.setAttribute('onclick', 'sendLogOutRequest()');
-  logoutDiv.textContent = 'Log Out';
-
-  mainBody.appendChild(logoutDiv)
-}
-
-
-function createAddButton() {
-  let mainBody = document.getElementById("training-sub-container");
-  // Create the main container div
-  const mainDiv = document.createElement('div');
-  mainDiv.className = 'add-training-cards-container center-aligned-flex';
-  mainDiv.setAttribute('onclick', 'redirectToPage("training-view/training-view.html")');
-
-  // Create the nested div
-  const nestedDiv = document.createElement('div');
-  nestedDiv.className = 'add-training-cards center-aligned-flex column-flex';
-
-  // Create the object element for the SVG
-  const imgObject = document.createElement('img');
-  imgObject.setAttribute('src', 'images/Add.png');
-
-  // Create the paragraph element
-  const paraDiv = document.createElement('div');
-  paraDiv.className = 'add-training-cards-para';
-  paraDiv.textContent = 'Add Videos and Documents';
-
-  // Append elements to their respective parents
-  nestedDiv.appendChild(imgObject);
-  nestedDiv.appendChild(paraDiv);
-  mainDiv.appendChild(nestedDiv);
-
-  // Append the main div to the body or another container in the document
-  mainBody.appendChild(mainDiv);
-}
 
 // Simulated function to fetch data from the database
 async function fetchDataFromDatabase() {
-  console.log("Fetching data")
-  let response = await fetch('http://127.0.0.1:8000/training-with-file/')
-  return await response.json();
+  try {
+    let response = await fetch(`${BASE_URL}/training-with-file/`);
+    if (!response.ok) {
+      // The server responded with a status code that falls out of the range of 2xx
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    showMessage(error.message, 'error')
+    console.error('Fetch error:', error.message);
+  }
 }
   
 
@@ -197,7 +47,7 @@ function addTrainingItem(training) {
     if (training.file.endsWith('.mp4') || training.file.endsWith('.avi') || training.file.endsWith('.mov')) {
         // If the file is a video
         const videoElement = document.createElement('video'); // Create the video element
-        videoElement.src = 'http://localhost:8000' + training.file; // Set the source of the video
+        videoElement.src = `${BASE_URL}` + training.file; // Set the source of the video
         videoElement.controls = false; // Hide video controls
         videoElement.style.objectFit = 'cover'
         videoElement.style.width = '100%'; // Set the width of the video
@@ -212,7 +62,7 @@ function addTrainingItem(training) {
           image.src = '../images/pdf.png'
         }
         else{
-          image.src = 'http://localhost:8000' + training.file; // Set the source of the image
+          image.src = `${BASE_URL}` + training.file; // Set the source of the image
         }
         image.alt = ''; // Set alt text for the image
         image.style.width = '100%'; // Set the image width to fill its container
@@ -246,27 +96,34 @@ async function loadTrainingSection(trainings) {
     const trainingContainer = document.getElementById('training-sub-container');
     trainingContainer.innerHTML = ''
 
-    trainings = trainings.results;
-    trainings.forEach(training => {
-      addTrainingItem(training)
-    });
+      trainings.forEach(training => {
+        addTrainingItem(training)
+      });
  
   } catch (error) {
+    showMessage(error.message, 'error')
     console.error('Error fetching data:', error);
   }
 }
-
-// Function to create a dictionary with page data and setup pagination
 async function setupPagination() {
+  let totalPages;
+  try {
+    let response = await fetch(`${BASE_URL}/training-count/`);
+    if (!response.ok) {
+      // If the response is not in the 2xx range, throw an error.
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-  let response = await fetch('http://localhost:8000/training-count/')
-  let data = await response.json()
+    let data = await response.json();
 
+    // Assuming data contains a property count which is the total number of items
+    const itemsPerPage = 10; // Adjust based on your needs
+    totalPages = Math.ceil(data.count / itemsPerPage);
 
-  // Assuming data is an array of items, and you decide how many items per page
-  const itemsPerPage = 10; // Adjust based on your needs
-  const totalPages = Math.ceil(data.count / itemsPerPage);
-
+  } catch (error) {
+    console.error('Error setting up pagination:', error.message);
+    showMessage(error.message, 'error') 
+  }
 
   // Function to generate pagination and attach event listeners
   async function generatePagination(currentPage, totalPages) {
@@ -283,11 +140,22 @@ async function setupPagination() {
           e.preventDefault();
           // Load the previous page
           document.getElementById('training-sub-container').innerHTML = ''; // Clear topics container
-    
-              // Fetch topics for clicked page
-              let response = await fetch(`http://localhost:8000/training-with-file/?page=${prevPage}`);
-              let trainings = await response.json()
-              loadTrainingSection(trainings);
+          try {
+            let response = await fetch(`${BASE_URL}/training-with-file/?page=${prevPage}`);
+            if (!response.ok) {
+              // If the response status is not in the 2xx range, throw an error.
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            let trainings = await response.json();
+            // if (trainings.results) 
+            if (trainings.results !== '' || trainings.results != undefined) {
+              loadTrainingSection(trainings.results); // Assuming loadTrainingSection is defined elsewhere to update the UI
+            }
+          } catch (error) {
+            console.error('Error fetching topics for page:', error.message);
+            showMessage(error.message, 'error')
+          }
+        
           generatePagination(prevPage, totalPages);
       });
       container.appendChild(prevButton);
@@ -313,12 +181,23 @@ async function setupPagination() {
             e.preventDefault();
             document.getElementById('training-sub-container').innerHTML = ''; // Clear topics container
 
-            // Fetch topics for clicked page
-            let response = await fetch(`http://localhost:8000/training-with-file/?page=${pageNumber}`);
-            let trainings = await response.json()
-            loadTrainingSection(trainings);
+            try {
+              let response = await fetch(`${BASE_URL}/training-with-file/?page=${prevPage}`);
+              if (!response.ok) {
+                // If the response status is not in the 2xx range, throw an error.
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              let trainings = await response.json();
+              if (trainings.results !== '' || trainings.results != undefined) {
+                loadTrainingSection(trainings.results); // Assuming loadTrainingSection is defined elsewhere to update the UI
+              } 
+            } catch (error) {
+              console.error('Error fetching topics for page:', error.message);
+              showMessage(error.message, 'error')
+            }
+
             generatePagination(pageNumber, totalPages); // Regenerate pagination
-        });
+          });
         container.appendChild(pageLink);
     }
 
@@ -334,7 +213,7 @@ async function setupPagination() {
           document.getElementById('training-sub-container').innerHTML = ''; // Clear topics container
     
               // Fetch topics for clicked page
-              let response = await fetch(`http://localhost:8000/training-with-file/?page=${nextPage}`);
+              let response = await fetch(`${BASE_URL}/training-with-file/?page=${nextPage}`);
               let trainings = await response.json()
               loadTrainingSection(trainings);
           generatePagination(nextPage, totalPages);
@@ -345,17 +224,10 @@ async function setupPagination() {
 
   // Call this function with the initial page and total pages from your API response
   generatePagination(1, totalPages); // Assuming 'totalPages' is defined somewhere in your code
-
 }
 
-
-document.addEventListener("DOMContentLoaded", async function () {
-  trainingTab.classList.add("selected-department-box")
-  trainingObject.setAttribute('data', '../images/Training-Selected.svg');
-  let trainings = await fetchDataFromDatabase();  
-  loadTrainingSection(trainings);
-  setupPagination();
-
+function setupNavigation() {
+  
   if (user) {
   
     // If user is logged in as admin, don't show login page.
@@ -388,5 +260,20 @@ document.addEventListener("DOMContentLoaded", async function () {
     );
   }
   
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+  // Setup Navigation first
+  setupNavigation()
+
+  trainingTab.classList.add("selected-department-box")
+  trainingObject.setAttribute('data', '../images/Training-Selected.svg');
+  let trainings = await fetchDataFromDatabase();  
+  if (trainings && trainings.results && trainings.results.length > 0) {
+    loadTrainingSection(trainings.results); 
+  }
+
+  setupPagination();
+
   
 })
