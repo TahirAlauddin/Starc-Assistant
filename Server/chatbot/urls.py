@@ -10,7 +10,7 @@ from .views import (DepartmentViewSet, QuestionViewSet, MachineViewSet,
                     TrainingFileViewSet, TopicFileViewSet,
                     login_view, logout_view, chatbot_model_view,
                     get_training_count, get_training_file,
-                    upload_data, TopicFileBulkView, 
+                    upload_data, retrain_model, TopicFileBulkView, 
                     BulkTrainingFilesAPIView)
 
 
@@ -21,12 +21,12 @@ from rest_framework_nested.routers import SimpleRouter, NestedSimpleRouter
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
-        'training':             reverse('training-list', request=request, format=format),
-        'topic':                reverse('topic-list', request=request, format=format),
+        'training':             reverse('training-list', request=request, format=format), # Training objects (text data)
+        'topic':                reverse('topic-list', request=request, format=format), # Chatbot Topics
         'department':           reverse('department-list', request=request, format=format),
         'machine':              reverse('machine-list', request=request, format=format),
-        'training-with-file':   reverse('training-with-file', request=request, format=format),
-        'training-count':       reverse('training-count', request=request, format=format),
+        'training-with-file':   reverse('training-with-file', request=request, format=format), # Training File Objects
+        'training-count':       reverse('training-count', request=request, format=format), # Total count of training objects
         
     })
 
@@ -51,6 +51,7 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('upload-data/', upload_data, name='upload-data'),
+    path('retrain-model/', retrain_model, name='retrain-model'),
     path('chatbot_model/', chatbot_model_view, name='chatbot-model'),
     path('training-with-file/', get_training_file, name='training-with-file'),
     path('training-count/', get_training_count, name='training-count'),

@@ -115,9 +115,9 @@ const menu = Menu.buildFromTemplate(menuTemplate);
         mainWindow.webContents.openDevTools();
     }
 
-    mainWindow.loadFile('home/welcome/index.html');
+    // mainWindow.loadFile('home/welcome/index.html');
     // mainWindow.loadFile('training/training-view/training-view.html');
-    // mainWindow.loadFile('training/training.html');
+    mainWindow.loadFile('training/training.html');
     // mainWindow.loadFile('admin/admin-panel.html');
     // mainWindow.loadFile('login/login.html');
     mainWindow.on('closed', function () {

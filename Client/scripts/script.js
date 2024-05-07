@@ -4,7 +4,7 @@ function redirectToPage(page) {
 
 
   let isAdmin = sessionStorage.getItem("isAdmin");
- 
+
   if (page.includes('login') && isAdmin == 'true') {
     targetPageURL = '../admin/admin-panel.html'
   }
@@ -39,6 +39,49 @@ function sendLogOutRequest() {
 }
 
 
+
+// Function to fetch machine data from the API and organize it into a dictionary
+async function fetchAndOrganizeMachineData() {
+  try {
+    const response = await fetch(`${BASE_URL}/machines`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const machines = await response.json();
+    const departments = { "Tornitura": [], "Rettifiche": [], "Qualita": [] };
+
+    // Check if there are no machines
+    if (machines.count === 0) {
+      console.log("No machines found.");
+      return departments;
+    }
+
+    // Organize machines by departments
+    machines.results.forEach(machine => {
+      const { name, department_name } = machine;
+
+      if (!departments[department_name]) {
+        departments[department_name] = [];
+      }
+      departments[department_name].push(name);
+    });
+
+    return departments;
+  } catch (error) {
+    console.error('Error fetching or processing data: ', error);
+  }
+}
+
+// // Call the function to fetch the data and organize it
+// let departmentOptions = fetchAndOrganizeMachineData();
+
 // Data for the options
 let departmentOptions = {
   Tornitura: [
@@ -65,17 +108,22 @@ let departmentOptions = {
 
 // Function to add options to the dropdown based on department
 function addOptionsToDropdown(department) {
-  var selectElement = document.getElementById("custom-dropdown");
-  // Clear existing options first
-  selectElement.innerHTML = "";
+  fetchAndOrganizeMachineData().then(departments => {
+    console.log(departments);
+    let departmentOptions = departments;
 
-  var optionsData = departmentOptions[department];
-  if (optionsData) {
-    for (var i = 0; i < optionsData.length; i++) {
-      var option = document.createElement("option");
-      option.text = optionsData[i];
-      option.value = optionsData[i];
-      selectElement.add(option);
+    var selectElement = document.getElementById("custom-dropdown");
+    // Clear existing options first
+    selectElement.innerHTML = "";
+
+    var optionsData = departmentOptions[department];
+    if (optionsData) {
+      for (var i = 0; i < optionsData.length; i++) {
+        var option = document.createElement("option");
+        option.text = optionsData[i];
+        option.value = optionsData[i];
+        selectElement.add(option);
+      }
     }
-  }
+  });
 }

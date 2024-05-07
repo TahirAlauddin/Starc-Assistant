@@ -99,7 +99,7 @@ function createQuestionElement(text, img) {
 }
 
 function cleanInputFields() {
-  location.reload()  
+  location.reload()
 }
 
 // Function to add a new question
@@ -159,36 +159,36 @@ async function saveFile(file, topicId) {
   }
 }
 
-  
+
 function deleteTopic(topicId) {
   showMessage("Deleting Topic", "information");
 
   fetch(`${BASE_URL}/topic/${topicId}`, {
     method: 'DELETE'
   })
-  .then(response => {
-    if (!response.ok) {
-      console.log('Error deleting topic:', response.statusText);
-      showMessage('Error deleting topic:' + response.statusText, 'error');
-      throw new Error('Network response was not ok.');
-    }
-    console.log(response)
-    if (response.status == 204) {
-      console.log('Topic deleted successfully!');
-      showMessage('Topic deleted successfully!', 'success');
+    .then(response => {
+      if (!response.ok) {
+        console.log('Error deleting topic:', response.statusText);
+        showMessage('Error deleting topic:' + response.statusText, 'error');
+        throw new Error('Network response was not ok.');
+      }
+      console.log(response)
+      if (response.status == 204) {
+        console.log('Topic deleted successfully!');
+        showMessage('Topic deleted successfully!', 'success');
 
 
-    } else {
-      showMessage('Failed to delete topic!', 'error');
-    }
-    setTimeout(() => {
-      redirectToPage('previous-topic/previous-topic.html'+'?tab='+selectedDepartment)
-    }, 500);
+      } else {
+        showMessage('Failed to delete topic!', 'error');
+      }
+      setTimeout(() => {
+        redirectToPage('previous-topic/previous-topic.html' + '?tab=' + selectedDepartment)
+      }, 500);
 
-  })
-  .catch(error => {
-    console.error('Failed to delete topic:', error);
-  });
+    })
+    .catch(error => {
+      console.error('Failed to delete topic:', error);
+    });
 }
 
 async function saveTopic() {
@@ -204,82 +204,106 @@ async function saveTopic() {
   const label = document.getElementById("label-input")
   let selectedMachine = null;
   const selectElement = document.getElementById("custom-dropdown");
-  
+  selectedMachine = selectElement.value
+
   let answers_data = [];
   let questions_data = [];
   let files = [];
-  
-  answers.forEach(answer=>{
+
+  answers.forEach(answer => {
     answers_data.push(answer.textContent);
   });
-  questions.forEach(question=>{
+  questions.forEach(question => {
     questions_data.push(question.textContent);
   });
 
-  
+
   const data = {};
-  data["label"]= label.value.trim();  
-  data["machine"] = selectedMachine ? selectedMachine : selectElement[0].value;
+  if (questions_data.length < 5) {
+    showMessage("Questions should be 5 or more", "error")
+    return;
+  }
+
+  if (answers_data.length < 1) {
+    showMessage("Add atleast 1 answer", "error")
+    return;
+  }
+  
+  if (label === "") {
+    showMessage("Add a label", "error")
+    return;
+  }
+
+  data["label"] = label.value.trim();
+  data["machine"] = selectedMachine;
   data["questions"] = questions_data;
   data["answers"] = answers_data;
-  
+
+  console.log(data);
+
+  if (!(data.label && data.machine && data.questions && data.answers)) {
+    console.log('Add label/question/answer:', 'Unknown error');
+    showMessage('Add label/question/answer', 'error')
+    return
+  }
+
 
   await fetch(`${BASE_URL}/upload-data/`, {
     method: httpMethod,
     body: JSON.stringify(data)
   })
-  .then(response => {
-    // Check if the response is ok (status in the range 200-299)
-    if (!response.ok) {
-      // Throw an error for any response not in the 200 range, including 200 status code check
-
-      console.log('Error uploading data:', data.message || 'Unknown error');
-      showMessage('Error saving data:' + data.message || 'Unknown error', 'error')
-      throw new Error('Network response was not ok: ' + response.statusText);
-    }
-
-    return response.json(); // We can safely parse JSON now
-  })
-  .then(async data => {
-    // Assuming 'data' contains a property 'status_code' to check for successful operation
-    console.log('Topic saved successfully!');
-    showMessage('Topic saved successfully!', 'success');
-    
-      
-    if (uploadedFiles && data.topic && data.topic.id) {
-      const results = await Promise.all(uploadedFiles.map(file => saveFile(file, data.topic.id)));
-      // Check if all uploads were successful
-      const allUploadsSuccessful = results.every(result => result === true);
-      if (allUploadsSuccessful) {
-        // All uploads successful, reinitialize uploadedVideos
-        uploadedVideos = [];
+    .then(response => {
+      // Check if the response is ok (status in the range 200-299)
+      if (!response.ok) {
+        // Throw an error for any response not in the 200 range, including 200 status code check
+        console.log(response)
+        console.log('Error uploading data:', data.message || 'Unknown error');
+        showMessage('Error saving data:' + data.message || 'Unknown error', 'error')
+        throw new Error('Network response was not ok: ' + response.statusText);
       }
-      return allUploadsSuccessful;
-    } else {
-      // No files to upload, treat as successful
-      uploadedVideos = [];
-      return true;
-    }
-  })
-  .then((allUploadsSuccessful) => {
-    // Now you have a flag indicating the success of all uploads
-    if (allUploadsSuccessful) {
-      // All uploads were successful
-      console.log('All files have been successfully uploaded');
-    } else {
-      // At least one upload failed
-      console.log('Some files might not have been uploaded successfully');
-    }
-    // cleanInputFields(); // You can call this if you still want to clean the fields regardless of success
-  })
-  .catch(error => {
-    console.error('Error in the file upload process:', error);
-    showMessage('Error in saving topic or uploading files!', 'error');
-    // TODO: update the error message
-  });
+
+      return response.json(); // We can safely parse JSON now
+    })
+    .then(async data => {
+      // Assuming 'data' contains a property 'status_code' to check for successful operation
+      console.log('Topic saved successfully!');
+      showMessage('Topic saved successfully!', 'success');
+
+
+      if (uploadedFiles && data.topic && data.topic.id) {
+        const results = await Promise.all(uploadedFiles.map(file => saveFile(file, data.topic.id)));
+        // Check if all uploads were successful
+        const allUploadsSuccessful = results.every(result => result === true);
+        if (allUploadsSuccessful) {
+          // All uploads successful, reinitialize uploadedVideos
+          uploadedVideos = [];
+        }
+        return allUploadsSuccessful;
+      } else {
+        // No files to upload, treat as successful
+        uploadedVideos = [];
+        return true;
+      }
+    })
+    .then((allUploadsSuccessful) => {
+      // Now you have a flag indicating the success of all uploads
+      if (allUploadsSuccessful) {
+        // All uploads were successful
+        console.log('All files have been successfully uploaded');
+      } else {
+        // At least one upload failed
+        console.log('Some files might not have been uploaded successfully');
+      }
+      // cleanInputFields(); // You can call this if you still want to clean the fields regardless of success
+    })
+    .catch(error => {
+      console.error('Error in the file upload process:', error);
+      showMessage('Error in saving topic or uploading files!', 'error');
+      // TODO: update the error message
+    });
   // TODO: Ensure 'cleanInputFields' is defined and properly resets the input fields.
   // TODO: Ensure 'showMessage' is defined and capable of displaying messages to the user.
-  
+
 }
 
 
@@ -301,16 +325,16 @@ async function fetchMediaFiles(topicId) {
     const data = await response.json();
     for (const videoGuide of data.results) {
       const fileUrl = videoGuide.file;
-      
+
       // Fetch the media file as a Blob
       const mediaResponse = await fetch(fileUrl);
       const fileData = await mediaResponse.json();
-      
+
       // Create a file object from the Blob
       displayMedia(fileData.file, fileData.id)
       // Check if file already exists in fileState. If not, mark as unchanged
       fileState.unchangedFiles.push(fileData.id);
-              
+
     }
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error);
@@ -319,33 +343,33 @@ async function fetchMediaFiles(topicId) {
 
 
 document
-.getElementById("add-training-cards-container")
-.addEventListener("click", function () {
-  // Programmatically trigger the hidden file input
-  document.getElementById("fileInput").click();
-});
+  .getElementById("add-training-cards-container")
+  .addEventListener("click", function () {
+    // Programmatically trigger the hidden file input
+    document.getElementById("fileInput").click();
+  });
 
 
 
 document.getElementById('previous-question-answers').addEventListener('click', () => {
-  redirectToPage('previous-topic/previous-topic.html'+'?tab='+selectedDepartment)
+  redirectToPage('previous-topic/previous-topic.html' + '?tab=' + selectedDepartment)
 })
 
-document.addEventListener("DOMContentLoaded", async function() {
-  const {id, department} = getUrlParams();
+document.addEventListener("DOMContentLoaded", async function () {
+  const { id, department } = getUrlParams();
   const data = await fetchTopicData(id);
   if (!data) {
-      console.error('ERROR OCCURRED');
-      return;
+    console.error('ERROR OCCURRED');
+    return;
   }
-  httpMethod = 'PUT'  
+  httpMethod = 'PUT'
 
   displayTopicData(data);
   makeLabelReadOnly();
   populateAnswers(data.answers);
   populateQuestions(data.questions);
   if (!data.isTrained) {
-      addDeleteButton(id);
+    addDeleteButton(id);
   } else {
     document.getElementById('save-button').remove()
   }
@@ -357,15 +381,15 @@ function getUrlParams() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   return {
-      id: urlParams.get('id'),
-      department: urlParams.get('selectedDepartment'),
+    id: urlParams.get('id'),
+    department: urlParams.get('selectedDepartment'),
   };
 }
 
 async function fetchTopicData(id) {
   let response = await fetch(`${BASE_URL}/topic/${id}`);
   if (!response.ok) {
-      return null;
+    return null;
   }
   return await response.json();
 }
@@ -382,16 +406,16 @@ function makeLabelReadOnly() {
 function populateAnswers(answers) {
   const answersContainer = document.getElementById("answers-container");
   answers.forEach(answer => {
-      const answerDiv = createQuestionElement(answer["text"], "message-square");
-      answersContainer.appendChild(answerDiv);
+    const answerDiv = createQuestionElement(answer["text"], "message-square");
+    answersContainer.appendChild(answerDiv);
   });
 }
 
 function populateQuestions(questions) {
   const questionsContainer = document.getElementById("questions-container");
   questions.forEach(question => {
-      const questionDiv = createQuestionElement(question["text"], "idea");
-      questionsContainer.appendChild(questionDiv);
+    const questionDiv = createQuestionElement(question["text"], "idea");
+    questionsContainer.appendChild(questionDiv);
   });
 }
 
@@ -403,7 +427,7 @@ function addDeleteButton(id) {
   div.style.background = 'tomato';
   div.textContent = 'Delete';
   div.addEventListener('click', () => {
-      deleteTopic(id);
+    deleteTopic(id);
   });
   container.appendChild(div);
 }

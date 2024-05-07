@@ -148,6 +148,143 @@ async function setupPagination() {
 
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+  var url = 'http://localhost:8000/machines/';
+  tableContent(url);
+  $('#machineTableBody').on('click', '.delete-button', function() {
+    var machineId = $(this).data('machine-id');
+    
+    // Perform AJAX request to Django view for deletion
+    $.ajax({
+        url: 'http://localhost:8000/machines/' + machineId + '/delete/',
+        method: 'POST',  
+        success: function(response) {
+            console.log('Machine deleted successfully');
+            window.location.href = 'machine.html';
+        },
+        error: function(error) {
+            console.error('Failed to delete machine:', error);
+        }
+    });
+    window.location.href = 'machine.html';
+  });
+})    
+
+
+
+let activePage = 1; 
+
+function updatePagination(response) {
+  const paginationContainer = document.getElementById('pagination-container');
+  paginationContainer.innerHTML = ''; // Clear existing pagination links
+
+  const totalPages = Math.ceil(response.count / 3); // Assuming 3 items per page
+
+  // Previous button
+  const prevButton = document.createElement('a');
+  prevButton.textContent = 'Back';
+  if (response.previous) {
+      prevButton.addEventListener('click', function() {
+          tableContent(response.previous);
+      });
+  } else {
+      prevButton.classList.add('disabled');
+  }
+  paginationContainer.appendChild(prevButton);
+
+  // Page numbers
+  for (let i = 1; i <= totalPages; i++) {
+      const pageLink = document.createElement('a');
+      pageLink.textContent = i;
+      pageLink.addEventListener('click', function() {
+          tableContent(`http://localhost:8000/machines/?page=${i}`);
+          activePage = i;
+          updatePagination(response);
+      });
+      if (i === activePage) {
+          pageLink.classList.add('active');
+      }
+      paginationContainer.appendChild(pageLink);
+  }
+
+  // Next button
+  const nextButton = document.createElement('a');
+  nextButton.textContent = 'Next';
+  if (response.next) {
+      nextButton.addEventListener('click', function() {
+          tableContent(response.next);
+      });
+ 
+  } else {
+      nextButton.classList.add('disabled');
+  }
+  paginationContainer.appendChild(nextButton);
+}
+
+function getPageNumber(url) {
+  var match = url.match(/page=(\d+)/);
+  if (match && match[1]) {
+      return parseInt(match[1]);
+  }
+  return 1; // Default to 1 if no page number found
+}
+
+function tableContent(PageUrl){
+  $.ajax({
+      url: PageUrl,  
+      method: 'GET',
+      success: function (response) {
+          if (response.results.length > 0) {
+              $('#machineTableBody').empty();
+              response.results.forEach(function (machine) {
+                  var machineName = machine.name; 
+                  var departmentName = machine.department_name;
+                  var id = machine.id;
+                  var addedDate = new Date(machine.added_date);
+
+                  // Get the date parts
+                  var year = addedDate.getFullYear();
+                  var month = (addedDate.getMonth() + 1).toString().padStart(2, '0');
+                  var day = addedDate.getDate().toString().padStart(2, '0'); 
+
+                  // Format the date as YYYY-MM-DD
+                  var formattedDate = year + '-' + month + '-' + day;
+
+                  $('#machineTableBody').append(
+                      '<tr>' +
+                      '<td>' + machineName + '</td>' +
+                      '<td>' + departmentName + '</td>' +
+                      '<td>' + formattedDate + '</td>' +
+                      '<td width="15%">' +
+                      '<a href="#" onclick="redirect(\'machine-detail.html\', \'' + machineName + '\', \'' + departmentName + '\', \'' + id + '\')" class="edit-button" data-machine-id="{{ \'' + machine.id + ' \' }}">Edit</a>' +
+                      '<a href="#" class="delete-button" data-machine-id='+ machine.id +'>Delete</a>' +
+                      '</td>' +
+                      '</tr>'
+                  );
+                  updatePagination(response);
+              });
+              if (PageUrl) {
+                  var page = getPageNumber(PageUrl);
+                  const paginationContainer = document.getElementById('pagination-container');
+                  var pageLinks = paginationContainer.querySelectorAll('a');
+                  pageLinks.forEach(link => {
+                      link.classList.remove('active');
+                      if (parseInt(link.textContent) === page) {
+                          link.classList.add('active');
+                      }
+                  });
+              }
+          } else {
+              $('#noResultRow').show();
+          }
+      },
+      error: function () {
+          alert('Failed to fetch machine list.');
+      }
+  });
+  
+}
+
 
 document.addEventListener("DOMContentLoaded", async function () {
   // lLLet trainings = await fetchDataFromDatabase();  

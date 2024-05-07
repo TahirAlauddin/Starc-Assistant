@@ -150,7 +150,7 @@ body {
 .first-heading {
   justify-content: start;
   height: auto;
-  width: 50%;
+  width: 35%;
   gap: 0.8rem;
 }
 
@@ -161,7 +161,7 @@ body {
 }
 
 .first-heading > object {
-  width: 7%;
+  width: 10%;
 }
 
 /* Styles for modifying question answer container */
@@ -186,7 +186,6 @@ body {
 /* Styles for modifying dropdown box */
 .dropdown-container {
   width: 82%;
-  margin-top: 1rem;
   font-family: "Inria Sans", sans-serif;
 }
 
@@ -262,10 +261,19 @@ body {
   background: #555;
 }
 
+@media screen and (1080px >= width >= 851px) {
+  .first-heading > object {
+    width: 15%;
+  }
+}
+
 /* Media Queries for Tablets */
 @media screen and (850px >= width >= 680px) {
   .sidebar {
     width: 20vw;
+  }
+  .first-heading > object {
+    width: 18%;
   }
 }
 
@@ -282,6 +290,15 @@ body {
 
   .admin-panel-box {
     height: 22%;
+  }
+
+  .custom-dropdown {
+    width: 10rem;
+    padding: 7px;
+  }
+
+  .first-heading > object {
+    width: 20%;
   }
 }
 

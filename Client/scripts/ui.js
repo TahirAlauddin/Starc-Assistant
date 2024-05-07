@@ -1,4 +1,19 @@
-function addRemoveImageButton(mediaContainer, file) {
+function removeFile(file) {
+  let index;
+  if (typeof file === File) {
+    index = fileStates.addedFiles.indexOf(file)
+    if (index !== -1)
+      fileStates.addedFiles.splice(index, 1);
+  } else {
+    index = fileStates.newFiles.indexOf(file);
+    if (index !== -1) {
+      fileStates.newFiles.splice(index, 1);
+      fileStates.removedFiles.push(file);
+    }
+  }
+}
+
+function addRemoveImageButton(mediaContainer, file, mediaSrc) {
   // Add remove button
   let user = sessionStorage.getItem('isAdmin')
 
@@ -8,6 +23,9 @@ function addRemoveImageButton(mediaContainer, file) {
   const removeButton = document.createElement('button');
   removeButton.innerHTML = '&times;'; // Add cross symbol
   removeButton.className = 'remove-button';
+  if (mediaSrc.toLowerCase().endsWith('.pdf')) {
+    removeButton.classList.add("remove-button-pdf")
+  }
   removeButton.addEventListener('click', function() {
     removeFile(file);
     mediaContainer.remove(); // Remove the media item from the UI
@@ -118,9 +136,12 @@ function displayMedia(mediaSrc, file) {
             // Append the canvas with the PDF page to your media container
             mediaContainer.appendChild(canvas);
             // Optional: Apply styles to make it look like an image preview
-            canvas.style.width = '12rem';
+            canvas.style.width = '10rem';
             canvas.style.objectFit = 'cover';
-            canvas.style.height = 'auto';
+            canvas.style.height = '100%';
+            canvas.style.position = "relative";
+            canvas.style.top = "-20px";
+
             canvas.onclick = () => window.open(mediaSrc, '_blank'); // Open PDF in new tab on click
           });
         });
@@ -142,7 +163,7 @@ function displayMedia(mediaSrc, file) {
   
     }
       
-    addRemoveImageButton(mediaContainer, file)
+    addRemoveImageButton(mediaContainer, file, mediaSrc)
 
     if (imageElement) {
       imageElement.addEventListener('click', function() {

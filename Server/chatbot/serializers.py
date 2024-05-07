@@ -13,6 +13,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
         model = Department
         fields = '__all__'
 
+
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
@@ -49,6 +50,7 @@ class AnswerSerializer(serializers.ModelSerializer):
         model = Answer
         fields = '__all__'
 
+
 class QuestionForTopicsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
@@ -60,12 +62,14 @@ class AnswerForTopicsSerializer(serializers.ModelSerializer):
         model = Answer
         fields = ['text']
 
+
 class TopicSerializer(serializers.ModelSerializer):
     questions = QuestionForTopicsSerializer(many=True, read_only=True)
     answers = AnswerForTopicsSerializer(many=True, read_only=True)
     class Meta:
         model = Topic
         fields = ['id', 'label', 'questions', 'answers', 'machine', 'isTrained']
+
 
 class TopicFileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -85,9 +89,9 @@ class TopicFileSerializer(serializers.ModelSerializer):
 
         return attrs
 
+
 # TODO: Remember to handle any potential name collisions and test this method thoroughly.
-
-
+# Training View Page
 class TrainingSerializer(serializers.ModelSerializer):
     files = NestedHyperlinkedRelatedField(view_name='training-files-detail',
                                         many=True,
@@ -95,7 +99,7 @@ class TrainingSerializer(serializers.ModelSerializer):
                                         read_only=True)
     class Meta:
         model = Training
-        fields = ['id', 'title', 'content', 'files']
+        fields = ['id', 'title', 'content', 'files', 'category']
 
 class TrainingFileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -103,12 +107,15 @@ class TrainingFileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
+# Training List Page
 class TrainingListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Training
-        fields = ['id', 'title', 'content', 'file']
+        fields = ['id', 'title', 'content', 'file', "category"]
 
     file = serializers.SerializerMethodField(read_only=True)
+
 
     def get_file(self, obj):
          # Try to get an associated TrainingFile, if none, use 'default.jpg'

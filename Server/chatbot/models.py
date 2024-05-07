@@ -102,9 +102,10 @@ class Training(models.Model):
     """
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True, null=True)
-    # category = models.ForeignKey('chatbot.Department', 
-    #                              on_delete=models.SET_NULL,
-    #                              null=True)
+    # category = models.CharField(max_length=255, null=True, blank=True)
+    category = models.ForeignKey('chatbot.Department', 
+                                 on_delete=models.SET_NULL,
+                                 null=True)
     def __str__(self) -> str:
         return f"Training#{self.id} ({self.title})"
 

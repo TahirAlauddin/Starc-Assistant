@@ -96,6 +96,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   if (user) {
+    // If user is logged in as admin, don't show login page.
+    document.getElementById('admin-panel-button').style.display = 'none';
+
     tornituraTab.setAttribute(
       "onclick",
       "redirectToPage('../../admin/admin-panel.html?tab=tornitura')"

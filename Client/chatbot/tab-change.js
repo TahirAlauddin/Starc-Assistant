@@ -17,8 +17,12 @@ function loadTornituraTab() {
         tornituraTab.classList.add(selectedClass);
         tornituraObject.setAttribute('data', '../images/Tornitura-Selected.svg');
 
-        rettificheObject.setAttribute('data', '../images/Rettifiche.svg');
-        qualitaObject.setAttribute('data', '../images/Qualita.svg');
+        if (rettificheTab.classList.contains(selectedClass)) {
+            rettificheObject.setAttribute('data', '../images/Rettifiche.svg');
+        }
+        if (qualitaTab.classList.contains(selectedClass)) {
+            qualitaObject.setAttribute('data', '../images/Qualita.svg');
+        }
 
         rettificheTab.classList.remove(selectedClass);
         qualitaTab.classList.remove(selectedClass);
@@ -45,9 +49,14 @@ function loadRettificheTab() {
 
         rettificheTab.classList.add(selectedClass);
         rettificheObject.setAttribute('data', '../images/Rettifiche-Selected.svg');
+        
+        if (tornituraTab.classList.contains(selectedClass)) {
+            tornituraObject.setAttribute('data', '../images/Tornitura.svg');
+        }
 
-        tornituraObject.setAttribute('data', '../images/Tornitura.svg');
-        qualitaObject.setAttribute('data', '../images/Qualita.svg');
+        if (qualitaTab.classList.contains(selectedClass)) {
+            qualitaObject.setAttribute('data', '../images/Qualita.svg');
+        }
 
         tornituraTab.classList.remove(selectedClass);
         qualitaTab.classList.remove(selectedClass);
@@ -73,10 +82,14 @@ function loadQualitaTab() {
 
         qualitaTab.classList.add(selectedClass);
         qualitaObject.setAttribute('data', '../images/Qualita-Selected.svg');
+        
+        if (tornituraTab.classList.contains(selectedClass)) {
+            tornituraObject.setAttribute('data', '../images/Tornitura.svg');
+        }
 
-        tornituraObject.setAttribute('data', '../images/Tornitura.svg');
-        rettificheObject.setAttribute('data', '../images/Rettifiche.svg');
-
+        if (rettificheTab.classList.contains(selectedClass)) {
+            rettificheObject.setAttribute('data', '../images/Rettifiche.svg');
+        }
 
         tornituraTab.classList.remove(selectedClass);
         rettificheTab.classList.remove(selectedClass);

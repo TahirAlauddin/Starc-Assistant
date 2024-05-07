@@ -1,8 +1,28 @@
+async function getDepartmentIdByName(departmentName) {
+  try {
+      const response = await fetch('http://localhost:8000/departments/');
+      const departments = await response.json();
+
+      // Find the department whose name matches the given departmentName
+      const department = departments.find(dep => dep.name === departmentName);
+
+      // Return the department ID or null if not found
+      return department ? department.id : null;
+  } catch (error) {
+      console.error('Failed to fetch departments:', error);
+      return null;
+  }
+}
+
 
 async function saveTraining() {
     let title = document.getElementById('title').textContent;
     let content = document.getElementById('content').textContent;
-  
+    let department = document.getElementById('custom-dropdown').value;
+
+    let departmentID = await getDepartmentIdByName(department);
+
+    console.log(departmentID)
   
     let trainingResponse = await fetch(`${BASE_URL}/training/`, {
       method: 'POST',
@@ -11,7 +31,8 @@ async function saveTraining() {
       },
       body: JSON.stringify({
         title: title,
-        content: content
+        content: content,
+        category: departmentID
       })
     });
   
@@ -83,9 +104,12 @@ async function updateTraining(trainingId) {
     // , updatedTitle, updatedContent, addedFiles, removedFiles) {
   let updatedContent = document.getElementById('content').textContent;
   let updatedTitle = document.getElementById('title').textContent;
+  let department = document.getElementById('custom-dropdown').value;
+
+  let departmentID = await getDepartmentIdByName(department);
   
   try {
-    await updateTrainingData(trainingId, updatedTitle, updatedContent);
+    await updateTrainingData(trainingId, updatedTitle, updatedContent, departmentID);
     await updateTrainingFiles(trainingId, fileState.addedFiles, fileState.removedFiles);
     console.log("Training updated successfully.");
   } catch (error) {
@@ -93,7 +117,7 @@ async function updateTraining(trainingId) {
   }
 }
 
-async function updateTrainingData(trainingId, updatedTitle, updatedContent) {
+async function updateTrainingData(trainingId, updatedTitle, updatedContent, departmentID) {
   const updateResponse = await fetch(`${BASE_URL}/training/${trainingId}/`, {
     method: 'PUT',
     headers: {
@@ -101,7 +125,8 @@ async function updateTrainingData(trainingId, updatedTitle, updatedContent) {
     },
     body: JSON.stringify({
       title: updatedTitle,
-      content: updatedContent
+      content: updatedContent,
+      category: departmentID
     })
   });
 

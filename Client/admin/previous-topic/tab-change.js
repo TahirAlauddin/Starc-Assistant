@@ -6,17 +6,29 @@ var tornituraObject = document.querySelector('#department-tornitura object');
 var rettificheObject = document.querySelector('#department-rettifiche object');
 var qualitaObject = document.querySelector('#department-qualita object');
 
+var tornituraHeadingImage = document.getElementById("heading-image-tornitura")
+var rettificheHeadingImage = document.getElementById("heading-image-rettifiche")
+var qualitaHeadingImage = document.getElementById("heading-image-qualita")
+
+
 function setTornituraTab(selectedClass) {
     document.getElementById("admin-heading").textContent =
         "Tornitura";
 
-    document.getElementById("admin-heading-object").setAttribute('data', '../../images/Tornitura.svg');
 
     tornituraTab.classList.add(selectedClass);
     tornituraObject.setAttribute('data', '../../images/Tornitura-Selected.svg');
 
-    rettificheObject.setAttribute('data', '../../images/Rettifiche.svg');
-    qualitaObject.setAttribute('data', '../../images/Qualita.svg');
+    tornituraHeadingImage.style.display = "block"
+    rettificheHeadingImage.style.display = "none"
+    qualitaHeadingImage.style.display = "none"
+
+    if (rettificheTab.classList.contains(selectedClass)) {
+        rettificheObject.setAttribute('data', '../../images/Rettifiche.svg');
+    }
+    if (qualitaTab.classList.contains(selectedClass)) {
+        qualitaObject.setAttribute('data', '../../images/Qualita.svg');
+    }
 
     rettificheTab.classList.remove(selectedClass);
     qualitaTab.classList.remove(selectedClass);
@@ -30,13 +42,21 @@ function setRettificheTab(selectedClass) {
     document.getElementById("admin-heading").textContent =
         "Rettifiche";
 
-    document.getElementById("admin-heading-object").setAttribute('data', '../../images/Rettifiche.svg');
 
     rettificheTab.classList.add(selectedClass);
     rettificheObject.setAttribute('data', '../../images/Rettifiche-Selected.svg');
 
-    tornituraObject.setAttribute('data', '../../images/Tornitura.svg');
-    qualitaObject.setAttribute('data', '../../images/Qualita.svg');
+    rettificheHeadingImage.style.display = "block"
+    tornituraHeadingImage.style.display = "none"
+    qualitaHeadingImage.style.display = "none"
+
+    if (tornituraTab.classList.contains(selectedClass)) {
+        tornituraObject.setAttribute('data', '../../images/Tornitura.svg');
+    }
+
+    if (qualitaTab.classList.contains(selectedClass)) {
+        qualitaObject.setAttribute('data', '../../images/Qualita.svg');
+    }
 
     tornituraTab.classList.remove(selectedClass);
     qualitaTab.classList.remove(selectedClass);
@@ -51,13 +71,21 @@ function setQualitaTab(selectedClass) {
         "Control Qualita";
 
     
-    document.getElementById("admin-heading-object").setAttribute('data', '../../images/Qualita.svg');
 
     qualitaTab.classList.add(selectedClass);
     qualitaObject.setAttribute('data', '../../images/Qualita-Selected.svg');
+    qualitaHeadingImage.style.display = "block"
+    tornituraHeadingImage.style.display = "none"
+    rettificheHeadingImage.style.display = "none"
 
-    tornituraObject.setAttribute('data', '../../images/Tornitura.svg');
-    rettificheObject.setAttribute('data', '../../images/Rettifiche.svg');
+    if (tornituraTab.classList.contains(selectedClass)) {
+        tornituraObject.setAttribute('data', '../../images/Tornitura.svg');
+    }
+
+    if (rettificheTab.classList.contains(selectedClass)) {
+        rettificheObject.setAttribute('data', '../../images/Rettifiche.svg');
+    }
+
 
     tornituraTab.classList.remove(selectedClass);
     rettificheTab.classList.remove(selectedClass);

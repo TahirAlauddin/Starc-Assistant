@@ -16,22 +16,31 @@ let trainingTab = document.getElementById("training-button");
 
 var trainingObject = document.querySelector('#training-button object');
 
-
-// Simulated function to fetch data from the database
-async function fetchDataFromDatabase() {
+async function fetchDataFromDatabase(param = "", page = "") {
   try {
-    let response = await fetch(`${BASE_URL}/training-with-file/`);
+    let url = `${BASE_URL}/training-with-file/`;
+    if (param !== "" || page !== "") {
+      url += `?`;
+      if (param !== "") {
+        url += `search=${param}`;
+      }
+      if (page !== "") {
+        url += `${param !== "" ? "&" : ""}page=${page}`;
+      }
+    }
+    let response = await fetch(url);
     if (!response.ok) {
       // The server responded with a status code that falls out of the range of 2xx
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     return await response.json();
   } catch (error) {
-    showMessage(error.message, 'error')
+    showMessage(error.message, 'error');
     console.error('Fetch error:', error.message);
   }
 }
-  
+
+
 
 // Adjusted function to add training items to the HTML
 function addTrainingItem(training) {
@@ -46,13 +55,13 @@ function addTrainingItem(training) {
 
     if (training.file.endsWith('.mp4') || training.file.endsWith('.avi') || training.file.endsWith('.mov')) {
         // If the file is a video
-        const videoElement = document.createElement('video'); // Create the video element
-        videoElement.src = `${BASE_URL}` + training.file; // Set the source of the video
-        videoElement.controls = false; // Hide video controls
+        const videoElement = document.createElement('video');
+        videoElement.src = `${BASE_URL}` + training.file;
+        videoElement.controls = false;
         videoElement.style.objectFit = 'cover'
-        videoElement.style.width = '100%'; // Set the width of the video
-        videoElement.style.height = '12rem'; // Set the height of the video
-        trainingCard.appendChild(videoElement); // Append the video element
+        videoElement.style.width = '100%';
+        videoElement.style.height = '12rem';
+        trainingCard.appendChild(videoElement);
 
     } 
     else {
@@ -91,24 +100,36 @@ function addTrainingItem(training) {
 
 }
 
+
 async function loadTrainingSection(trainings) {
   try {
     const trainingContainer = document.getElementById('training-sub-container');
     trainingContainer.innerHTML = ''
+    
+    if (user) {
+      createAddButton()
+    }
 
-      trainings.forEach(training => {
-        addTrainingItem(training)
-      });
+    trainings.forEach(training => {
+      addTrainingItem(training)
+    });
  
   } catch (error) {
     showMessage(error.message, 'error')
     console.error('Error fetching data:', error);
   }
 }
-async function setupPagination() {
+
+async function setupPagination(param = "") {
   let totalPages;
   try {
-    let response = await fetch(`${BASE_URL}/training-count/`);
+    let response;
+    if (param === "") {
+      response = await fetch(`${BASE_URL}/training-count/`);
+    }
+    else {
+      response = await fetch(`${BASE_URL}/training-count/?search=${param}`);
+    }
     if (!response.ok) {
       // If the response is not in the 2xx range, throw an error.
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -139,17 +160,10 @@ async function setupPagination() {
       prevButton.addEventListener('click', async function(e) {
           e.preventDefault();
           // Load the previous page
-          document.getElementById('training-sub-container').innerHTML = ''; // Clear topics container
           try {
-            let response = await fetch(`${BASE_URL}/training-with-file/?page=${prevPage}`);
-            if (!response.ok) {
-              // If the response status is not in the 2xx range, throw an error.
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            let trainings = await response.json();
-            // if (trainings.results) 
+            let trainings = await fetchDataFromDatabase(param, prevPage)
             if (trainings.results !== '' || trainings.results != undefined) {
-              loadTrainingSection(trainings.results); // Assuming loadTrainingSection is defined elsewhere to update the UI
+              loadTrainingSection(trainings.results);
             }
           } catch (error) {
             console.error('Error fetching topics for page:', error.message);
@@ -179,24 +193,17 @@ async function setupPagination() {
         pageLink.className = pageNumber === currentPage ? 'active' : '';
         pageLink.addEventListener('click', async function(e) {
             e.preventDefault();
-            document.getElementById('training-sub-container').innerHTML = ''; // Clear topics container
-
             try {
-              let response = await fetch(`${BASE_URL}/training-with-file/?page=${prevPage}`);
-              if (!response.ok) {
-                // If the response status is not in the 2xx range, throw an error.
-                throw new Error(`HTTP error! status: ${response.status}`);
-              }
-              let trainings = await response.json();
+              let trainings = await fetchDataFromDatabase(param, currentPage)
               if (trainings.results !== '' || trainings.results != undefined) {
-                loadTrainingSection(trainings.results); // Assuming loadTrainingSection is defined elsewhere to update the UI
+                loadTrainingSection(trainings.results);
               } 
             } catch (error) {
               console.error('Error fetching topics for page:', error.message);
               showMessage(error.message, 'error')
             }
 
-            generatePagination(pageNumber, totalPages); // Regenerate pagination
+            generatePagination(pageNumber, totalPages);
           });
         container.appendChild(pageLink);
     }
@@ -210,12 +217,9 @@ async function setupPagination() {
       nextButton.addEventListener('click', async function(e) {
           e.preventDefault();
           // Load the next page
-          document.getElementById('training-sub-container').innerHTML = ''; // Clear topics container
-    
-              // Fetch topics for clicked page
-              let response = await fetch(`${BASE_URL}/training-with-file/?page=${nextPage}`);
-              let trainings = await response.json()
-              loadTrainingSection(trainings);
+          // Fetch topics for clicked page
+          let trainings = await fetchDataFromDatabase(param, nextPage)
+          loadTrainingSection(trainings);
           generatePagination(nextPage, totalPages);
       });
       container.appendChild(nextButton);
@@ -223,17 +227,24 @@ async function setupPagination() {
   }
 
   // Call this function with the initial page and total pages from your API response
-  generatePagination(1, totalPages); // Assuming 'totalPages' is defined somewhere in your code
+  generatePagination(1, totalPages);
 }
+
+
+async function filterTrainingData() {
+  let searchBarText = document.getElementById('search-bar').value;
+  let trainings = await fetchDataFromDatabase(searchBarText)
+  loadTrainingSection(trainings.results)
+  setupPagination(searchBarText)
+}
+
 
 function setupNavigation() {
   
   if (user) {
-  
     // If user is logged in as admin, don't show login page.
     document.getElementById('admin-panel-button').style.display = 'none'
-  
-    createAddButton()
+
     tornituraTab.setAttribute(
         "onclick",
         "redirectToPage('../admin/admin-panel.html?tab=tornitura')"
@@ -263,6 +274,8 @@ function setupNavigation() {
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
+  document.getElementById("search-button").addEventListener("click", filterTrainingData)
+  
   // Setup Navigation first
   setupNavigation()
 
@@ -271,9 +284,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   let trainings = await fetchDataFromDatabase();  
   if (trainings && trainings.results && trainings.results.length > 0) {
     loadTrainingSection(trainings.results); 
+  } else {
+    if (user) {
+      createAddButton()
+    }
   }
-
   setupPagination();
-
-  
 })

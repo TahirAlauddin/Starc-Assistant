@@ -64,18 +64,22 @@
     <div class="max-height max-width center-aligned-flex admin-main column-flex">
       <div class="admin-heading center-aligned-flex">
         <div class="first-heading center-aligned-flex">
-          <object data="../images/Tornitura.svg" type="image/svg+xml"></object>
+          <object data="../images/Tornitura.svg" id="heading-image-tornitura" type="image/svg+xml"></object>
+          <object data="../images/Rettifiche.svg" id="heading-image-rettifiche" type="image/svg+xml"></object>
+          <object data="../images/Qualita.svg" id="heading-image-qualita" type="image/svg+xml"></object>
           <h2 id="admin-heading">Tornitura</h2>
           <object class="right-arrow-object" data="images/GT.svg" type="image/svg+xml"></object>
           <h2>Q/A</h2>
         </div>
         
         
-        <div class="logout-button center-aligned-flex" onclick="goToChatbot()">
-          Ask Anything
-        </div>
-        <div class="logout-button center-aligned-flex" onclick="sendLogOutRequest()">
-          Log Out
+        <div style="display: flex; gap: 1rem; justify-content: end;">
+          <div class="logout-button center-aligned-flex" onclick="goToChatbot()">
+            Ask Anything
+          </div>
+          <div class="logout-button center-aligned-flex" onclick="sendLogOutRequest()">
+            Log Out
+          </div>
         </div>
       </div>
       <div id="label-save-container" class="center-aligned-flex label-save-container">
@@ -147,19 +151,15 @@
   }
 </script>
 
+<script src="../scripts/script.js"></script>
 <script src="pdf-library.js"></script>
 <script src="../scripts/config.js"></script>
-<script src="../scripts/script.js"></script>
 <script src="../scripts/sidebar-responsiveness.js"></script>
+<script src="admin.js"></script>
 
 <script src="../scripts/notification.js"></script>
 <script src="../scripts/ui.js"></script>
-<script src="admin.js"></script>
 <script src="tab-change.js"></script>
-<script>
-  addOptionsToDropdown("Tornitura");
-</script>
-
 
 </body></html>
 

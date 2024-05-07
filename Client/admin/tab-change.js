@@ -5,6 +5,11 @@ let qualitaTab = document.getElementById("department-qualita");
 var tornituraObject = document.querySelector('#department-tornitura object');
 var rettificheObject = document.querySelector('#department-rettifiche object');
 var qualitaObject = document.querySelector('#department-qualita object');
+
+var tornituraHeadingImage = document.getElementById("heading-image-tornitura")
+var rettificheHeadingImage = document.getElementById("heading-image-rettifiche")
+var qualitaHeadingImage = document.getElementById("heading-image-qualita")
+
 var selectedDepartment = 1;
 
 function setTornituraTab(selectedClass) {
@@ -14,9 +19,16 @@ function setTornituraTab(selectedClass) {
 
     tornituraTab.classList.add(selectedClass);
     tornituraObject.setAttribute('data', '../images/Tornitura-Selected.svg');
+    tornituraHeadingImage.style.display = "block"
+    rettificheHeadingImage.style.display = "none"
+    qualitaHeadingImage.style.display = "none"
 
-    rettificheObject.setAttribute('data', '../images/Rettifiche.svg');
-    qualitaObject.setAttribute('data', '../images/Qualita.svg');
+    if (rettificheTab.classList.contains(selectedClass)) {
+        rettificheObject.setAttribute('data', '../images/Rettifiche.svg');
+    }
+    if (qualitaTab.classList.contains(selectedClass)) {
+        qualitaObject.setAttribute('data', '../images/Qualita.svg');
+    }
 
     rettificheTab.classList.remove(selectedClass);
     qualitaTab.classList.remove(selectedClass);
@@ -32,9 +44,18 @@ function setRettificheTab(selectedClass) {
 
     rettificheTab.classList.add(selectedClass);
     rettificheObject.setAttribute('data', '../images/Rettifiche-Selected.svg');
+    rettificheHeadingImage.style.display = "block"
+    tornituraHeadingImage.style.display = "none"
+    qualitaHeadingImage.style.display = "none"
 
-    tornituraObject.setAttribute('data', '../images/Tornitura.svg');
-    qualitaObject.setAttribute('data', '../images/Qualita.svg');
+
+    if (tornituraTab.classList.contains(selectedClass)) {
+        tornituraObject.setAttribute('data', '../images/Tornitura.svg');
+}
+
+    if (qualitaTab.classList.contains(selectedClass)) {
+        qualitaObject.setAttribute('data', '../images/Qualita.svg');
+}
 
     tornituraTab.classList.remove(selectedClass);
     qualitaTab.classList.remove(selectedClass);
@@ -49,9 +70,17 @@ function setQualitaTab(selectedClass) {
 
     qualitaTab.classList.add(selectedClass);
     qualitaObject.setAttribute('data', '../images/Qualita-Selected.svg');
+    qualitaHeadingImage.style.display = "block"
+    tornituraHeadingImage.style.display = "none"
+    rettificheHeadingImage.style.display = "none"
 
-    tornituraObject.setAttribute('data', '../images/Tornitura.svg');
-    rettificheObject.setAttribute('data', '../images/Rettifiche.svg');
+    if (tornituraTab.classList.contains(selectedClass)) {
+        tornituraObject.setAttribute('data', '../images/Tornitura.svg');
+    }
+
+    if (rettificheTab.classList.contains(selectedClass)) {
+        rettificheObject.setAttribute('data', '../images/Rettifiche.svg');
+}
 
     tornituraTab.classList.remove(selectedClass);
     rettificheTab.classList.remove(selectedClass);
@@ -106,5 +135,8 @@ document.addEventListener('DOMContentLoaded', function () {
  
      else if (tab == 3) {
          setQualitaTab(selectedClass);
+     }
+     else {
+        setTornituraTab(selectedClass)
      }
 })

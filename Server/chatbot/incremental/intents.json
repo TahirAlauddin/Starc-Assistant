@@ -12040,6 +12040,19 @@
       "responses": [
         "hey, I am great, hru?"
       ]
+    },
+    {
+      "tag": "adsf",
+      "patterns": [
+        "asdf",
+        "asdf",
+        "asdf",
+        "asdf",
+        "asdf"
+      ],
+      "responses": [
+        "asdfasdf"
+      ]
     }
   ]
 }

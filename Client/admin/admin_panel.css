@@ -48,6 +48,32 @@
   animation: fadeIn 0.5s;
 }
 
+.remove-button-pdf {
+  top: 5px;
+}
+
+.remove-button,
+.close-button-popup {
+  background-color: tomato;
+  color: white;
+  position: absolute;
+  padding: 0px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+}
+
+.remove-button {
+  position: relative;
+  z-index: 9;
+  bottom: 110px;
+  left: 40px;
+  width: 20px;
+  height: 20px;
+  font-size: 18px;
+}
+
+
 #uploadForm {
   display: none;
 }
@@ -58,9 +84,8 @@
   transition: 0.3s;
   border-radius: 4px;
   overflow: hidden;
-  margin: 5px; /* Half of gap size to ensure proper spacing */
-  height: 10rem;
-  width: 10rem;
+  height: 8rem;
+  width: 8rem;
 }
 
 #media-container:hover {
@@ -164,7 +189,7 @@
 
 .label-container {
   border-radius: 0.8rem;
-  width: 45%;
+  width: 75%;
   height: 6rem;
   background-color: var(--tertiary-color);
   overflow: hidden;
@@ -214,7 +239,7 @@
   font-weight: bold;
   border-radius: 0.5rem;
   width: 10rem;
-  height: auto;
+  height: 1rem;
   cursor: pointer;
 }
 
@@ -374,15 +399,13 @@
 .videos-container {
   background-color: var(--tertiary-color);
   border-radius: 0.8rem;
-  height: 13.5rem;
-  min-height: 13.5rem;
-  gap: 2.2rem;
+  height: 11.5rem;
+  min-height: 11.5rem;
   flex-wrap: wrap;
   justify-content: start;
   align-items: center;
   box-sizing: border-box;
-  padding: 1.1rem;
-  max-height: 9rem;
+  max-height: 11.5rem;
   overflow-y: auto;
 }
 
@@ -401,89 +424,6 @@
 .videos > img {
   width: 7rem;
   height: 7rem;
-}
-
-@media screen and (1080px >= width >= 850px) {
-  .training-page {
-    min-height: 550px;
-  }
-}
-
-@media screen and (850px >= width >= 720px) {
-  .training-page {
-    min-height: 450px;
-  }
-
-}
-
-@media screen and (1440px >= width >= 1080px) {
-  html {
-    font-size: 80%;
-  }
-
-  .training-page {
-    min-height: 580px;
-  }
-}
-
-@media screen and (width > 1440px) {
-  html {
-    font-size: 90%;
-  }
-
-  .training-page {
-    min-height: 820px;
-  }  
-}
-
-
-/* Styles for the lightbox */
-.lightbox {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
-}
-
-.lightbox-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-
-.lightbox-content > video {
-  width: 350px;
-  aspect-ratio: 16 / 9;
-}
-
-
-@media screen and (1540px >= width >= 1080px) {
-  .lightbox-content > video {
-    width: 650px;
-    aspect-ratio: 16 / 9;
-  }
-}
-
-
-@media screen and (width > 1550px) {
-
-  .lightbox-content > video {
-    width: 750px;
-    aspect-ratio: 16 / 9;
-  }
 }
 
 
@@ -521,7 +461,7 @@
 
 
 .add-training-cards-container {
-  width: 13rem;
+  width: 10rem;
   text-align: center;
   cursor: pointer;
 }
@@ -530,7 +470,6 @@
 .training-vids-sub-container {
   border-radius: 1rem;
   justify-content: start;
-  /* padding: 1%; */
   height: 85%;
   width: 95%;
   background-color: var(--tertiary-color);
@@ -539,16 +478,15 @@
 
 .training-vids {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-content: center;
+  grid-template-columns: repeat(4, 1fr);
   justify-items: center;
   border-radius: 1rem;
   gap: 1rem;
-  width: 110%;
+  width: 100%;
   background-color: var(--tertiary-color);
   overflow-y: auto;
   box-sizing: border-box;
-  max-height: 45rem;
+  max-height: 10rem;
 }
 
 .add-training-cards {
@@ -601,3 +539,112 @@
 }
 
 
+
+/* Styles for the lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.lightbox-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.lightbox-content > video {
+  width: 350px;
+  aspect-ratio: 16 / 9;
+}
+
+
+@media screen and (720px >= width >= 520px) {
+  .training-vids {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .remove-button {
+    bottom: 74px;
+    left: 25px;
+  }
+}
+
+@media screen and (850px >= width >= 720px) {
+  .training-page {
+    min-height: 450px;
+  }
+
+  .remove-button {
+    bottom: 74px;
+    left: 25px;
+  }
+
+}
+
+@media screen and (1080px >= width >= 850px) {
+  .training-page {
+    min-height: 550px;
+  }
+
+  .remove-button {
+    bottom: 74px;
+    left: 25px;
+  }
+}
+
+@media screen and (1440px >= width >= 1080px) {
+  html {
+    font-size: 80%;
+  }
+
+  .training-page {
+    min-height: 580px;
+  }
+
+  .remove-button {
+    bottom: 95px;
+    left: 35px;
+  }
+}
+
+@media screen and (width > 1440px) {
+  html {
+    font-size: 90%;
+  }
+
+  .training-page {
+    min-height: 820px;
+  }  
+}
+
+
+@media screen and (1540px >= width >= 1080px) {
+  .lightbox-content > video {
+    width: 650px;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+
+@media screen and (width > 1550px) {
+
+  .lightbox-content > video {
+    width: 750px;
+    aspect-ratio: 16 / 9;
+  }
+}

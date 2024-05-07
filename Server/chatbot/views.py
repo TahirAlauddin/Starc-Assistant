@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.db import transaction 
 from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 from django.contrib.auth import (authenticate,
                                 login as auth_login, 
                                 logout as auth_logout)
@@ -236,9 +237,14 @@ def get_training_file(request):
     Each training object will have a 'file' attribute 
     that will return the file of the associated TrainingFile, or 'default.jpg' if none exists.
     """
-    # Fetch all Training objects
-    trainings = Training.objects.all()
-   
+    query = request.query_params.get('search', None)
+    if query is not None:
+        trainings = Training.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+    else:
+        trainings = Training.objects.all()
+
     # Set up pagination
     paginator = StandardResultsSetPagination()
     page = paginator.paginate_queryset(trainings, request)
@@ -259,7 +265,15 @@ def get_training_file(request):
 @api_view(['GET'])
 def get_training_count(request):
     # Fetch all Training objects
-    count = Training.objects.count()
+    query = request.query_params.get('search', None)
+    if query is not None:
+        trainings = Training.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+        count = trainings.count()
+    else:
+        count = Training.objects.count()
+    
     # Return the response
     return Response({'count': count})
 
@@ -269,6 +283,10 @@ def addTopicToModel(questions, topic, answers):
                                             "./chatbot/incremental/intents.json",
                                             questions, topic.label, answers)
 
+
+def retrain_model(request):
+    print("Model Retrained")
+    return JsonResponse({"message": "Function executed successfully"}, status=200)
 
 
 @api_view(('POST', 'PUT'))
@@ -295,6 +313,7 @@ def upload_data(request):
         else:
             # Create a new topic since it doesn't exist
             existing_machine_instance = Machine.objects.filter(name__iexact=machine).first()
+            print(existing_machine_instance)
             new_topic = Topic.objects.create(label=label, machine=existing_machine_instance)
             serializer = TopicSerializer(new_topic)
             if questions and answers:
@@ -354,7 +373,7 @@ def upload_data(request):
     else:
         Response({'error': 'Method not allowed'},
                   status.HTTP_405_METHOD_NOT_ALLOWED)
-        
+
 
 class TopicFileBulkView(APIView):
     def post(self, request, *args, **kwargs):

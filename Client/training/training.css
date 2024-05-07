@@ -1,7 +1,5 @@
 @import url("../css/constants.css");
 
-
-
 /* Messages/notification */
 #message-container {
   position: fixed;
@@ -13,13 +11,13 @@
   color: #fff;
   background-color: #444;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   text-align: center;
   font-size: 16px;
 }
 
 .success {
-  background-color: #4CAF50 !important; /* Green */
+  background-color: #4caf50 !important; /* Green */
 }
 
 .information {
@@ -27,42 +25,40 @@
 }
 
 .error {
-  background-color: #F44336 !important; /* Red */
+  background-color: #f44336 !important; /* Red */
 }
 
-
 .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000000;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000000;
+}
 
-  .popup-content {
-    max-width: 80%;
-    max-height: 80%;
-  }
+.popup-content {
+  max-width: 80%;
+  max-height: 80%;
+}
 
-  /* Add your animations here */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+/* Add your animations here */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-
-  .fadeIn {
-    animation: fadeIn 0.5s;
+  to {
+    opacity: 1;
   }
+}
 
+.fadeIn {
+  animation: fadeIn 0.5s;
+}
 
 .training-main {
   padding: 1% 2%;
@@ -88,7 +84,7 @@
 
 .training-heading {
   height: auto;
-  width: 95%;
+  width: 98%;
   gap: 10%;
   justify-content: space-between;
 }
@@ -96,13 +92,13 @@
 .training-sub-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  justify-content: center;
+  align-content: start;
   justify-items: center;
   border-radius: 1rem;
   border: 0.8rem solid var(--tertiary-color);
   gap: 5% 0;
   height: 85%;
-  width: 95%;
+  width: 96%;
   background-color: var(--tertiary-color);
   overflow-y: auto;
 }
@@ -118,7 +114,8 @@
   margin: 5%;
 }
 
-.training-cards > img, .training-cards video {
+.training-cards > img,
+.training-cards video {
   object-fit: cover;
   width: 100%;
 }
@@ -132,24 +129,21 @@
   color: var(--primary-color);
 }
 
-
 .training-vids-title {
   background-color: transparent;
-  width: 85%;
+  width: 15%;
   height: 3.5rem;
-
-    min-height: 1.7rem;
-    font-size: 1.5rem;
-    margin: 2%;
-    margin-bottom: 0;
-    border-radius: 1rem;
-    padding: 1rem 4rem 1rem 2rem;
-    overflow-y: auto;
-    overflow-x: hidden;
-    font-weight: bold;
-    color: var(--primary-color);
-    position: relative;
-    display: flex;
+  min-height: 1.7rem;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  border-radius: 1rem;
+  padding: 1rem 4rem 1rem 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-weight: bold;
+  color: var(--primary-color);
+  position: relative;
+  display: flex;
 }
 .add-training-cards {
   width: 70%;
@@ -169,7 +163,7 @@
 }
 
 .add-training-cards-container {
-  width: 13rem;
+  width: 11rem;
   text-align: center;
   cursor: pointer;
 }
@@ -184,9 +178,12 @@
 .training-vids-sub-container {
   border-radius: 1rem;
   justify-content: start;
-  /* padding: 1%; */
+  align-items: start;
+  padding-left: 3%;
+  padding-right: 3%;
   height: 87%;
   width: 95%;
+  gap: 1rem;
   background-color: var(--tertiary-color);
   box-sizing: border-box;
 }
@@ -204,7 +201,7 @@
   background-color: var(--tertiary-color);
   overflow-y: auto;
   box-sizing: border-box;
-  padding: 1rem;
+  margin-top: 1rem;
   max-height: 13rem;
 }
 
@@ -246,7 +243,8 @@
   cursor: pointer;
 }
 
-.remove-button, .close-button-popup {   
+.remove-button,
+.close-button-popup {
   background-color: tomato;
   color: white;
   position: absolute;
@@ -312,16 +310,18 @@
 
 .training-vids-para {
   background-color: white;
-  width: 85%;
+  width: 100%;
   height: 100%;
   font-size: 1.2rem;
-  margin: 2%;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   border-radius: 1rem;
-  padding: 1rem 4rem 1rem 2rem;
+  padding: 1rem;
   overflow-y: auto;
   overflow-x: hidden;
   min-height: 10rem;
   font-weight: bold;
+  box-sizing: border-box;
   color: var(--primary-color);
   position: relative;
 }
@@ -367,7 +367,7 @@
 
 .button-container {
   gap: 1rem;
-  width: 96%;
+  width: 100%;
   display: flex;
   justify-content: end;
   padding-right: 2rem;
@@ -397,6 +397,34 @@
   font-weight: bold;
 }
 
+.search-bar-container {
+  display: flex; /* Aligns the input and button in a row */
+  justify-content: center; /* Centers the search bar horizontally */
+  margin: 20px; /* Adds some space around the search bar */
+  width: 30%;
+}
+
+.search-bar-container input[type="text"] {
+  flex-grow: 1; /* Allows the input to grow and fill available space */
+  padding: 10px; /* Adds padding inside the input for better text visibility */
+  margin-right: 8px; /* Adds a small space between the input and the button */
+  border: 2px solid #ccc; /* Adds a border to the input field */
+  border-radius: 4px; /* Rounds the corners of the input field */
+}
+
+.search-bar-container button {
+  padding: 10px 20px; /* Adds padding inside the button */
+  background-color: #007BFF; /* Sets a blue background color for the button */
+  color: white; /* Sets the text color to white */
+  border: none; /* Removes the border */
+  border-radius: 4px; /* Rounds the corners of the button */
+  cursor: pointer; /* Changes the cursor to a pointer when hovering over the button */
+}
+
+.search-bar-container button:hover {
+  background-color: #0056b3; /* Changes the button color on hover */
+}
+
 .pagination-container {
   height: 2.5rem;
   justify-content: end;
@@ -416,7 +444,7 @@
   float: left;
   padding: 8px 16px;
   text-decoration: none;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
   border: 1px solid #ddd;
   margin: 0 4px;
 }
@@ -427,13 +455,15 @@
   border: 1px solid var(--primary-color);
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
-
-/* Style the 'Back' and 'Next' links */
-.pagination a:first-child, .pagination a:last-child {
-  border-radius: 4px;
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
 }
 
+/* Style the 'Back' and 'Next' links */
+.pagination a:first-child,
+.pagination a:last-child {
+  border-radius: 4px;
+}
 
 @media screen and (1080px >= width >= 850px) {
   html {
@@ -441,7 +471,7 @@
   }
 
   .training-page {
-    min-height: 550px;
+    min-height: 640px;
   }
 
   .training-vids {
@@ -470,7 +500,6 @@
     min-height: 18.5rem;
   }
 }
-
 
 @media screen and (1300px >= width >= 1080px) {
   .training-cards {
@@ -557,24 +586,25 @@
   cursor: pointer; /* Optional: to indicate it's clickable */
 }
 
-
 #media-container {
   position: relative;
   flex: 0 1 calc(33.333% - 10px); /* Adjust the percentage for desired width, subtract gap */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   border-radius: 4px;
   overflow: hidden;
   margin: 5px; /* Half of gap size to ensure proper spacing */
-  height: 10rem;
-  width: 10rem;
+  height: 8rem;
+  width: 8rem;
 }
 
 #media-container:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-#media-container img, #media-container video, #media-container object {
+#media-container img,
+#media-container video,
+#media-container object {
   width: 100%;
   height: auto;
 }
@@ -590,5 +620,3 @@
   overflow: auto; /* Allows scrolling */
   background: #fff; /* White background */
 }
-
-

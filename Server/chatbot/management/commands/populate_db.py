@@ -35,7 +35,7 @@ class Command(BaseCommand):
             machine, _ = Machine.objects.get_or_create(name="DefaultMachine", department=department)
 
             # Create a new Topic
-            intents = json.load(open('intents.json', encoding='utf-8')).get('intents', [])
+            intents = json.load(open('chatbot\incremental\intents.json', encoding='utf-8')).get('intents', [])
             for intent in intents:      
                 conversational_programming_topic, _ = Topic.objects.get_or_create(
                     label=f"{intent['tag']}",
