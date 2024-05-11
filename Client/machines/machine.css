@@ -63,7 +63,9 @@
     animation: fadeIn 0.5s;
   }
 
-
+body{
+  font-family: "Inria Sans", sans-serif;
+}
 .machine-main {
   padding: 1% 2%;
   background-color: var(--tertiary-color);
@@ -77,6 +79,10 @@
   overflow: hidden;
   border-radius: 1rem;
   gap: 1%;
+}
+a:hover{
+  cursor: pointer;
+
 }
 
 .machine-container {
@@ -95,7 +101,9 @@
   gap: 10%;
   justify-content: space-between;
   border-bottom: 1px solid #BFBFBF;
+
 }
+
 
 .machine-sub-container {
   position: relative;
@@ -294,7 +302,34 @@ margin-left: 15px;
   td:nth-child(2) {
     width: 10%;
   }
+  table tr td:last-child {
+    text-align: left;
+  }
+  
 
+}
+@media screen and (720px > width >= 540px) {
+  html {
+    font-size: 50%;
+  }
+  .machine-page {
+    min-height: 400px;
+  }
+  .search-container input[type="text"] {
+    padding: 5px 20px 5px 5px;
+  }
+  .button-container button{
+    padding: 5px 8px;
+  }
+  td:first-child {
+    width: 10%;
+  }
+  td:nth-child(2) {
+    width: 10%;
+  }
+  td:nth-child(3) {
+    width: 10%;
+  }
 }
 
 @media screen and (850px > width >= 580px) {
@@ -318,6 +353,7 @@ margin-left: 15px;
   td:nth-child(2) {
     width: 10%;
   }
+  
 }
 
 
@@ -334,6 +370,9 @@ margin-left: 15px;
 
   .machine-page {
     min-height: 600px;
+  }
+  td:first-child {
+    width: 20%;
   }
 }
 

@@ -1,10 +1,13 @@
-
+body{
+    font-family: "Inria Sans", sans-serif;
+  }
     .one-heading h2{
-        font-weight:700;
-        font-size: 30px;
         line-height: 40px;
         color:#0161DB;
         margin-bottom: 0;
+        font-size: 2rem;
+        font-weight: 900;
+
     }
     .machinedetail-main {
         padding: 1% 2%;
@@ -175,6 +178,37 @@
         }
         .sub-box select{
             Width:150px;
+        }  
+        .robot-img{
+            width: 23%;
+            height: 33%;
+            left: 55%;
+        }  
+        
+    }
+    @media screen and (720px > width >= 540px) {
+        html {
+          font-size: 60%;
+        }
+      
+        .machinedetail-page {
+          min-height: 450px;
+        }
+        .button-container{
+            margin-left: 200px;
+        }
+        .machinedetail-sub-container {
+            grid-template-columns: repeat(4, 1fr);
+            height: 190px;
+        }
+        .sub-box input[type="text"]{
+            width:150px;
+            margin-left: 70px;
+        }
+        .sub-box select{
+            Width:150px;
+            margin-left: 10px;
+            
         }  
         .robot-img{
             width: 23%;
