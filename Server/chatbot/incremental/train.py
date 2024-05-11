@@ -5,29 +5,33 @@ from creme import metrics
 import json
 import joblib
 
-# Pipeline for extracting TF-IDF features and using Multinomial Naive Bayes for classification
-model = compose.Pipeline(
-    ('vect', feature_extraction.TFIDF(lowercase=True, ngram_range=(1, 6))),
-    ('nb', naive_bayes.MultinomialNB(alpha=0.3))
-)
+model_path = "chatbot/incremental/finalmodel.joblib"
+intents_path = "chatbot/incremental/intents.json"
 
-intents = json.loads(open('intents.json', encoding="utf-8").read())
+def train_model(model_path, intents_path):
+    # Pipeline for extracting TF-IDF features and using Multinomial Naive Bayes for classification
+    model = compose.Pipeline(
+        ('vect', feature_extraction.TFIDF(lowercase=True, ngram_range=(1, 6))),
+        ('nb', naive_bayes.MultinomialNB(alpha=0.3))
+    )
 
-# Metric to evaluate the model
-metric = metrics.Accuracy()
+    intents = json.loads(open('./chatbot/incremental/intents.json', encoding="utf-8").read())
 
-for intent in intents["intents"]:
-    tag = intent["tag"]
-    for question in intent["patterns"]:
-        # Train the model incrementally
-        model.fit_one(question, tag)
+    # Metric to evaluate the model
+    metric = metrics.Accuracy()
 
-        # Predict the tag for the current question
-        y_pred = model.predict_one(question)
+    for intent in intents["intents"]:
+        tag = intent["tag"]
+        for question in intent["patterns"]:
+            # Train the model incrementally
+            model.fit_one(question, tag)
 
-        # Update metric
-        metric.update(y_true=tag, y_pred=y_pred)
+            # Predict the tag for the current question
+            y_pred = model.predict_one(question)
 
-        print(f"Tag: '{tag}' Predicted Tag '{y_pred}'. Current accuracy: {metric.get()}")
+            # Update metric
+            metric.update(y_true=tag, y_pred=y_pred)
 
-joblib.dump(model, "finalmodel-check.joblib")
+            print(f"Tag: '{tag}' Predicted Tag '{y_pred}'. Current accuracy: {metric.get()}")
+
+    joblib.dump(model, "./chatbot/incremental/finalmodel.joblib")

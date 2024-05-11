@@ -8,6 +8,7 @@ const ipFilePath = path.join(os.homedir(), 'StarcAssistant', 'ipAddress.txt');
 // Now ipFilePath is available for use in your renderer process
 
 const Ip = fs.readFileSync(ipFilePath, 'utf8');
+// const Ip = "192.168.10.9";
 
 // const BASE_URL = `http://localhost:8000`; // Use the function to set BASE_URL
 const BASE_URL = `http://${Ip}:8000`; // Use the function to set BASE_URL

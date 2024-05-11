@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # INSTALLED APPS
     'rest_framework',
+    'background_task',
     'django_filters',
     "debug_toolbar",
     # LOCAL APPS

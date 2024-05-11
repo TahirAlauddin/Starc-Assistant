@@ -19,18 +19,20 @@ from .serializers import (DepartmentSerializer, QuestionSerializer,
                         TrainingFileSerializer, TopicFileSerializer)
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
-
+import threading
 from rest_framework import viewsets, filters
 from rest_framework.pagination import PageNumberPagination
 from .models import Department
 from .serializers import DepartmentSerializer, TrainingListSerializer
 from chatbot.incremental import retrain
+from chatbot.incremental import train
 
 import threading
 import json
 
 chatbot = None
-
+model_path = "chatbot/incremental/finalmodel.joblib"
+intents_path = "chatbot/incremental/intents.json"
 
 # Custom Pagination class
 class StandardResultsSetPagination(PageNumberPagination):
@@ -279,14 +281,18 @@ def get_training_count(request):
 
 
 def addTopicToModel(questions, topic, answers):
-    retrain.retrain_model_and_update_intents("./chatbot/incremental/finalmodel.joblib", 
-                                            "./chatbot/incremental/intents.json",
+    retrain.retrain_model_and_update_intents(model_path, 
+                                            intents_path,
                                             questions, topic.label, answers)
 
 
+def train_model_task():
+    train.train_model(model_path, intents_path)
+
 def retrain_model(request):
-    print("Model Retrained")
-    return JsonResponse({"message": "Function executed successfully"}, status=200)
+    thread = threading.Thread(target=train_model_task, daemon=True)
+    thread.start()
+    return JsonResponse({"message": "Model Trained Successfully"}, status=200)
 
 
 @api_view(('POST', 'PUT'))
