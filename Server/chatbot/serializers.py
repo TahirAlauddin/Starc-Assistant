@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import (Department, Question, 
                     Machine, Answer, Topic,
                     Training, TrainingFile,
-                    TopicFile)
+                    TopicFile,MachineList)
 from rest_framework_nested.relations import NestedHyperlinkedRelatedField
 from django.core.files.base import ContentFile
 from rest_framework import serializers
@@ -131,5 +131,15 @@ class TrainingListFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrainingFile
         fields = ['id', 'training', 'file']
+
+class MachineListSerializer(serializers.ModelSerializer):
+    department_name = serializers.CharField(source='department.name', read_only=True)
+    added_date = serializers.DateTimeField(read_only=True)
+
+    class Meta:
+        model = MachineList
+        fields = ['id', 'name', 'department_name', 'added_date'] 
+       
+
 
         

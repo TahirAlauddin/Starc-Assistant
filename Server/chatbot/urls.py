@@ -11,7 +11,7 @@ from .views import (DepartmentViewSet, QuestionViewSet, MachineViewSet,
                     login_view, logout_view, chatbot_model_view,
                     get_training_count, get_training_file,
                     upload_data, retrain_model, TopicFileBulkView, 
-                    BulkTrainingFilesAPIView)
+                    BulkTrainingFilesAPIView, MachineListView, delete_machine, edit_machine, get_machine_count, add_machine)
 
 
 from rest_framework_nested.routers import SimpleRouter, NestedSimpleRouter
@@ -55,6 +55,14 @@ urlpatterns = [
     path('chatbot_model/', chatbot_model_view, name='chatbot-model'),
     path('training-with-file/', get_training_file, name='training-with-file'),
     path('training-count/', get_training_count, name='training-count'),
+
+    path('machines/', MachineListView.as_view(), name='machine-list'), 
+    path('machines/<int:machine_id>/delete/', delete_machine, name='delete-machine'),
+    path('machines/<int:machine_id>/edit/', edit_machine, name='edit-machine'),
+    path('machine-count/', get_machine_count, name='machine-count'),
+    path('machines/add/', add_machine, name='add-machine'),
+    
+    
     
     path('', include(router.urls)),
     path('', include(training_router.urls)),

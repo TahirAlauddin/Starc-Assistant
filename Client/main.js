@@ -117,9 +117,11 @@ const menu = Menu.buildFromTemplate(menuTemplate);
 
     // mainWindow.loadFile('home/welcome/index.html');
     // mainWindow.loadFile('training/training-view/training-view.html');
-    mainWindow.loadFile('training/training.html');
+    // mainWindow.loadFile('training/training.html');
     // mainWindow.loadFile('admin/admin-panel.html');
     // mainWindow.loadFile('login/login.html');
+    mainWindow.loadFile('machines/machine.html');
+    // mainWindow.loadFile('machines/machine-detail.html');
     mainWindow.on('closed', function () {
         mainWindow = null;
     });

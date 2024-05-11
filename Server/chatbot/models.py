@@ -134,3 +134,18 @@ def topic_file_pre_delete(sender, instance, **kwargs):
     print(instance.file.path)
     if (instance.file):
         os.remove(instance.file.path)
+
+class MachineList(models.Model):
+    """
+    Represents a machine in a department.
+    """
+    name = models.CharField(max_length=255)
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.CASCADE,
+        related_name='machineslist'
+    )
+    added_date = models.DateTimeField(auto_now_add=True)  
+
+    def __str__(self) -> str:
+        return f'Machine#{self.id} (Name={self.name})'        
