@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import (Department, Question, 
                     Machine, Answer, Topic,
                     Training, TrainingFile,
-                    TopicFile,MachineList)
+                    TopicFile)
 from rest_framework_nested.relations import NestedHyperlinkedRelatedField
 from django.core.files.base import ContentFile
 from rest_framework import serializers
@@ -14,35 +14,44 @@ class DepartmentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class MachineSerializer(serializers.ModelSerializer):
+    department = serializers.CharField()
+    class Meta:
+        model = Machine
+        fields = ['id', 'name', 'department']
+        
+    def create(self, validated_data):
+        # Extract the department name from validated data
+        department_name = validated_data.pop('department', None)
+        # Get or create the department based on the name
+        department, created = Department.objects.get_or_create(name=department_name)
+        # Create the Machine instance with the department
+        machine = Machine.objects.create(department=department, **validated_data)
+        
+        return machine
+    
+    def update(self, instance, validated_data):
+        # Extract the department name and remove it from validated_data if present
+        department_name = validated_data.pop('department', None)
+        
+        # Update the department if a new name is provided
+        if department_name and department_name != instance.department.name:
+            department, created = Department.objects.get_or_create(name=department_name)
+            instance.department = department
+        
+        # Update other fields of Machine
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        
+        instance.save()
+        return instance
+        
+        
+
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = '__all__'
-
-
-class MachineSerializer(serializers.ModelSerializer):
-    department_name = serializers.CharField(source='department.name', read_only=True)
-    department = serializers.PrimaryKeyRelatedField(
-        queryset=Department.objects.all(),
-        write_only=True
-    )
-
-    class Meta:
-        model = Machine
-        fields = ['id', 'name', 'department', 'department_name']
-
-    def create(self, validated_data):
-        # Pop department as it's expecting a Department instance, not a name
-        machine = Machine.objects.create(**validated_data)
-        return machine
-
-    def update(self, instance, validated_data):
-        department = validated_data.pop('department', None)
-        instance.name = validated_data.get('name', instance.name)
-        if department:
-            instance.department = department
-        instance.save()
-        return instance
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -131,15 +140,3 @@ class TrainingListFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrainingFile
         fields = ['id', 'training', 'file']
-
-class MachineListSerializer(serializers.ModelSerializer):
-    department_name = serializers.CharField(source='department.name', read_only=True)
-    added_date = serializers.DateTimeField(read_only=True)
-
-    class Meta:
-        model = MachineList
-        fields = ['id', 'name', 'department_name', 'added_date'] 
-       
-
-
-        

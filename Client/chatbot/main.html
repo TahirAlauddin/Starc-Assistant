@@ -1,119 +1,151 @@
 <!DOCTYPE html>
 <!-- saved from url=(0051)http://localhost:8000/tornitura-page/?tab=tornitura -->
 <html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/style.css" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../home/home.css" />
 
+    <title>STARC - Home</title>
+  </head>
 
-    <link rel="stylesheet" href="../home/home.css">
-
-
-    <title>
-        STARC - Home
-    </title>
-</head>
-
-<body>
-
-    <input type="hidden" name="csrfmiddlewaretoken"
-        value="QIBjOtacl58aMJ4uzL9AgocX9CrB47PcFLleCqlyXbgQtQ3EToOPrGJ4PVmzGJzY">
+  <body>
+    <input
+      type="hidden"
+      name="csrfmiddlewaretoken"
+      value="QIBjOtacl58aMJ4uzL9AgocX9CrB47PcFLleCqlyXbgQtQ3EToOPrGJ4PVmzGJzY"
+    />
     <div class="home-page center-aligned-flex row-flex max-height max-width">
+      <div class="sidebar max-height center-aligned-flex column-flex">
+        <img
+          onclick="redirectToPage('../home/home.html')"
+          src="../images/starc-logo.png"
+          style="cursor: pointer"
+          alt=""
+        />
 
-        <div class="sidebar max-height center-aligned-flex column-flex">
-            <img onclick="redirectToPage('../home/home.html')" src="../images/starc-logo.png" style="cursor: pointer;"
-                alt="">
+        <h2>Departments</h2>
 
-            <h2>Departments</h2>
+        <div
+          class="department-box center-aligned-flex row-flex"
+          id="department-tornitura"
+        >
+          <object data="../images/Tornitura.svg" type="image/svg+xml"></object>
 
-            <div class="department-box center-aligned-flex row-flex" id="department-tornitura">
-                <object data="../images/Tornitura.svg" type="image/svg+xml"></object>
-
-                <div class="department-title center-aligned-flex">Tornitura</div>
-            </div>
-
-            <div class="department-box center-aligned-flex row-flex" id="department-rettifiche">
-                <object data="../images/Rettifiche.svg" type="image/svg+xml"></object>
-
-                <div class="department-title center-aligned-flex">Rettifiche</div>
-            </div>
-
-            <div class="department-box center-aligned-flex row-flex" id="department-qualita">
-                <object data="../images/Qualita.svg" type="image/svg+xml"></object>
-
-                <div class="department-title center-aligned-flex">Qualita</div>
-            </div>
-
-            <div class="department-box center-aligned-flex row-flex" id="training-button"
-                onclick="redirectToPage('../training/training.html')">
-                <object data="../images/Training.svg" type="image/svg+xml"></object>
-
-                <div class="department-title center-aligned-flex">Training</div>
-            </div>
-    
-            <div class="free-space"></div>
-
-            <div class="department-box admin-panel-box center-aligned-flex column-flex" id="admin-panel-button"
-                onclick="redirectToPage('../login/login.html')">
-                <div class="center-aligned-flex admin-panel-icon-container">
-                    <object data="../images/Admin.svg" type="image/svg+xml"></object>
-                </div>
-
-                <h3>Admin Panel</h3>
-            </div>
+          <div class="department-title center-aligned-flex">Tornitura</div>
         </div>
 
-        <div class="main max-height center-aligned-flex column-flex">
-            <div class="department-main max-height center-aligned-flex sub-main column-flex" id="department-main">
-                <h2 class="departments-title" id="departments-title">Tornitura Department</h2>
-                <div class="chatbot-image-container" id="chatbot-image-container">
-                    
-                    <div class="chat-message" id="chat-message">
-                        <p id="typingText">Hi, I'm Tarsia! Welcome to chat bot, How can I help you?</p>
-                    </div>
-                </div>
-                <div class="dropdown-container"><select class="custom-dropdown" id="custom-dropdown">
-                        <option value="Graziano">Graziano</option>
-                        <option value="Mori Seiki">Mori Seiki</option>
-                        <option value="Okuma">Okuma</option>
-                        <option value="Puma SMX">Puma SMX</option>
-                        <option value="Doosan TT">Doosan TT</option>
-                        <option value="DMG Mori">DMG Mori</option>
-                    </select></div>
-                <div class="chat-input"><input type="text" class="message-input" id="message-input"
-                        placeholder="Message">
-                    <div id="send-message-button" class="send-message-button-container" onclick="sendMessageButtonClick()"><img
-                            class="send-message-button" src="images/Send-Message-Arrow.png" alt=""></div>
-                </div>
-                <div class="recommendations-container">
-                    <div class="recommendations-item center-aligned-flex">
-                        <div>May occasionally generate incorrect information.</div>
-                    </div>
-                    <div class="recommendations-item center-aligned-flex">
-                        <div>Limited Knowledge</div>
-                    </div>
-                    <div class="recommendations-item center-aligned-flex">
-                        <div>Trained to decline inapproriate requests</div>
-                    </div>
-                </div>
-            </div>
+        <div
+          class="department-box center-aligned-flex row-flex"
+          id="department-rettifiche"
+        >
+          <object data="../images/Rettifiche.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Rettifiche</div>
         </div>
+
+        <div
+          class="department-box center-aligned-flex row-flex"
+          id="department-qualita"
+        >
+          <object data="../images/Qualita.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Qualita</div>
+        </div>
+
+        <div
+          class="department-box center-aligned-flex row-flex"
+          id="training-button"
+          onclick="redirectToPage('../training/training.html')"
+        >
+          <object data="../images/Training.svg" type="image/svg+xml"></object>
+
+          <div class="department-title center-aligned-flex">Training</div>
+        </div>
+
+        <div class="free-space"></div>
+
+        <div
+          class="department-box admin-panel-box center-aligned-flex column-flex"
+          id="admin-panel-button"
+          onclick="redirectToPage('../login/login.html')"
+        >
+          <div class="center-aligned-flex admin-panel-icon-container">
+            <object data="../images/Admin.svg" type="image/svg+xml"></object>
+          </div>
+
+          <h3>Admin Panel</h3>
+        </div>
+      </div>
+
+      <div class="main max-height center-aligned-flex column-flex">
+        <div
+          class="department-main max-height center-aligned-flex sub-main column-flex"
+          id="department-main"
+        >
+          <h2 class="departments-title" id="departments-title">
+            Tornitura Department
+          </h2>
+          <div class="chatbot-image-container" id="chatbot-image-container">
+            <video src="" id="animation-vid" class="animation-vid" disablePictureInPicture="true"></video>
+            <img src="../images/robot.png" style="position: absolute; top: 50%; left: 50%; width: 25%; transform: translate(-50%, -50%);" alt="">
+            <div class="chat-message" id="chat-message">
+              <p id="typingText">
+                Hi, I'm Tarsia! Welcome to chat bot, How can I help you?
+              </p>
+            </div>
+          </div>
+          <div class="dropdown-container">
+            <select class="custom-dropdown" id="custom-dropdown">
+            </select>
+          </div>
+          <div class="chat-input">
+            <input
+              type="text"
+              class="message-input"
+              id="message-input"
+              placeholder="Message"
+            />
+            <div
+              id="send-message-button"
+              class="send-message-button-container"
+              onclick="sendMessageButtonClick()"
+            >
+              <img
+                class="send-message-button"
+                src="images/Send-Message-Arrow.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="recommendations-container">
+            <div class="recommendations-item center-aligned-flex">
+              <div>May occasionally generate incorrect information.</div>
+            </div>
+            <div class="recommendations-item center-aligned-flex">
+              <div>Limited Knowledge</div>
+            </div>
+            <div class="recommendations-item center-aligned-flex">
+              <div>Trained to decline inapproriate requests</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <script src="main.js"></script>
+    <script src="../scripts/config.js"></script>
     <script src="../scripts/script.js"></script>
 
     <script>
-        let user = ``;
+      let user = ``;
     </script>
 
     <script src="../scripts/sidebar-responsiveness.js"></script>
-    <script src="main.js"></script>
     <script src="tab-change.js"></script>
-
-</body>
-
+  </body>
 </html>

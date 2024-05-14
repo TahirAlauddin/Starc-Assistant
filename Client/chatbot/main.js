@@ -13,7 +13,7 @@ var qualitaObject = document.querySelector('#department-qualita object');
 // There are two values for 'currentMainContainer' var,
 // 1. base
 // 2. chatbot
-let currentMainContainer = "chatbot";
+let currentMainContainer = "base";
 
 var perfEntries = performance.getEntriesByType("navigation");
 
@@ -30,8 +30,8 @@ function typeText() {
   let typingElement = document.getElementById("typingText");
   if (lineIndex < textToType.length) {
     if (charIndex <= textToType[lineIndex].length) {
-      if (typingElement){
-          typingElement.innerHTML = textToType[lineIndex].substring(
+      if (typingElement) {
+        typingElement.innerHTML = textToType[lineIndex].substring(
           0,
           charIndex + 1
         );
@@ -47,11 +47,7 @@ function typeText() {
 const recommendations = [
   "May occasionally generate incorrect information.",
   "Limited Knowledge",
-  // "How to fix my machine",
-  // "My machine is not turing on.",
-  // "May make mistakes",
-  "Trained to decline inapproriate requests",
-  // "May produce harmful instructions",
+  "Trained to decline inapproriate requests"
 ];
 
 function clearMainDiv() {
@@ -156,9 +152,9 @@ function addQuestionHistory(query) {
   let queryContainer = createQueryContainer(query);
 
   let chatbotHistoryContainer = document.querySelector(".chatbot-history-container")
-  
+
   // Create a ResizeObserver instance
-  var resizeObserver = new ResizeObserver(function(entries) {
+  var resizeObserver = new ResizeObserver(function (entries) {
     for (let entry of entries) {
       scrollToBottom(entry.target);
     }
@@ -175,9 +171,9 @@ async function addAnswerHistory(answer, files) {
   let answerContainer = createAnswerContainer();
 
   let chatbotHistoryContainer = document.querySelector(".chatbot-history-container")
-      
+
   // Create a ResizeObserver instance
-  var resizeObserver = new ResizeObserver(function(entries) {
+  var resizeObserver = new ResizeObserver(function (entries) {
     for (let entry of entries) {
       scrollToBottom(chatbotHistoryContainer);
     }
@@ -213,7 +209,7 @@ async function addAnswerHistory(answer, files) {
   // Start the typing effect
   await typeAnswer();
   let fileString = ""
-  
+
   if (files) {
 
     files.forEach(file => {
@@ -223,7 +219,7 @@ async function addAnswerHistory(answer, files) {
       </a>`
     });
   }
-    
+
   pElement.innerHTML = pElement.innerHTML + fileString;
 
 }
@@ -327,8 +323,6 @@ function createChatbotImageContainer() {
   video.loop = true;
   video.setAttribute('disablePictureInPicture', '');
 
-  video.src = '../images/waves.mp4';
-
   // Create the image element
   var img = document.createElement('img');
 
@@ -365,32 +359,6 @@ function createChatbotImageContainer() {
   return chatbotImageContainer;
 }
 
-function createVideoAndImage() {
-  // Create the video element
-  var video = document.createElement('video');
-  video.id = 'animation-vid';
-  video.style.width = '100%';
-  video.style.height = '40rem';
-  video.autoplay = true;
-  video.muted = true;
-  video.loop = true;
-  video.setAttribute('disablePictureInPicture', '');
-
-  video.src = '../images/waves.mp4';
-
-  // Create the image element
-  var image = document.createElement('img');
-
-  image.src = '../images/robot.png';
-  image.style.position = 'absolute';
-  image.style.top = '50%';
-  image.style.left = '50%';
-  image.style.width = '30%';
-  image.style.transform = 'translate(-50%, -50%)';
-  image.alt = '';
-
-  return video, image;
-}
 
 function createChatbotMain() {
   let mainContainer = document.querySelector(".main");
@@ -431,7 +399,6 @@ async function createDepartmentMain() {
   let dropdownContainer = createDropdown()
   departmentMain.appendChild(dropdownContainer);
 
-
   let chatInputContainer = createChatInput();
   departmentMain.appendChild(chatInputContainer);
 
@@ -444,8 +411,6 @@ async function createDepartmentMain() {
   typeText();
   responsivePage();
 }
-
-createDepartmentMain();
 
 
 async function sendMessageButtonClick() {
@@ -532,7 +497,7 @@ async function sendQuery() {
 
 
 // Execute a function when the user presses a key on the keyboard
-document.addEventListener("keypress", function(event) {
+document.addEventListener("keypress", function (event) {
   // If the user presses the "Enter" key on the keyboard
   if (event.key === "Enter") {
     // Cancel the default action, if needed

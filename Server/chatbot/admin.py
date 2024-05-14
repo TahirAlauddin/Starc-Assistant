@@ -1,12 +1,7 @@
 from django.contrib import admin
-from .models import TrainingFile, Training, Machine, MachineList, Department
+from .models import TrainingFile, Training, Machine, Department
 
 admin.site.register((TrainingFile, Training, Machine))
-
-@admin.register(MachineList)
-class MachineAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'department', 'added_date')
-    list_filter = ('department',)
 
 @admin.register(Department)
 class DepartmentAdmin(admin.ModelAdmin):

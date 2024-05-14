@@ -12,6 +12,22 @@ class Department(models.Model):
     def __str__(self) -> str:
         return str(self.name)
 
+
+class Machine(models.Model):
+    """
+    Represents a machine in a department.
+    """
+    name = models.CharField(max_length=255)
+    department = models.ForeignKey(
+        "chatbot.Department",
+        on_delete=models.CASCADE,
+        related_name='machines'
+    )
+
+    def __str__(self) -> str:
+        return f'Machine#{self.id} (Name={self.name})'
+
+
 class Question(models.Model):
     """
     Represents a question related to a specific topic.
@@ -40,19 +56,6 @@ class Answer(models.Model):
     def __str__(self) -> str:
         return f'Ans#{self.id} ({self.text[:20]}...)'
     
-class Machine(models.Model):
-    """
-    Represents a machine in a department.
-    """
-    name = models.CharField(max_length=255)
-    department = models.ForeignKey(
-        "chatbot.Department",
-        on_delete=models.CASCADE,
-        related_name='machines'
-    )
-
-    def __str__(self) -> str:
-        return f'Machine#{self.id} (Name={self.name})'
 
 class Topic(models.Model):
     """
@@ -134,18 +137,3 @@ def topic_file_pre_delete(sender, instance, **kwargs):
     print(instance.file.path)
     if (instance.file):
         os.remove(instance.file.path)
-
-class MachineList(models.Model):
-    """
-    Represents a machine in a department.
-    """
-    name = models.CharField(max_length=255)
-    department = models.ForeignKey(
-        Department,
-        on_delete=models.CASCADE,
-        related_name='machineslist'
-    )
-    added_date = models.DateTimeField(auto_now_add=True)  
-
-    def __str__(self) -> str:
-        return f'Machine#{self.id} (Name={self.name})'        

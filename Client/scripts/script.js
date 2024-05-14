@@ -39,39 +39,41 @@ function sendLogOutRequest() {
 }
 
 
-
-// Function to fetch machine data from the API and organize it into a dictionary
 async function fetchAndOrganizeMachineData() {
   try {
-    const response = await fetch(`${BASE_URL}/machines`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const machines = await response.json();
+    let url = `${BASE_URL}/machines`;
     const departments = { "Tornitura": [], "Rettifiche": [], "Qualita": [] };
+    while (url) {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
-    // Check if there are no machines
-    if (machines.count === 0) {
-      console.log("No machines found.");
-      return departments;
-    }
-
-    // Organize machines by departments
-    machines.results.forEach(machine => {
-      const { name, department_name } = machine;
-
-      if (!departments[department_name]) {
-        departments[department_name] = [];
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-      departments[department_name].push(name);
-    });
+
+      const machines = await response.json();
+      url = machines.next;  // Update the URL to the next page, if it exists
+
+      // Check if there are no machines
+      if (machines.count === 0) {
+        console.log("No machines found.");
+        return departments;
+      }
+
+      // Organize machines by departments
+      machines.results.forEach(machine => {
+        const { name, department } = machine;
+
+        if (!departments[department]) {
+          departments[department] = [];
+        }
+        departments[department].push(name);
+      });
+    }
 
     return departments;
   } catch (error) {
@@ -79,32 +81,6 @@ async function fetchAndOrganizeMachineData() {
   }
 }
 
-// // Call the function to fetch the data and organize it
-// let departmentOptions = fetchAndOrganizeMachineData();
-
-// Data for the options
-let departmentOptions = {
-  Tornitura: [
-    "Graziano",
-    "Mori Seiki",
-    "Okuma",
-    "Puma SMX",
-    "Doosan TT",
-    "DMG Mori",
-  ],
-  Rettifiche: ["Proflex 2", "Proflex 3", "Lizzini", "Kopp", "Sagitech"],
-  Qualita: [
-    "Adcole",
-    "Altimetro",
-    "Calibro",
-    "Micrometro",
-    "Taylor Hobson",
-    "Proiettore Di Profili",
-    "Durometro",
-    "3D CMM",
-    "Attacco Acido",
-  ],
-};
 
 // Function to add options to the dropdown based on department
 function addOptionsToDropdown(department) {

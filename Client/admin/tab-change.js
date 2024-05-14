@@ -51,11 +51,11 @@ function setRettificheTab(selectedClass) {
 
     if (tornituraTab.classList.contains(selectedClass)) {
         tornituraObject.setAttribute('data', '../images/Tornitura.svg');
-}
+    }
 
     if (qualitaTab.classList.contains(selectedClass)) {
         qualitaObject.setAttribute('data', '../images/Qualita.svg');
-}
+    }
 
     tornituraTab.classList.remove(selectedClass);
     qualitaTab.classList.remove(selectedClass);
@@ -80,7 +80,7 @@ function setQualitaTab(selectedClass) {
 
     if (rettificheTab.classList.contains(selectedClass)) {
         rettificheObject.setAttribute('data', '../images/Rettifiche.svg');
-}
+    }
 
     tornituraTab.classList.remove(selectedClass);
     rettificheTab.classList.remove(selectedClass);
@@ -127,16 +127,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (tab == 1) {
         setTornituraTab(selectedClass);
- 
-     }
-     else if (tab == 2) {
-         setRettificheTab(selectedClass);
-     }
- 
-     else if (tab == 3) {
-         setQualitaTab(selectedClass);
-     }
-     else {
+
+    }
+    else if (tab == 2) {
+        setRettificheTab(selectedClass);
+    }
+
+    else if (tab == 3) {
+        setQualitaTab(selectedClass);
+    }
+    else {
         setTornituraTab(selectedClass)
-     }
+    }
 })

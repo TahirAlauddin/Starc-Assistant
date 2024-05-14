@@ -1,5 +1,6 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
+const { ipcRenderer } = require('electron');
 
 let tab = urlParams.get("tab");
 
@@ -20,12 +21,29 @@ function redirectToPage(page) {
 }
 
 
-function retrainModel() {
+async function retrainModel() {
     fetch(`${BASE_URL}/retrain-model`)
-    .then(response => response.json())
-    .then(data => console.log('Success:', data))
-    .catch(error => console.error('Error retraining model:', error));
+        .then(async response => {
+            if (!response.ok) {
+                // If the HTTP status code is 409 or any other non-2xx, throw an error
+                let res = await response.json()
+                if (response.status == 409) {
+                    throw new Error(res.message);
+                }
+                throw new Error(`HTTP error, status = ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            ipcRenderer.send('start-training');
+            showMessage(data.message);
+        })
+        .catch(error => {
+            console.error('Error retraining model:', error);
+            showMessage(error.message, 'error');
+        });
 }
+
 
 document.getElementById("retrain-model-button").addEventListener("click", retrainModel)
 

@@ -12,11 +12,11 @@ from django.contrib.auth import (authenticate,
                                 logout as auth_logout)
 from .models import (Department, Question, Machine,
                      Answer, Topic, Training, TrainingFile,
-                     TopicFile, MachineList)
+                     TopicFile)
 from .serializers import (DepartmentSerializer, QuestionSerializer,
                         MachineSerializer, AnswerSerializer, 
                         TopicSerializer, TrainingSerializer,
-                        TrainingFileSerializer, TopicFileSerializer, MachineListSerializer)
+                        TrainingFileSerializer, TopicFileSerializer)
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 import threading
@@ -35,6 +35,7 @@ from django.utils import timezone
 chatbot = None
 model_path = "chatbot/incremental/finalmodel.joblib"
 intents_path = "chatbot/incremental/intents.json"
+is_training_in_progress = False
 
 # Custom Pagination class
 class StandardResultsSetPagination(PageNumberPagination):
@@ -114,9 +115,9 @@ class QuestionViewSet(viewsets.ModelViewSet):
 class MachineViewSet(viewsets.ModelViewSet):
     serializer_class = MachineSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['name', 'department']
-    search_fields = ['name', 'department']
-    ordering_fields = ['name', 'department'] 
+    filterset_fields = ['name', 'department__name']
+    search_fields = ['name', 'department__name']
+    ordering_fields = ['name', 'department__name'] 
     # ordering = ['answer']  # Default ordering
     pagination_class = StandardResultsSetPagination
 
@@ -282,6 +283,14 @@ def get_training_count(request):
     return Response({'count': count})
 
 
+@api_view(['GET'])
+def check_training_status(request):
+    if is_training_in_progress:
+        return JsonResponse({"message": "Model Training is already in progress. Please do not click again!"}, status=200)
+    
+    return JsonResponse({"is_trained": "Model is Trained"}, status=200)
+    
+
 def addTopicToModel(questions, topic, answers):
     retrain.retrain_model_and_update_intents(model_path, 
                                             intents_path,
@@ -289,12 +298,26 @@ def addTopicToModel(questions, topic, answers):
 
 
 def train_model_task():
-    train.train_model(model_path, intents_path)
+    global is_training_in_progress
+    try:
+        train.train_model(model_path, intents_path)
+    finally:
+        # Reset the flag when training is complete
+        is_training_in_progress = False
+        
+
 
 def retrain_model(request):
+    global is_training_in_progress
+    if is_training_in_progress:
+        # Return response if training is already in progress
+        return JsonResponse({"message": "Model Training is already in progress. Please do not click again!"}, status=409)
+    
+    # Set the flag to True to indicate training is starting
+    is_training_in_progress = True
     thread = threading.Thread(target=train_model_task, daemon=True)
     thread.start()
-    return JsonResponse({"message": "Model Trained Successfully"}, status=200)
+    return JsonResponse({"message": "Model Training Started Successfully"}, status=200)
 
 
 @api_view(('POST', 'PUT'))
@@ -422,119 +445,11 @@ class TopicFileBulkView(APIView):
 
         return Response({'message': 'Files deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
 
-
-
-@csrf_exempt
-def edit_machine(request, machine_id):
-    try:
-        machine = MachineList.objects.get(id=machine_id)
-    except MachineList.DoesNotExist:
-        return JsonResponse({'error': 'Machine not found'}, status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'POST':
-        new_name = request.POST.get('new_name')
-        new_department_id = request.POST.get('new_department')
-        
-        if new_name and new_department_id:
-            try:
-                new_department = Department.objects.get(id=new_department_id)
-            except Department.DoesNotExist:
-                return JsonResponse({'error': 'Department not found'}, status=status.HTTP_404_NOT_FOUND)
-
-            machine.name = new_name
-            machine.department = new_department
-            machine.added_date = timezone.now()  # Set added_date to current date and time
-            machine.save()
-            return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
-        else:
-            return JsonResponse({'error': 'Incomplete data provided'}, status=status.HTTP_400_BAD_REQUEST)
-    else:
-         return JsonResponse({'error': 'Invalid request method'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
-
-
-
-@csrf_exempt
-def delete_machine(request, machine_id):
-    try:
-        machine = MachineList.objects.get(id=machine_id)
-    except MachineList.DoesNotExist:
-        return JsonResponse({'error': 'Machine not found'}, status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'POST':
-        machine.delete()
-        return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
-    else:
-        return JsonResponse({'error': 'Invalid request method'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
-
+ 
 @api_view(['GET'])
 def get_machine_count(request):
     # Fetch all Machine objects
-    count = MachineList.objects.count()
+    count = Machine.objects.count()
     # Return the response
     return Response({'count': count})    
-
-class MachineListView(APIView):
-    
-    def get(self, request):
-        # Get the search name from the query parameters
-        search_name = request.query_params.get('search', None)
-        
-        if search_name:
-            try:
-                machine = MachineList.objects.get(name=search_name)
-                serializer = MachineListSerializer(machine)
-                return Response(serializer.data, status=status.HTTP_200_OK)
-
-            except MachineList.DoesNotExist:
-                # If machine with the given name does not exist, return 404 Not Found
-                return Response({"error": f"Machine with name '{search_name}' not found."},
-                                status=status.HTTP_404_NOT_FOUND)
-            
-        else:
-            # If no search name provided, return all machines
-            
-            machines = MachineList.objects.all()
-            serializer = MachineListSerializer(machines, many=True)
-
-            # Set up pagination
-            paginator = StandardResultsSetPagination()
-            page = paginator.paginate_queryset(machines, request)
-            
-            if page is not None:
-                # Serialize the data for the current page
-                serializer = MachineListSerializer(page, many=True)
-                return paginator.get_paginated_response(serializer.data)
-
-            # Serialize the data
-            serializer = MachineListSerializer(machines, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-    
-
-
-@csrf_exempt
-def add_machine(request):
-    if request.method == 'POST':
-        new_name = request.POST.get('new_name')
-        new_department = request.POST.get('new_department')
-        
-        if new_name and new_department:
-            try:
-                new_department = Department.objects.get(id=new_department)
-            except Department.DoesNotExist:
-                return JsonResponse({'error': 'Department not found'}, status=404)
-
-           
-            # Set added_date to current date and time
-            added_date = timezone.now()
-
-            # Create new machine
-            MachineList.objects.create(name=new_name, department=new_department, added_date=added_date)
-
-            return JsonResponse({'message': 'Machine added successfully'}, status=201)
-        
-        else:
-            return JsonResponse({'error': 'Incomplete data provided'}, status=400)
-    else:
-        return JsonResponse({'error': 'Invalid request method'}, status=405)
-
 

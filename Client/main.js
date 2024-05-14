@@ -1,10 +1,11 @@
-const {ipcMain, app, BrowserWindow, Menu, globalShortcut } = require('electron');
+const { ipcMain, app, BrowserWindow, Menu, globalShortcut, dialog } = require('electron');
 let resolve = require('path').resolve
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
 let BASE_URL;
+let trainingStatusInterval = null;
 
 // This will create a path to "ipAddress.txt" inside a ".JewelBox" directory within the user's home directory
 const ipFilePath = path.join(os.homedir(), 'StarcAssistant', 'ipAddress.txt');
@@ -31,33 +32,33 @@ function updateIpAddress() {
 
 function createInputWindow() {
     let inputWin = new BrowserWindow({
-      width: 400,
-      height: 200,
-      icon: 'images/logo.ico',
-      webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false, // For simplicity, disabled. Consider security implications.
-        enableRemoteModule:  true, // Explicitly enable the remote module
-      },
+        width: 400,
+        height: 200,
+        icon: 'images/logo.ico',
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false, // For simplicity, disabled. Consider security implications.
+            enableRemoteModule: true, // Explicitly enable the remote module
+        },
     });
-  
+
     inputWin.loadFile('config/index.html'); // Load the HTML file with your form
-  
+
     ipcMain.once('save-ip', (event, ip) => {
-          fs.mkdirSync(path.dirname(ipFilePath), { recursive: true }); // Ensure the directory exists
-          fs.closeSync(fs.openSync(ipFilePath, 'a')); // Create the file if it doesn't exist
-  
-          fs.writeFileSync(ipFilePath, ip); // Save IP to a file
-          BASE_URL = `http://${ip}:8000`; // Use the function to set BASE_URL
-          createWindow(); // You should create the main window here only if it's not already created
-          inputWin.close(); // Close the window after saving
-      });
-  
-      inputWin.on('closed', () => {
-          inputWin = null; // Dereference the object to prevent memory leaks
-      });
-  }
-  
+        fs.mkdirSync(path.dirname(ipFilePath), { recursive: true }); // Ensure the directory exists
+        fs.closeSync(fs.openSync(ipFilePath, 'a')); // Create the file if it doesn't exist
+
+        fs.writeFileSync(ipFilePath, ip); // Save IP to a file
+        BASE_URL = `http://localhost:8000`; // Use the function to set BASE_URL
+        createWindow(); // You should create the main window here only if it's not already created
+        inputWin.close(); // Close the window after saving
+    });
+
+    inputWin.on('closed', () => {
+        inputWin = null; // Dereference the object to prevent memory leaks
+    });
+}
+
 
 function createWindow() {
     mainWindow = new BrowserWindow({
@@ -66,49 +67,50 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false, // For simplicity, disabled. Consider security implications.
-            enableRemoteModule:  true, // Explicitly enable the remote module
+            enableRemoteModule: true, // Explicitly enable the remote module
         }
     });
 
     mainWindow.maximize()
-    
+
     // Create a custom menu (an example menu without developer tools)
     const menuTemplate = [
         {
-        label: 'File',
-        submenu: [
-            { role: 'quit' }
-        ]
+            label: 'File',
+            submenu: [
+                { role: 'quit' }
+            ]
         },
 
-        { label: 'Edit',
-        submenu: [
-            { role: 'undo' },
-            { role: 'redo' },
-            { type: 'separator' },
-            { role: 'cut' },
-            { role: 'copy' },
-            { role: 'paste' }
+        {
+            label: 'Edit',
+            submenu: [
+                { role: 'undo' },
+                { role: 'redo' },
+                { type: 'separator' },
+                { role: 'cut' },
+                { role: 'copy' },
+                { role: 'paste' }
             ]
         },
         {
             label: 'View',
             submenu: [
-              { role: 'reload' },
-              { role: 'forceReload' },
-              { type: 'separator' },
-              { role: 'resetZoom' },
-              { role: 'zoomIn' },
-              { role: 'zoomOut' },
-              { type: 'separator' },
-              { role: 'togglefullscreen' }
+                { role: 'reload' },
+                { role: 'forceReload' },
+                { type: 'separator' },
+                { role: 'resetZoom' },
+                { role: 'zoomIn' },
+                { role: 'zoomOut' },
+                { type: 'separator' },
+                { role: 'togglefullscreen' }
             ]
-          },
+        },
         // Add other menus as needed
     ];
 
     // Set the application menu
-const menu = Menu.buildFromTemplate(menuTemplate);
+    const menu = Menu.buildFromTemplate(menuTemplate);
     Menu.setApplicationMenu(menu);
 
     if (isDev) {
@@ -119,6 +121,7 @@ const menu = Menu.buildFromTemplate(menuTemplate);
     // mainWindow.loadFile('training/training-view/training-view.html');
     // mainWindow.loadFile('training/training.html');
     // mainWindow.loadFile('admin/admin-panel.html');
+    // mainWindow.loadFile('admin/previous-topic/previous-topic.html');
     // mainWindow.loadFile('login/login.html');
     mainWindow.loadFile('machines/machine.html');
     // mainWindow.loadFile('machines/machine-detail.html');
@@ -126,12 +129,12 @@ const menu = Menu.buildFromTemplate(menuTemplate);
         mainWindow = null;
     });
 
-    
+
     // Register the 'Ctrl + W' shortcut
     mainWindow.on('focus', () => {
         globalShortcut.register('Ctrl+W', () => {
-        // Close the specific window, or use app.quit() to quit the app
-        mainWindow.close(); // Adjust as needed
+            // Close the specific window, or use app.quit() to quit the app
+            mainWindow.close(); // Adjust as needed
         });
     });
 
@@ -152,7 +155,7 @@ app.on('ready', () => {
     if (fs.existsSync(ipFilePath)) {
         // If the IP address file exists, read it (optional here)
         const Ip = fs.readFileSync(ipFilePath, 'utf8');
-        BASE_URL = `http://${Ip}:8000`; // Use the function to set BASE_URL
+        BASE_URL = `http://localhost:8000`; // Use the function to set BASE_URL
 
         createWindow(); // Open the main app window
     } else {
@@ -176,7 +179,7 @@ app.on('activate', function () {
 
 // Listen for the navigate message from the renderer process
 app.on('navigate', (event, page, args) => {
-        
+
     let path;
     if (runningAsPackaged == true) {
         base_path = './resources/app/src'
@@ -201,15 +204,15 @@ app.on('navigate', (event, page, args) => {
         // Send the arguments to the renderer process
         mainWindow.webContents.once('did-finish-load', () => {
             mainWindow.webContents.send('page-data', args);
-        });        
+        });
     }
     else if (page == 'login') {
         console.log(BASE_URL)
         path = resolve(`${base_path}/pages/login/index.html`)
-        mainWindow.loadFile(path);    
+        mainWindow.loadFile(path);
     } else if (page == 'admin') {
         path = `${BASE_URL}/admin/`
-        
+
         const urlRegex = /^(http:\/\/|https:\/\/)?(([\da-z.-]+)\.([a-z.]{2,6})|(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}))([\/\w .-]*)*\/?$/;
 
         console.log(BASE_URL)
@@ -218,14 +221,14 @@ app.on('navigate', (event, page, args) => {
             dialog.showErrorBox('title', 'Invalid URL provided by the user.')
             return; // Exit the function if the URL is invalid
         }
-    
+
         // Ensure the URL starts with http:// or https://
-        let validatedUrl = BASE_URL.startsWith('http://') || BASE_URL.startsWith('https://') 
-            ? BASE_URL 
+        let validatedUrl = BASE_URL.startsWith('http://') || BASE_URL.startsWith('https://')
+            ? BASE_URL
             : `${BASE_URL}`;
-    
+
         path = `${validatedUrl}/admin/`;
-    
+
         // Create a new BrowserWindow instance
         let newWindow = new BrowserWindow({
             width: 800, // Set the width of the new window
@@ -271,6 +274,67 @@ ipcMain.on('update-ip', (event, ip) => {
 
 ipcMain.on('show-message-box', (event, options) => {
     dialog.showMessageBox(mainWindow, options).then((response) => {
-      event.reply('message-box-response', response);
+        event.reply('message-box-response', response);
     });
+});
+
+
+
+function startTrainingModel() {
+    // Start model training logic here...
+    console.log("Training started.");
+    // Start polling when training starts
+    if (!trainingStatusInterval) {
+        trainingStatusInterval = setInterval(checkModelTrainingStatus, 10000);
+    }
+}
+
+function stopTrainingModel() {
+    // Logic to stop model training if applicable
+    console.log("Training stopped or completed.");
+    // Stop polling when training is not needed
+    if (trainingStatusInterval) {
+        clearInterval(trainingStatusInterval);
+        trainingStatusInterval = null;
+    }
+}
+
+function showTrainingCompleteDialog() {
+    const options = {
+        type: 'info',
+        title: 'Training Complete',
+        message: 'Model training has completed successfully.',
+        buttons: ['OK']
+    };
+    dialog.showMessageBox(null, options).then(result => {
+        console.log('Dialog result:', result.response);
+    }).catch(err => {
+        console.error('Dialog error:', err);
+    });
+}
+
+function checkModelTrainingStatus() {
+    console.log(BASE_URL)
+    fetch(`${BASE_URL}/check-training-status`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.is_trained) {
+                showTrainingCompleteDialog();
+                stopTrainingModel(); // Stop polling after model is trained
+                ipcMain.emit('model-trained'); // Notify other parts of your application
+            }
+        })
+        .catch(error => {
+            console.error('Error checking training status:', error);
+        });
+}
+
+// IPC listeners that could be triggered from renderer processes
+ipcMain.on('start-training', (event) => {
+    console.log("Method Started")
+    startTrainingModel();
+});
+
+ipcMain.on('stop-training', (event) => {
+    stopTrainingModel();
 });

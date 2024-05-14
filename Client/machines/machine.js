@@ -1,161 +1,79 @@
-
-
 function redirect(destination, machineName, departmentName, id) {
-    machineName = encodeURIComponent(machineName);
-    departmentName = encodeURIComponent(departmentName);
-    id = encodeURIComponent(id);
-    
-    window.location.href = destination + '?machine=' + machineName + '&department=' + departmentName + '&id=' + id;
-  }
-  
-// Function to handle row click event
-function handleRowClick(event) {
-  var row = event.target.closest('tr');
+  machineName = encodeURIComponent(machineName);
+  departmentName = encodeURIComponent(departmentName);
+  id = encodeURIComponent(id);
 
-  var machineName = row.cells[0].innerText; 
-  var departmentName = row.cells[1].innerText; 
- 
-  redirect('machine-detail.html', machineName, departmentName);
+  window.location.href =
+    destination +
+    "?machine=" +
+    machineName +
+    "&department=" +
+    departmentName +
+    "&id=" +
+    id;
 }
 
-// Attach event listeners to table rows
-var rows = document.querySelectorAll('.machine-sub-container table tbody tr');
-rows.forEach(function(row) {
-  row.addEventListener('click', handleRowClick);
-});
 
 function searchbar() {
-    var input, filter;
-    input = document.getElementById("searchInput");
-    filter = input.value.trim();
-    console.log("fil",filter);
-    if(filter){
-        // Construct the URL with the search term
-        const url = `${BASE_URL}/machines/?search=${encodeURIComponent(filter)}`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                searched(data);
-            })
-            .catch(error => {
-                    var row = document.getElementById("noResult");
-                    row.innerHTML="no result found"
-                
-            });
-    }else if(filter==''){
-        const url = `${BASE_URL}/machines/`;
-        tableContent(url)
-        var row = document.getElementById("noResult");
-        row.innerHTML=""
-
-    }        
-}
-function searched(data) {
-    var machineTableBody = document.getElementById('machineTableBody');
-    machineTableBody.innerHTML = '';
-    var machineName = data.name;
-    var departmentName = data.department_name;
-    var id = data.id;
-    var addedDate = new Date(data.added_date);
-    var formattedDate = addedDate.toISOString().slice(0, 10); // Format as YYYY-MM-DD
-    machineTableBody.innerHTML +=
-        '<tr>' +
-        '<td>' + machineName + '</td>' +
-        '<td>' + departmentName + '</td>' +
-        '<td width="12%">' + formattedDate + '</td>' +
-        '<td width="13%">' +
-        '<a href="#" onclick="redirect(\'machine-detail.html\', \'' + machineName + '\', \'' + departmentName + '\', \'' + id + '\')" class="edit-button" data-machine-id="' + id + '">Edit</a>' +
-        '<a href="#" class="delete-button" data-machine-id="' + id + '">Delete</a>' +
-        '</td>' +
-        '</tr>';
-        const paginationContainer = document.getElementById('pagination-container');
-        paginationContainer.innerHTML = '';
-
+  var input, filter;
+  input = document.getElementById("searchInput");
+  filter = input.value.trim();
+  const url = `${BASE_URL}/machines/`;
+  tableContent(url, page = "", param = filter);
 }
 
 
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    
-    var url = `${BASE_URL}/machines/`;
-    tableContent(url);
-  
-    document.getElementById('machineTableBody').addEventListener('click', function(event) {
-      if (event.target.classList.contains('delete-button')) {
-        var machineId = event.target.getAttribute('data-machine-id');
-        window.location.reload();
-  
-        // Perform AJAX request to Django view for deletion
-        fetch(`${BASE_URL}/machines/` + machineId + `/delete/`, {
-          method: 'POST'
-        })
-        .then(response => {
-          if (response.ok) {
-            console.log('Machine deleted successfully');
-            window.location.reload();
-
-          } else {
-            console.error('Failed to delete machine:', response.statusText);
-          }
-        })
-        .catch(error => {
-          console.error('Failed to delete machine:', error);
-        });
-      }
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  var url = `${BASE_URL}/machines/`;
+  tableContent(url);
 });
-     
 
+let activePage = 1;
 
-
-let activePage = 1; 
-
-function updatePagination(response) {
-  const paginationContainer = document.getElementById('pagination-container');
-  paginationContainer.innerHTML = ''; // Clear existing pagination links
+function updatePagination(response, param = "") {
+  const paginationContainer = document.getElementById("pagination-container");
+  paginationContainer.innerHTML = "";
 
   const totalPages = Math.ceil(response.count / 5); // Assuming 5 items per page
 
   // Previous button
-  const prevButton = document.createElement('a');
-  prevButton.textContent = 'Back';
+  const prevButton = document.createElement("a");
+  prevButton.textContent = "Back";
   if (response.previous) {
-      prevButton.addEventListener('click', function() {
-          tableContent(response.previous);
-      });
+    prevButton.addEventListener("click", function () {
+      var page = getPageNumber(response.previous);
+      tableContent(`${BASE_URL}/machines/`, page, param);
+    });
   } else {
-      prevButton.classList.add('disabled');
+    prevButton.classList.add("disabled");
   }
   paginationContainer.appendChild(prevButton);
 
   // Page numbers
   for (let i = 1; i <= totalPages; i++) {
-      const pageLink = document.createElement('a');
-      pageLink.textContent = i;
-      pageLink.addEventListener('click', function() {
-          tableContent(`${BASE_URL}/machines/?page=${i}`);
-          activePage = i;
-          updatePagination(response);
-      });
-      if (i === activePage) {
-          pageLink.classList.add('active');
-      }
-      paginationContainer.appendChild(pageLink);
+    const pageLink = document.createElement("a");
+    pageLink.textContent = i;
+    pageLink.addEventListener("click", function () {
+      tableContent(`${BASE_URL}/machines/`, page = i, param = param);
+      activePage = i;
+      updatePagination(response, param);
+    });
+    if (i === activePage) {
+      pageLink.classList.add("active");
+    }
+    paginationContainer.appendChild(pageLink);
   }
 
   // Next button
-  const nextButton = document.createElement('a');
-  nextButton.textContent = 'Next';
+  const nextButton = document.createElement("a");
+  nextButton.textContent = "Next";
   if (response.next) {
-      nextButton.addEventListener('click', function() {
-          tableContent(response.next);
-      });
- 
+    nextButton.addEventListener("click", function () {
+      var page = getPageNumber(response.next);
+      tableContent(`${BASE_URL}/machines/`, page, param);
+    });
   } else {
-      nextButton.classList.add('disabled');
+    nextButton.classList.add("disabled");
   }
   paginationContainer.appendChild(nextButton);
 }
@@ -163,101 +81,136 @@ function updatePagination(response) {
 function getPageNumber(url) {
   var match = url.match(/page=(\d+)/);
   if (match && match[1]) {
-      return parseInt(match[1]);
+    return parseInt(match[1]);
   }
-  return 1; // Default to 1 if no page number found
+  return 1;
 }
 
-function tableContent(PageUrl) {
+function getCorrectUrl(url, page = "", param = "") {
+  if (param !== "" || page !== "") {
+    url += `?`;
+    if (param !== "") {
+      url += `search=${param}`;
+    }
+    if (page !== "") {
+      url += `${param !== "" ? "&" : ""}page=${page}`;
+    }
+  }
 
-    fetch(PageUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to fetch machine list');
-            }
-            return response.json();
-        })
-        .then(response => {
-            if (response.results.length > 0) {
-                var machineTableBody = document.getElementById('machineTableBody');
-                machineTableBody.innerHTML = ''; // Clear the table body
-                response.results.forEach(function (machine) {
-                    var machineName = machine.name;
-                    var departmentName = machine.department_name;
-                    var id = machine.id;
-                    var addedDate = new Date(machine.added_date);
-                    var formattedDate = addedDate.toISOString().slice(0, 10); // Format as YYYY-MM-DD
-                    machineTableBody.innerHTML +=
-                        '<tr>' +
-                        '<td>' + machineName + '</td>' +
-                        '<td>' + departmentName + '</td>' +
-                        '<td width="12%">' + formattedDate + '</td>' +
-                        '<td width="13%">' +
-                        '<a href="#" onclick="redirect(\'machine-detail.html\', \'' + machineName + '\', \'' + departmentName + '\', \'' + id + '\')" class="edit-button" data-machine-id="' + id + '">Edit</a>' +
-                        '<a href="#" class="delete-button" data-machine-id="' + id + '">Delete</a>' +
-                        '</td>' +
-                        '</tr>';
-                });
-                updatePagination(response);
-                if (PageUrl) {
-                    var page = getPageNumber(PageUrl);
-                    const paginationContainer = document.getElementById('pagination-container');
-                    var pageLinks = paginationContainer.querySelectorAll('a');
-                    pageLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (parseInt(link.textContent) === page) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            } else {
-                document.getElementById('noResultRow').style.display = 'block';
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Failed to fetch machine list.');
+  return url;
+}
+
+function addMachineRow(machineTableBody, machineName, departmentName, id) {
+  // Create table row element
+  var row = document.createElement("tr");
+
+  // Create and append the machine name cell
+  var nameCell = document.createElement("td");
+  nameCell.textContent = machineName;
+  row.appendChild(nameCell);
+
+  // Create and append the department name cell
+  var departmentCell = document.createElement("td");
+  departmentCell.textContent = departmentName;
+  row.appendChild(departmentCell);
+
+  // Create and append the action cell
+  var actionCell = document.createElement("td");
+  actionCell.setAttribute("width", "13%");
+
+  // Create edit link
+  var editLink = document.createElement("a");
+  editLink.href = "#";
+  editLink.textContent = "Edit";
+  editLink.className = "edit-button";
+  editLink.dataset.machineId = id;
+  editLink.onclick = function () {
+    redirect("machine-detail.html", machineName, departmentName, id);
+  };
+  actionCell.appendChild(editLink);
+
+  // Add space between buttons
+  actionCell.appendChild(document.createTextNode(" "));
+
+  // Create delete link
+  var deleteLink = document.createElement("a");
+  deleteLink.href = "#";
+  deleteLink.textContent = "Delete";
+  deleteLink.className = "delete-button";
+  deleteLink.dataset.machineId = id;
+  deleteLink.onclick = function () {
+    del(id);
+  };
+  actionCell.appendChild(deleteLink);
+
+  // Append the action cell to the row
+  row.appendChild(actionCell);
+
+  // Append the row to the table body
+  machineTableBody.appendChild(row);
+}
+
+function tableContent(PageUrl, page = "", param = "") {
+  console.log(PageUrl);
+  PageUrl = getCorrectUrl(PageUrl, page, param);
+  console.log(PageUrl);
+  fetch(PageUrl)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch machine list");
+      }
+      return response.json();
+    })
+    .then((response) => {
+      if (response.results.length > 0) {
+        var machineTableBody = document.getElementById("machineTableBody");
+        machineTableBody.innerHTML = ""; // Clear the table body
+        response.results.forEach(function (machine) {
+          var machineName = machine.name;
+          var departmentName = machine.department;
+          var id = machine.id;
+
+          addMachineRow(machineTableBody, machineName, departmentName, id);
         });
+        updatePagination(response, param);
+        if (PageUrl) {
+          var page = getPageNumber(PageUrl);
+          const paginationContainer = document.getElementById(
+            "pagination-container"
+          );
+          var pageLinks = paginationContainer.querySelectorAll("a");
+          pageLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (parseInt(link.textContent) === page) {
+              link.classList.add("active");
+            }
+          });
+        }
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+    });
 }
 
-
-document.addEventListener("DOMContentLoaded", async function () {
-  // lLLet trainings = await fetchDataFromDatabase();  
-  // loadTrainingSection(trainings);
-  // setupPagination();
-  let user = sessionStorage.getItem('isAdmin')
-
-  if (user) {
-  
-    // If user is logged in as admin, don't show login page.
-    document.getElementById('admin-panel-button').style.display = 'none'
-  
-    createAddButton()
-    tornituraTab.setAttribute(
-        "onclick",
-        "redirectToPage('../admin/admin-panel.html?tab=tornitura')"
-    );
-    rettificheTab.setAttribute(
-        "onclick",
-        "redirectToPage('../admin/admin-panel.html?tab=rettifiche')"
-    );
-    qualitaTab.setAttribute(
-        "onclick",
-        "redirectToPage('../admin/admin-panel.html?tab=qualita')");
-  } else {
-    tornituraTab.setAttribute(
-        "onclick",
-        "redirectToPage('../chatbot/main.html?tab=tornitura')"
-    );
-    rettificheTab.setAttribute(
-        "onclick",
-        "redirectToPage('../chatbot/main.html?tab=rettifiche')"
-    );
-    qualitaTab.setAttribute(
-        "onclick",
-        "redirectToPage('../chatbot/main.html?tab=qualita')"
-    );
-  }
-  
-  
-})
+function del(machineId) {
+  fetch(`${BASE_URL}/machines/${machineId}/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      // Add any additional headers if needed
+    },
+    // Add any request body if needed
+  })
+    .then((response) => {
+      if (response.ok) {
+        console.log("Machine deleted successfully");
+        window.location.href = "machine.html"; // Redirect or update UI as necessary
+      } else {
+        throw new Error("Failed to delete machine");
+      }
+    })
+    .catch((error) => {
+      console.error("Failed to delete machine:", error);
+    });
+}
