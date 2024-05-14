@@ -26,11 +26,8 @@ from .models import Department
 from .serializers import DepartmentSerializer, TrainingListSerializer
 from chatbot.incremental import retrain
 from chatbot.incremental import train
-
 import threading
 import json
-import time
-from django.utils import timezone
 
 chatbot = None
 model_path = "chatbot/incremental/finalmodel.joblib"
@@ -49,7 +46,7 @@ def import_chatbot_in_background():
     from chatbot.incremental import chatbot  # takes 5 seconds to run
 
 # Start the import in a separate thread
-# threading.Thread(target=import_chatbot_in_background).start()
+threading.Thread(target=import_chatbot_in_background).start()
 
 @csrf_exempt
 def login_view(request):
@@ -306,7 +303,7 @@ def train_model_task():
         is_training_in_progress = False
         
 
-
+# Ali's code for retraining model
 def retrain_model(request):
     global is_training_in_progress
     if is_training_in_progress:

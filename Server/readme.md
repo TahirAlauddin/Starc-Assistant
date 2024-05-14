@@ -76,3 +76,9 @@ For a deep dive into the functionalities and architecture of Starc Assistant, re
 - [User Guide](#): Comprehensive manual for end-users.
 - [Developer Documentation](#): In-depth setup and development guidelines.
 - [FAQs](#): Frequently Asked Questions.
+
+
+## Installation
+
+Visual C++ Distrib 2014-2022
+Python 3.11.5
