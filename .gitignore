@@ -43,3 +43,6 @@ __pycache__
 *.zip
 node_modules
 *.pdf
+
+
+media/

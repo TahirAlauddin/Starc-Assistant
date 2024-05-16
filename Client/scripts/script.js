@@ -83,9 +83,8 @@ async function fetchAndOrganizeMachineData() {
 
 
 // Function to add options to the dropdown based on department
-function addOptionsToDropdown(department) {
-  fetchAndOrganizeMachineData().then(departments => {
-    console.log(departments);
+async function addOptionsToDropdown(department) {
+  await fetchAndOrganizeMachineData().then(departments => {
     let departmentOptions = departments;
 
     var selectElement = document.getElementById("custom-dropdown");

@@ -418,6 +418,8 @@ async function sendMessageButtonClick() {
   let answer = data.response;
   let files = data.files;
 
+  console.log(data);
+
   let query = document.getElementById("message-input").value.trim();
   document.getElementById("message-input").value = '';
 

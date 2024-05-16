@@ -11,7 +11,7 @@ from .views import (DepartmentViewSet, QuestionViewSet, MachineViewSet,
                     login_view, logout_view, chatbot_model_view,
                     get_training_count, get_training_file,
                     upload_data, retrain_model, check_training_status, TopicFileBulkView, 
-                    BulkTrainingFilesAPIView)
+                    BulkTrainingFilesAPIView, BulkTopicFilesAPIView)
 
 
 from rest_framework_nested.routers import SimpleRouter, NestedSimpleRouter
@@ -62,6 +62,8 @@ urlpatterns = [
     path('topics/files/upload/', TopicFileBulkView.as_view(), name='topic-file-upload'),
     path('training/<int:training_pk>/training-files-bulk/',
           BulkTrainingFilesAPIView.as_view(), name='bulk-training-files'),
+    path('topic/<int:topic_pk>/topic-files-bulk/',
+          BulkTopicFilesAPIView.as_view(), name='bulk-topic-files'),
 
     path('', include(topic_router.urls)),
     path("__debug__/", include("debug_toolbar.urls")),

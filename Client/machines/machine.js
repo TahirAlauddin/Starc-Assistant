@@ -151,9 +151,7 @@ function addMachineRow(machineTableBody, machineName, departmentName, id) {
 }
 
 function tableContent(PageUrl, page = "", param = "") {
-  console.log(PageUrl);
   PageUrl = getCorrectUrl(PageUrl, page, param);
-  console.log(PageUrl);
   fetch(PageUrl)
     .then((response) => {
       if (!response.ok) {

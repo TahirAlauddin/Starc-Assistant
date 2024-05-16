@@ -12053,6 +12053,154 @@
       "responses": [
         "asdfasdf"
       ]
+    },
+    {
+      "tag": "My love life",
+      "patterns": [
+        "My love life",
+        "My love life",
+        "+",
+        "My love life",
+        "My love life"
+      ],
+      "responses": [
+        "It sucks"
+      ]
+    },
+    {
+      "tag": "nandemonai",
+      "patterns": [
+        "nandemonai",
+        "nandemonai",
+        "nandemonai",
+        "nandemonai",
+        "nandemonai"
+      ],
+      "responses": [
+        "nandemonai"
+      ]
+    },
+    {
+      "tag": "Newone",
+      "patterns": [
+        "Newone",
+        "Newone",
+        "Newone",
+        "Newone",
+        "Newone"
+      ],
+      "responses": [
+        "Newone"
+      ]
+    },
+    {
+      "tag": "A new label",
+      "patterns": [
+        "A new label",
+        "A new label",
+        "A new label",
+        "A new label",
+        "A new label"
+      ],
+      "responses": [
+        "A new label"
+      ]
+    },
+    {
+      "tag": "Another one",
+      "patterns": [
+        "Another one",
+        "Another one",
+        "Another one",
+        "Another one",
+        "Another one"
+      ],
+      "responses": [
+        "Another one"
+      ]
+    },
+    {
+      "tag": "I'm bored",
+      "patterns": [
+        "I'm bored",
+        "I'm bored",
+        "I'm bored",
+        "I'm bored",
+        "I'm bored"
+      ],
+      "responses": [
+        "I'm bored"
+      ]
+    },
+    {
+      "tag": "I'm bored 2",
+      "patterns": [
+        "I'm bored",
+        "I'm bored",
+        "I'm bored",
+        "I'm bored",
+        "I'm bored",
+        "I'm bored",
+        "I'm bored",
+        "I'm bored",
+        "I'm bored",
+        "I'm bored"
+      ],
+      "responses": [
+        "I'm bored"
+      ]
+    },
+    {
+      "tag": "I'm bored 3",
+      "patterns": [
+        "I'm bored",
+        "I'm bored",
+        "I'm bored",
+        "I'm bored",
+        "I'm bored"
+      ],
+      "responses": [
+        "I'm bored"
+      ]
+    },
+    {
+      "tag": "Nobody Knows",
+      "patterns": [
+        "Nobody knows",
+        "Nobody knows",
+        "Nobody knows",
+        "Nobody knows",
+        "Nobody knows"
+      ],
+      "responses": [
+        "Nobody knows"
+      ]
+    },
+    {
+      "tag": "My name",
+      "patterns": [
+        "My name is Something",
+        "I go by the name of Something",
+        "My first name is something",
+        "Something is my name",
+        "I am called Something"
+      ],
+      "responses": [
+        "I am the something"
+      ]
+    },
+    {
+      "tag": "Final Question",
+      "patterns": [
+        "Final Question",
+        "Final Question",
+        "Final Question",
+        "Final Question",
+        "Final Question"
+      ],
+      "responses": [
+        "Final Question"
+      ]
     }
   ]
 }

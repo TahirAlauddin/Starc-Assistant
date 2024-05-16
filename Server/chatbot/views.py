@@ -26,7 +26,6 @@ from .models import Department
 from .serializers import DepartmentSerializer, TrainingListSerializer
 from chatbot.incremental import retrain
 from chatbot.incremental import train
-import threading
 import json
 
 chatbot = None
@@ -165,6 +164,37 @@ class TrainingViewSet(viewsets.ModelViewSet):
     pagination_class = StandardResultsSetPagination    
 
 
+class BulkTopicFilesAPIView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request, topic_pk, *args, **kwargs):
+        # Get the topic instance based on topic_pk, handle not found
+        topic = self.get_topic_instance(topic_pk)
+        if topic is None:
+            return JsonResponse({'error': 'Topic not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        added_files = request.FILES.getlist('addedFiles')
+        removed_files_ids = request.data.getlist('removedFiles')
+
+        # Handle added files
+        for file in added_files:
+            # TODO: Adjust the creation logic as needed for your model
+            TopicFile.objects.create(file=file, topic=topic)
+
+        # Handle removed files
+        TopicFile.objects.filter(id__in=removed_files_ids).delete()
+
+        # Return a success response
+        return JsonResponse({'message': 'Files updated successfully'}, status=status.HTTP_200_OK)
+
+    def get_topic_instance(self, topic_pk):
+        try:
+            return Topic.objects.get(pk=topic_pk)
+        except Topic.DoesNotExist:
+            return None
+
+
+
 class BulkTrainingFilesAPIView(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
@@ -193,8 +223,6 @@ class BulkTrainingFilesAPIView(APIView):
             return Training.objects.get(pk=training_pk)
         except Training.DoesNotExist:
             return None
-
-
 
 
 class TrainingFileViewSet(viewsets.ModelViewSet):
@@ -341,7 +369,6 @@ def upload_data(request):
         else:
             # Create a new topic since it doesn't exist
             existing_machine_instance = Machine.objects.filter(name__iexact=machine).first()
-            print(existing_machine_instance)
             new_topic = Topic.objects.create(label=label, machine=existing_machine_instance)
             serializer = TopicSerializer(new_topic)
             if questions and answers:
@@ -349,8 +376,11 @@ def upload_data(request):
                     Question.objects.create(text=question, topic=new_topic)
                 for answer in answers:
                     Answer.objects.create(text=answer, topic=new_topic)
-                    
+                
+                
+                print("Topic should be added to model")
                 threading.Thread(target=addTopicToModel, args=(questions, new_topic, answers)).start()
+                print("Topic was added to model")
         
             return Response({'message': 'Topic created successfully', 
                             'topic': {'id': new_topic.id, 
@@ -365,32 +395,21 @@ def upload_data(request):
         with transaction.atomic():
             topic = Topic.objects.filter(label=label).first()
             if topic:
-                # Update questions
-                current_questions_texts = set(topic.questions.values_list('text', flat=True))
-                incoming_questions_texts = set(questions)
+                # Attempt to find or create the new machine
+                machine, created = Machine.objects.get_or_create(name=machine)
+                topic.machine = machine
                 
-                # Add new questions that are not in the current questions
-                new_questions = incoming_questions_texts - current_questions_texts
-                for question_text in new_questions:
-                    Question.objects.create(topic=topic, text=question_text)
+                # Delete existing questions and answers
+                Question.objects.filter(topic=topic).delete()
+                Answer.objects.filter(topic=topic).delete()
                 
-                # Remove questions that are no longer in the incoming questions
-                questions_to_remove = current_questions_texts - incoming_questions_texts
-                topic.questions.filter(text__in=questions_to_remove).delete()
-
-                # Update answers
-                current_answers_texts = set(topic.answers.values_list('text', flat=True))
-                incoming_answers_texts = set(answers)
+                # Add new questions and answers
+                if questions and answers:
+                    for question in questions:
+                        Question.objects.create(text=question, topic=topic)
+                    for answer in answers:
+                        Answer.objects.create(text=answer, topic=topic)
                 
-                # Add new answers that are not in the current answers
-                new_answers = incoming_answers_texts - current_answers_texts
-                for answer_text in new_answers:
-                    Answer.objects.create(topic=topic, text=answer_text)
-                
-                # Remove answers that are no longer in the incoming answers
-                answers_to_remove = current_answers_texts - incoming_answers_texts
-                topic.answers.filter(text__in=answers_to_remove).delete()
-
                 # Save any changes made to the topic itself
                 topic.save()
                 

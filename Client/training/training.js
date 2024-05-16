@@ -138,7 +138,7 @@ async function setupPagination(param = "") {
     let data = await response.json();
 
     // Assuming data contains a property count which is the total number of items
-    const itemsPerPage = 10; // Adjust based on your needs
+    const itemsPerPage = 5; // Adjust based on your needs
     totalPages = Math.ceil(data.count / itemsPerPage);
 
   } catch (error) {
@@ -194,7 +194,7 @@ async function setupPagination(param = "") {
         pageLink.addEventListener('click', async function(e) {
             e.preventDefault();
             try {
-              let trainings = await fetchDataFromDatabase(param, currentPage)
+              let trainings = await fetchDataFromDatabase(param, pageNumber)
               if (trainings.results !== '' || trainings.results != undefined) {
                 loadTrainingSection(trainings.results);
               } 
@@ -235,7 +235,7 @@ async function filterTrainingData() {
   let searchBarText = document.getElementById('search-bar').value;
   let trainings = await fetchDataFromDatabase(searchBarText)
   loadTrainingSection(trainings.results)
-  setupPagination(searchBarText)
+  await setupPagination(searchBarText)
 }
 
 
@@ -257,6 +257,7 @@ function setupNavigation() {
         "onclick",
         "redirectToPage('../admin/admin-panel.html?tab=qualita')");
   } else {
+    document.getElementById('machine-button').style.display = 'none'
     tornituraTab.setAttribute(
         "onclick",
         "redirectToPage('../chatbot/main.html?tab=tornitura')"
@@ -274,8 +275,6 @@ function setupNavigation() {
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-  document.getElementById("search-button").addEventListener("click", filterTrainingData)
-  
   // Setup Navigation first
   setupNavigation()
 
@@ -289,5 +288,5 @@ document.addEventListener("DOMContentLoaded", async function () {
       createAddButton()
     }
   }
-  setupPagination();
+  await setupPagination();
 })
