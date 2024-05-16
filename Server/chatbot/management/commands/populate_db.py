@@ -8,15 +8,16 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Code for your custom command goes here
-        self.add_data_to_db()
-        self.stdout.write(self.style.SUCCESS('Question Answers added to Database successfully'))
+        success = self.add_data_to_db()
+        if success:
+            self.stdout.write(self.style.SUCCESS('Question Answers added to Database successfully'))
 
     def add_data_to_db(self):
         # Assuming there's a Machine model instance you want to associate with the topic
         # This example assumes there's at least one Machine instance in the database
-        sure = input('Are you sure?')
+        sure = input('Are you sure? Y/N: ')
         if not sure:
-            return
+            return False
                 
         # Department mappings based on your comments
         department_mappings = {
