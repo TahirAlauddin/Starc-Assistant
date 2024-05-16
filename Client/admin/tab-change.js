@@ -12,10 +12,10 @@ var qualitaHeadingImage = document.getElementById("heading-image-qualita")
 
 var selectedDepartment = 1;
 
-function setTornituraTab(selectedClass) {
+async function setTornituraTab(selectedClass) {
     document.getElementById("admin-heading").textContent =
         "Tornitura";
-    addOptionsToDropdown("Tornitura");
+    await addOptionsToDropdown("Tornitura");
 
     tornituraTab.classList.add(selectedClass);
     tornituraObject.setAttribute('data', '../images/Tornitura-Selected.svg');
@@ -36,11 +36,11 @@ function setTornituraTab(selectedClass) {
     selectedDepartment = 1
 }
 
-function setRettificheTab(selectedClass) {
+async function setRettificheTab(selectedClass) {
     document.getElementById("admin-heading").textContent =
         "Rettifiche";
 
-    addOptionsToDropdown("Rettifiche");
+    await addOptionsToDropdown("Rettifiche");
 
     rettificheTab.classList.add(selectedClass);
     rettificheObject.setAttribute('data', '../images/Rettifiche-Selected.svg');
@@ -63,10 +63,10 @@ function setRettificheTab(selectedClass) {
 
 }
 
-function setQualitaTab(selectedClass) {
+async function setQualitaTab(selectedClass) {
     document.getElementById("admin-heading").textContent =
         "Control Qualita";
-    addOptionsToDropdown("Qualita");
+    await addOptionsToDropdown("Qualita");
 
     qualitaTab.classList.add(selectedClass);
     qualitaObject.setAttribute('data', '../images/Qualita-Selected.svg');
@@ -89,54 +89,55 @@ function setQualitaTab(selectedClass) {
 }
 
 // For Tornitura
-tornituraTab.addEventListener("click", function () {
+tornituraTab.addEventListener("click", async function () {
     let selectedClass = "selected-department-box";
 
     if (!tornituraTab.classList.contains(selectedClass)) {
-        setTornituraTab(selectedClass);
+        await setTornituraTab(selectedClass);
     }
 
 });
 
 // For Rettifiche
-rettificheTab.addEventListener("click", function () {
+rettificheTab.addEventListener("click", async function () {
     let selectedClass = "selected-department-box";
 
     if (!rettificheTab.classList.contains(selectedClass)) {
-        setRettificheTab(selectedClass);
+        await setRettificheTab(selectedClass);
     }
 
 });
 
 // For Qualita
-qualitaTab.addEventListener("click", function () {
+qualitaTab.addEventListener("click", async function () {
     let selectedClass = "selected-department-box";
 
     if (!qualitaTab.classList.contains(selectedClass)) {
-        setQualitaTab(selectedClass);
+        await setQualitaTab(selectedClass);
     }
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     let selectedClass = "selected-department-box";
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
     let tab = urlParams.get("tab");
+    console.log(tab)
 
-    if (tab == 1) {
-        setTornituraTab(selectedClass);
+    if (tab == "tornitura") {
+        await setTornituraTab(selectedClass);
 
     }
-    else if (tab == 2) {
-        setRettificheTab(selectedClass);
+    else if (tab == "rettifiche") {
+        await setRettificheTab(selectedClass);
     }
 
-    else if (tab == 3) {
-        setQualitaTab(selectedClass);
+    else if (tab == "qualita") {
+        await setQualitaTab(selectedClass);
     }
     else {
-        setTornituraTab(selectedClass)
+        await setTornituraTab(selectedClass)
     }
 })

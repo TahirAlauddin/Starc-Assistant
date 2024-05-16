@@ -1,5 +1,6 @@
 from django.db import models
-from django.db.models.signals import pre_delete
+from django.db.models.signals import post_delete
+import time
 from django.dispatch import receiver
 import os    
 
@@ -132,8 +133,52 @@ class TopicFile(models.Model):
                                on_delete=models.CASCADE,
                                related_name='files') 
 
-@receiver(pre_delete, sender=TopicFile)
-def topic_file_pre_delete(sender, instance, **kwargs):
-    print(instance.file.path)
-    if (instance.file):
-        os.remove(instance.file.path)
+@receiver(post_delete, sender=TopicFile)
+def topic_file_post_delete(sender, instance, **kwargs):
+    file_path = instance.file.path
+    print(file_path)
+    if instance.file:
+        start_time = time.time()
+        while True:
+            try:
+                os.remove(file_path)
+                print(f"File {file_path} successfully deleted.")
+                break
+            except FileNotFoundError:
+                print(f"File {file_path} not found. Exiting.")
+                break
+            except PermissionError as e:
+                print(f"PermissionError: {e}. Retrying...")
+                if time.time() - start_time > 5:
+                    print(f"Failed to delete the file after 5 seconds: {e}")
+                    break
+                time.sleep(1)  # Wait for 1 second before retrying
+            except Exception as e:
+                print(f"Error deleting file: {e}")
+                break
+            
+            
+@receiver(post_delete, sender=TrainingFile)
+def training_file_post_delete(sender, instance, **kwargs):
+    file_path = instance.file.path
+    print(file_path)
+    if instance.file:
+        start_time = time.time()
+        while True:
+            try:
+                os.remove(file_path)
+                print(f"File {file_path} successfully deleted.")
+                break
+            except FileNotFoundError:
+                print(f"File {file_path} not found. Exiting.")
+                break
+            except PermissionError as e:
+                print(f"PermissionError: {e}. Retrying...")
+                if time.time() - start_time > 5:
+                    print(f"Failed to delete the file after 5 seconds: {e}")
+                    break
+                time.sleep(1)  # Wait for 1 second before retrying
+            except Exception as e:
+                print(f"Error deleting file: {e}")
+                break
+            

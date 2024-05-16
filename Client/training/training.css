@@ -260,6 +260,7 @@
   width: 20px;
   height: 20px;
   font-size: 18px;
+  z-index: 1;
 }
 
 .close-button-popup {
@@ -397,32 +398,41 @@
   font-weight: bold;
 }
 
-.search-bar-container {
-  display: flex; /* Aligns the input and button in a row */
-  justify-content: center; /* Centers the search bar horizontally */
-  margin: 20px; /* Adds some space around the search bar */
-  width: 30%;
+
+.search-container {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 0.2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  padding: 0px 20px 0px 20px;
+  border-radius: 20px;
+  margin-left: 40px;
 }
 
-.search-bar-container input[type="text"] {
-  flex-grow: 1; /* Allows the input to grow and fill available space */
-  padding: 10px; /* Adds padding inside the input for better text visibility */
-  margin-right: 8px; /* Adds a small space between the input and the button */
-  border: 2px solid #ccc; /* Adds a border to the input field */
-  border-radius: 4px; /* Rounds the corners of the input field */
+.search-container img {
+  cursor: pointer;
 }
 
-.search-bar-container button {
-  padding: 10px 20px; /* Adds padding inside the button */
-  background-color: #007BFF; /* Sets a blue background color for the button */
-  color: white; /* Sets the text color to white */
-  border: none; /* Removes the border */
-  border-radius: 4px; /* Rounds the corners of the button */
-  cursor: pointer; /* Changes the cursor to a pointer when hovering over the button */
+.search-container input[type="text"] {
+  flex: 2;
+  border: none;
+  outline: none;
+  padding: 5px 200px 5px 5px;
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 28px;
 }
 
-.search-bar-container button:hover {
-  background-color: #0056b3; /* Changes the button color on hover */
+.search-container input[type="text"]::placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+
+.search-container .search-icon {
+  color: #aaa;
+  margin-right: 10px;
 }
 
 .pagination-container {

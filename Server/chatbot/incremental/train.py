@@ -1,7 +1,7 @@
-from creme import compose
-from creme import feature_extraction
-from creme import naive_bayes
-from creme import metrics
+from river import compose
+from river import feature_extraction
+from river import naive_bayes
+from river import metrics
 import json
 import joblib
 
@@ -11,8 +11,8 @@ intents_path = "chatbot/incremental/intents.json"
 def train_model(model_path, intents_path):
     # Pipeline for extracting TF-IDF features and using Multinomial Naive Bayes for classification
     model = compose.Pipeline(
-        ('vect', feature_extraction.TFIDF(lowercase=True, ngram_range=(1, 6))),
-        ('nb', naive_bayes.MultinomialNB(alpha=0.3))
+    ('vectorizer', feature_extraction.BagOfWords(lowercase=True, ngram_range=(1, 6))),
+    ('classifier', naive_bayes.MultinomialNB(alpha=0.3))
     )
 
     intents = json.loads(open('./chatbot/incremental/intents.json', encoding="utf-8").read())
@@ -24,7 +24,7 @@ def train_model(model_path, intents_path):
         tag = intent["tag"]
         for question in intent["patterns"]:
             # Train the model incrementally
-            model.fit_one(question, tag)
+            model.learn_one(question, tag)
 
             # Predict the tag for the current question
             y_pred = model.predict_one(question)

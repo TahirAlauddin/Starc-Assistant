@@ -49,6 +49,22 @@
           <div class="department-title center-aligned-flex">Training</div>
         </div>
 
+        <div
+            class="department-box center-aligned-flex row-flex"
+            id="machine-button"
+            onclick="redirectToPage('../machines/machine.html')"
+          >
+            <img
+              src="../images/machine-blue.png"
+              alt=""
+              srcset=""
+              width="25px"
+              height="25px"
+            />
+
+            <div class="department-title center-aligned-flex">Machines</div>
+          </div>
+
         <div class="free-space"></div>
 
 
@@ -71,9 +87,9 @@
             <h2>Training</h2>
           </div>
 
-          <div class="search-bar-container">
-            <input type="text" name="" id="search-bar">
-            <button id="search-button">Search</button>
+          <div class="search-container">
+            <img src="images/search.png" alt="" srcset="" height="20px" width="20px" onclick="filterTrainingData()" />
+            <input type="text" id="search-bar" placeholder="Search here">
           </div>
           
           <div id="logout-button" class="logout-button center-aligned-flex" onclick="sendLogOutRequest()">

@@ -48,7 +48,7 @@ typing-extensions = "==4.8.0"
 tzdata = "==2023.3"
 urllib3 = "==2.2.1"
 waitress = "==3.0.0"
-django4-background-tasks = "*"
+river = "*"
 
 [dev-packages]
 

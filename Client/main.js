@@ -122,8 +122,8 @@ function createWindow() {
     // mainWindow.loadFile('training/training.html');
     // mainWindow.loadFile('admin/admin-panel.html');
     // mainWindow.loadFile('admin/previous-topic/previous-topic.html');
-    // mainWindow.loadFile('login/login.html');
-    mainWindow.loadFile('machines/machine.html');
+    mainWindow.loadFile('login/login.html');
+    // mainWindow.loadFile('machines/machine.html');
     // mainWindow.loadFile('machines/machine-detail.html');
     mainWindow.on('closed', function () {
         mainWindow = null;
@@ -207,7 +207,6 @@ app.on('navigate', (event, page, args) => {
         });
     }
     else if (page == 'login') {
-        console.log(BASE_URL)
         path = resolve(`${base_path}/pages/login/index.html`)
         mainWindow.loadFile(path);
     } else if (page == 'admin') {
@@ -215,7 +214,6 @@ app.on('navigate', (event, page, args) => {
 
         const urlRegex = /^(http:\/\/|https:\/\/)?(([\da-z.-]+)\.([a-z.]{2,6})|(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}))([\/\w .-]*)*\/?$/;
 
-        console.log(BASE_URL)
         // Validate the base URL provided by the user
         if (!urlRegex.test(BASE_URL.split(':8000')[0])) {
             dialog.showErrorBox('title', 'Invalid URL provided by the user.')

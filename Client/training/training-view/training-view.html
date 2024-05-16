@@ -45,6 +45,22 @@
           <div class="department-title center-aligned-flex">Training</div>
         </div>
 
+        <div
+            class="department-box center-aligned-flex row-flex"
+            id="machine-button"
+            onclick="redirectToPage('../../machines/machine.html')"
+          >
+            <img
+              src="../../images/machine-blue.png"
+              alt=""
+              srcset=""
+              width="25px"
+              height="25px"
+            />
+
+            <div class="department-title center-aligned-flex">Machines</div>
+          </div>
+
         <div class="free-space"></div>
 
         <div class="department-box admin-panel-box center-aligned-flex column-flex" id="admin-panel-button"
@@ -66,6 +82,8 @@
           </div>
 
         </div>
+
+
         <div class="center-aligned-flex column-flex training-vids-sub-container" id="training-vids-sub-container">
           <div class="training-vids center-aligned-flex" id="training-vids">
            
@@ -134,10 +152,10 @@
 
   <script>
     // Object to track file state
-    const fileState = {
-      addedFiles: [],
-      removedFiles: [],
-      unchangedFiles: []
+    const fileStates = {
+      newFiles: [],
+      filesMarkedForDeletion: [],
+      existingFiles: []
     }
     let uploadedFiles = []
 

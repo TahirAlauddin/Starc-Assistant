@@ -42,10 +42,8 @@ async function saveTraining() {
     }
     
     const training = await trainingResponse.json();
-    const newPageURL = `training-view.html?id=${training.id}`;
-    redirectToPage(newPageURL);
-    showMessage('Successfully Added Training', 'success')
     await saveTrainingFiles(training.id)
+    showMessage('Successfully Added Training', 'success')
     return training.id;
   }
   
@@ -58,7 +56,6 @@ async function saveTrainingFiles(trainingId) {
     return await fetch(`${BASE_URL}/training/${trainingId}/training-files/`, {
       method: 'POST',
       headers: {
-        // 'Authorization': 'Bearer <Your Access Token Here>',
       },
       body: formData
     })
@@ -110,8 +107,9 @@ async function updateTraining(trainingId) {
   
   try {
     await updateTrainingData(trainingId, updatedTitle, updatedContent, departmentID);
-    await updateTrainingFiles(trainingId, fileState.addedFiles, fileState.removedFiles);
+    await updateTrainingFiles(trainingId, fileStates.newFiles, fileStates.filesMarkedForDeletion);
     console.log("Training updated successfully.");
+    showMessage("Training updated successfully")
   } catch (error) {
     console.error("An error occurred during the update:", error);
   }
