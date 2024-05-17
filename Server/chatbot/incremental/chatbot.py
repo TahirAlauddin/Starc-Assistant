@@ -3,7 +3,7 @@ import json
 import random
 
 model = joblib.load("chatbot/incremental/finalmodel.joblib")
-intents = json.loads(open('chatbot/incremental/intents.json', encoding="utf-8").read())
+intents = json.loads(open('chatbot/incremental/new_intents.json', encoding="utf-8").read())
 
 
 def get_predicted_tag(predicted_tag, intents):
@@ -18,7 +18,7 @@ def get_predicted_tag(predicted_tag, intents):
 # Set a threshold for the prediction probability
 threshold = 0.005
 
-def get_answer(question):
+def get_answer(question, intents):
     probabilities = model.predict_proba_one(question)
     # Get the tag with the highest probability
     predicted_tag, highest_probability = max(probabilities.items(), key=lambda item: item[1])

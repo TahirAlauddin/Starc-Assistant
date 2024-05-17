@@ -12201,6 +12201,32 @@
       "responses": [
         "Final Question"
       ]
+    },
+    {
+      "tag": "Gugu Gaga",
+      "patterns": [
+        "Gugu Gaga",
+        "Gugu Gaga",
+        "Gugu Gaga",
+        "Gugu Gaga",
+        "Gugu Gaga"
+      ],
+      "responses": [
+        "Gugu Gaga"
+      ]
+    },
+    {
+      "tag": "Anything you want",
+      "patterns": [
+        "Anything you want",
+        "Anything I want",
+        "Anything we want",
+        "Anything he wants",
+        "Anything she wants"
+      ],
+      "responses": [
+        "Anything you want"
+      ]
     }
   ]
 }

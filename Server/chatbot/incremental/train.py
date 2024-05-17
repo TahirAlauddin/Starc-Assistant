@@ -15,7 +15,7 @@ def train_model(model_path, intents_path):
     ('classifier', naive_bayes.MultinomialNB(alpha=0.3))
     )
 
-    intents = json.loads(open('./chatbot/incremental/intents.json', encoding="utf-8").read())
+    intents = json.loads(open(intents_path, encoding="utf-8").read())
 
     # Metric to evaluate the model
     metric = metrics.Accuracy()

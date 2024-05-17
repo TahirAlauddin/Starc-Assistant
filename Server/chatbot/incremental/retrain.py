@@ -8,7 +8,7 @@ def load_model(model_path):
 def update_model(model, questions, tag):
     """Update the model with new questions and a single tag."""
     for question in questions:
-        model.fit_one(question, tag)
+        model.learn_one(question, tag)
     return model
 
 def save_model(model, model_path):

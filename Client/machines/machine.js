@@ -13,6 +13,12 @@ function redirect(destination, machineName, departmentName, id) {
     id;
 }
 
+document.getElementById('searchInput').addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    searchbar();
+  }
+});
+
 
 function searchbar() {
   var input, filter;

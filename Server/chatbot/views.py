@@ -29,6 +29,7 @@ from chatbot.incremental import train
 import json
 
 chatbot = None
+intents = None
 model_path = "chatbot/incremental/finalmodel.joblib"
 intents_path = "chatbot/incremental/intents.json"
 is_training_in_progress = False
@@ -39,13 +40,20 @@ class StandardResultsSetPagination(PageNumberPagination):
     page_size_query_param = 'page_size'  # Allow client to override the page size
     max_page_size = 100  # Maximum limit for page size
 
-
 def import_chatbot_in_background():
     global chatbot
     from chatbot.incremental import chatbot  # takes 5 seconds to run
 
-# Start the import in a separate thread
-threading.Thread(target=import_chatbot_in_background).start()
+
+def restartChatBotModel():
+    # Start the import in a separate thread
+    global chatbot, intents
+    chatbot = None
+    intents = json.loads(open('chatbot/incremental/new_intents.json', encoding="utf-8").read())
+    chatBotThread = threading.Thread(target=import_chatbot_in_background)
+    chatBotThread.start()
+
+restartChatBotModel()
 
 @csrf_exempt
 def login_view(request):
@@ -73,10 +81,11 @@ def logout_view(request):
 @csrf_exempt
 def chatbot_model_view(request):
     if request.method == 'POST':
+        global intents
         data = json.loads(request.body.decode('utf-8'))
         query = data.get('query')
-        answer, tag = chatbot.get_answer(query)
-        print(answer, tag, "LINE 77")
+        answer, tag = chatbot.get_answer(query, intents)
+        print(tag, "LINE 77")
         files = None
         if tag:
             files = TopicFile.objects.filter(topic__label=tag).values_list('file', flat=True)
@@ -322,14 +331,37 @@ def addTopicToModel(questions, topic, answers):
                                             questions, topic.label, answers)
 
 
+def create_intents_file():
+    intents_data = {
+        "intents": []
+    }
+
+    topics = Topic.objects.all()
+
+    for topic in topics:
+        intent = {
+            "tag": topic.label,
+            "patterns": [question.text for question in topic.questions.all()],
+            "responses": [answer.text for answer in topic.answers.all()]
+        }
+        intents_data["intents"].append(intent)
+
+    intents_path = 'chatbot/incremental/new_intents.json'
+    with open(intents_path, 'w') as f:
+        json.dump(intents_data, f)
+    
+    return intents_path
+
 def train_model_task():
     global is_training_in_progress
     try:
+        intents_path = create_intents_file()
         train.train_model(model_path, intents_path)
     finally:
         # Reset the flag when training is complete
         is_training_in_progress = False
-        
+        restartChatBotModel()
+
 
 # Ali's code for retraining model
 def retrain_model(request):
