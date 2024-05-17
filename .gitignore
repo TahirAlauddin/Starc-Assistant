@@ -46,3 +46,6 @@ node_modules
 
 
 media/
+
+Client/StarcAssistant-win32-x64
+staticfiles

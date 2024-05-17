@@ -1,38 +1,57 @@
-from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.views import APIView
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from django.http import JsonResponse
-from django.db import transaction 
-from rest_framework import status
-from django.views.decorators.csrf import csrf_exempt
+from django.db import transaction
 from django.db.models import Q
-from django.contrib.auth import (authenticate,
-                                login as auth_login, 
-                                logout as auth_logout)
-from .models import (Department, Question, Machine,
-                     Answer, Topic, Training, TrainingFile,
-                     TopicFile)
-from .serializers import (DepartmentSerializer, QuestionSerializer,
-                        MachineSerializer, AnswerSerializer, 
-                        TopicSerializer, TrainingSerializer,
-                        TrainingFileSerializer, TopicFileSerializer)
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
-import threading
-from rest_framework import viewsets, filters
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+
+from rest_framework import status, viewsets, filters
+from rest_framework.decorators import api_view
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.pagination import PageNumberPagination
-from .models import Department
-from .serializers import DepartmentSerializer, TrainingListSerializer
-from chatbot.incremental import retrain
-from chatbot.incremental import train
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from django_filters.rest_framework import DjangoFilterBackend
+
+from .models import (
+    Department, Question, Machine, Answer, Topic, Training, 
+    TrainingFile, TopicFile
+)
+from .serializers import (
+    DepartmentSerializer, QuestionSerializer, MachineSerializer, 
+    AnswerSerializer, TopicSerializer, TrainingSerializer, 
+    TrainingFileSerializer, TopicFileSerializer, TrainingListSerializer
+)
+
+import threading
 import json
 
-chatbot = None
-intents = None
+from .incremental import chatbot 
+from .chatbot_utils import * 
+
 model_path = "chatbot/incremental/finalmodel.joblib"
 intents_path = "chatbot/incremental/intents.json"
 is_training_in_progress = False
+model = intents = None
+
+model, intents = chatbot.load_model(model_path, intents_path)
+
+
+def train_model_task(model_path, intents_path):
+    global is_training_in_progress
+    try:
+        create_intents_file(intents_path)
+        train.train_model(model_path, intents_path)
+    finally:
+        # Reset the flag when training is complete
+        is_training_in_progress = False
+        # Make sure to reload the model to use the latest one
+        reload_model()
+
+
+def reload_model():
+    global model, intents 
+    model, intents = chatbot.load_model(model_path, intents_path)
+
 
 # Custom Pagination class
 class StandardResultsSetPagination(PageNumberPagination):
@@ -40,20 +59,20 @@ class StandardResultsSetPagination(PageNumberPagination):
     page_size_query_param = 'page_size'  # Allow client to override the page size
     max_page_size = 100  # Maximum limit for page size
 
-def import_chatbot_in_background():
-    global chatbot
-    from chatbot.incremental import chatbot  # takes 5 seconds to run
 
+# Ali's code for retraining model
+def retrain_model(request):
+    global is_training_in_progress
+    if is_training_in_progress:
+        # Return response if training is already in progress
+        return JsonResponse({"message": "Model Training is already in progress. Please do not click again!"}, status=409)
+    
+    # Set the flag to True to indicate training is starting
+    is_training_in_progress = True
+    thread = threading.Thread(target=train_model_task, args=(model_path, intents_path,), daemon=True)
+    thread.start()
+    return JsonResponse({"message": "Model Training Started Successfully"}, status=200)
 
-def restartChatBotModel():
-    # Start the import in a separate thread
-    global chatbot, intents
-    chatbot = None
-    intents = json.loads(open('chatbot/incremental/new_intents.json', encoding="utf-8").read())
-    chatBotThread = threading.Thread(target=import_chatbot_in_background)
-    chatBotThread.start()
-
-restartChatBotModel()
 
 @csrf_exempt
 def login_view(request):
@@ -81,10 +100,9 @@ def logout_view(request):
 @csrf_exempt
 def chatbot_model_view(request):
     if request.method == 'POST':
-        global intents
         data = json.loads(request.body.decode('utf-8'))
         query = data.get('query')
-        answer, tag = chatbot.get_answer(query, intents)
+        answer, tag = chatbot.get_answer(model, query, intents)
         print(tag, "LINE 77")
         files = None
         if tag:
@@ -325,58 +343,6 @@ def check_training_status(request):
     return JsonResponse({"is_trained": "Model is Trained"}, status=200)
     
 
-def addTopicToModel(questions, topic, answers):
-    retrain.retrain_model_and_update_intents(model_path, 
-                                            intents_path,
-                                            questions, topic.label, answers)
-
-
-def create_intents_file():
-    intents_data = {
-        "intents": []
-    }
-
-    topics = Topic.objects.all()
-
-    for topic in topics:
-        intent = {
-            "tag": topic.label,
-            "patterns": [question.text for question in topic.questions.all()],
-            "responses": [answer.text for answer in topic.answers.all()]
-        }
-        intents_data["intents"].append(intent)
-
-    intents_path = 'chatbot/incremental/new_intents.json'
-    with open(intents_path, 'w') as f:
-        json.dump(intents_data, f)
-    
-    return intents_path
-
-def train_model_task():
-    global is_training_in_progress
-    try:
-        intents_path = create_intents_file()
-        train.train_model(model_path, intents_path)
-    finally:
-        # Reset the flag when training is complete
-        is_training_in_progress = False
-        restartChatBotModel()
-
-
-# Ali's code for retraining model
-def retrain_model(request):
-    global is_training_in_progress
-    if is_training_in_progress:
-        # Return response if training is already in progress
-        return JsonResponse({"message": "Model Training is already in progress. Please do not click again!"}, status=409)
-    
-    # Set the flag to True to indicate training is starting
-    is_training_in_progress = True
-    thread = threading.Thread(target=train_model_task, daemon=True)
-    thread.start()
-    return JsonResponse({"message": "Model Training Started Successfully"}, status=200)
-
-
 @api_view(('POST', 'PUT'))
 @csrf_exempt
 def upload_data(request):
@@ -402,7 +368,6 @@ def upload_data(request):
             # Create a new topic since it doesn't exist
             existing_machine_instance = Machine.objects.filter(name__iexact=machine).first()
             new_topic = Topic.objects.create(label=label, machine=existing_machine_instance)
-            serializer = TopicSerializer(new_topic)
             if questions and answers:
                 for question in questions:
                     Question.objects.create(text=question, topic=new_topic)
@@ -411,7 +376,9 @@ def upload_data(request):
                 
                 
                 print("Topic should be added to model")
-                threading.Thread(target=addTopicToModel, args=(questions, new_topic, answers)).start()
+                threading.Thread(target=addTopicToModel, args=(questions, new_topic,
+                                                            answers, model_path,
+                                                            intents_path)).start()
                 print("Topic was added to model")
         
             return Response({'message': 'Topic created successfully', 

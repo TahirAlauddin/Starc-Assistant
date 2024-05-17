@@ -51,7 +51,7 @@ For detailed instructions on how to use the Starc Assistant Client, refer to the
 
 To build the application for Windows:
 ```bash
-npx electron-packager . StarcAssistant --platform=win32 --arch=x64 --icon=starc-logo-icon.png --overwrite
+npx electron-packager . StarcAssistant --platform=win32 --arch=x64 --icon=starc-logo-icon.png
 ```
 
 For more detailed instructions on setting up the development environment, building, and packaging the application, please refer to the [Developer Guide](#).

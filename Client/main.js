@@ -50,6 +50,8 @@ function createInputWindow() {
 
         fs.writeFileSync(ipFilePath, ip); // Save IP to a file
         BASE_URL = `http://localhost:8000`; // Use the function to set BASE_URL
+        BASE_URL = `http://${ip}:8000`; // Use the function to set BASE_URL
+
         createWindow(); // You should create the main window here only if it's not already created
         inputWin.close(); // Close the window after saving
     });
@@ -117,12 +119,12 @@ function createWindow() {
         mainWindow.webContents.openDevTools();
     }
 
-    // mainWindow.loadFile('home/welcome/index.html');
+    mainWindow.loadFile('home/welcome/index.html');
     // mainWindow.loadFile('training/training-view/training-view.html');
     // mainWindow.loadFile('training/training.html');
     // mainWindow.loadFile('admin/admin-panel.html');
     // mainWindow.loadFile('admin/previous-topic/previous-topic.html');
-    mainWindow.loadFile('login/login.html');
+    // mainWindow.loadFile('login/login.html');
     // mainWindow.loadFile('machines/machine.html');
     // mainWindow.loadFile('machines/machine-detail.html');
     mainWindow.on('closed', function () {
@@ -155,7 +157,8 @@ app.on('ready', () => {
     if (fs.existsSync(ipFilePath)) {
         // If the IP address file exists, read it (optional here)
         const Ip = fs.readFileSync(ipFilePath, 'utf8');
-        BASE_URL = `http://localhost:8000`; // Use the function to set BASE_URL
+        BASE_URL = `http://localhost:8000`; 
+        BASE_URL = `http://${Ip}:8000`; 
 
         createWindow(); // Open the main app window
     } else {

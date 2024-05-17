@@ -49,6 +49,7 @@ tzdata = "==2023.3"
 urllib3 = "==2.2.1"
 waitress = "==3.0.0"
 river = "*"
+whitenoise = "*"
 
 [dev-packages]
 
