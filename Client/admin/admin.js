@@ -396,6 +396,7 @@ document
   })
 
 document.addEventListener('DOMContentLoaded', async function () {
+
   let selectedClass = "selected-department-box";
 
   const queryString = window.location.search;
@@ -404,15 +405,15 @@ document.addEventListener('DOMContentLoaded', async function () {
   let tab = urlParams.get("tab");
   console.log(tab)
 
-  if (tab == 1) {
+  if (tab == "tornitura") {
     await setTornituraTab(selectedClass);
 
   }
-  else if (tab == 2) {
+  else if (tab == "rettifiche") {
     await setRettificheTab(selectedClass);
   }
 
-  else if (tab == 3) {
+  else if (tab == "qualita") {
     await setQualitaTab(selectedClass);
   }
   else {
@@ -435,13 +436,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   // Make sure Topics are deletable because we have "Train New model function" now
   addDeleteButtonInTopic(id)
-  // Make topics deletable if not originally trained
-  // TODO
-  // if (!data.isTrained) {
-  //   addDeleteButton(id);
-  // } else {
-  //   document.getElementById('save-button').remove()
-  // }
+
   // Assuming fetchMediaFiles is defined elsewhere and fetches media files based on the topic ID
   fetchMediaFiles(id)
 })

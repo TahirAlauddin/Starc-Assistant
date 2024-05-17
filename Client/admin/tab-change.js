@@ -116,28 +116,3 @@ qualitaTab.addEventListener("click", async function () {
         await setQualitaTab(selectedClass);
     }
 });
-
-document.addEventListener('DOMContentLoaded', async function () {
-    let selectedClass = "selected-department-box";
-
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-
-    let tab = urlParams.get("tab");
-    console.log(tab)
-
-    if (tab == "tornitura") {
-        await setTornituraTab(selectedClass);
-
-    }
-    else if (tab == "rettifiche") {
-        await setRettificheTab(selectedClass);
-    }
-
-    else if (tab == "qualita") {
-        await setQualitaTab(selectedClass);
-    }
-    else {
-        await setTornituraTab(selectedClass)
-    }
-})

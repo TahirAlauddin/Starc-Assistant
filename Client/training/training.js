@@ -230,6 +230,11 @@ async function setupPagination(param = "") {
   generatePagination(1, totalPages);
 }
 
+document.getElementById('search-bar').addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    filterTrainingData();
+  }
+});
 
 async function filterTrainingData() {
   let searchBarText = document.getElementById('search-bar').value;
