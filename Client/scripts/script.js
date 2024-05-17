@@ -13,7 +13,7 @@ function redirectToPage(page) {
 }
 
 
-function sendLogOutRequest() {
+function sendLogOutRequest(page='admin') {
   // let csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
   fetch(`${BASE_URL}/logout/`, {
@@ -30,7 +30,11 @@ function sendLogOutRequest() {
       if (data.status == 'success') {
         sessionStorage.setItem("isAdmin", "false")
         sessionStorage.removeItem("isAdmin")
-        window.location.replace("../home/home.html");
+        if (page == 'previous') {
+          window.location.replace("../../home/home.html");
+        } else {
+          window.location.replace("../home/home.html");
+        }
       } else {
         console.log('data', data)
       }
