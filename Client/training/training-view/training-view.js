@@ -1,3 +1,8 @@
+function disableDropdown() {
+  var dropdown = document.getElementById('custom-dropdown');
+  dropdown.disabled = true;
+}
+
 
 function populateData(id) {
 
@@ -156,6 +161,8 @@ document.addEventListener("DOMContentLoaded", function () {
       elements.forEach(element => {
         element.contentEditable = 'false'
       })
+      disableDropdown();
+      document.getElementById("title").style.padding = "0px";
     }
   } else if (user) {
     document.getElementById('save-training-button').addEventListener('click', saveTraining);

@@ -179,8 +179,7 @@
   border-radius: 1rem;
   justify-content: start;
   align-items: start;
-  padding-left: 3%;
-  padding-right: 3%;
+  padding: 3%;
   height: 87%;
   width: 95%;
   gap: 1rem;
@@ -201,7 +200,6 @@
   background-color: var(--tertiary-color);
   overflow-y: auto;
   box-sizing: border-box;
-  margin-top: 1rem;
   max-height: 13rem;
 }
 
@@ -397,7 +395,6 @@
   font-size: 1.2rem;
   font-weight: bold;
 }
-
 
 .search-container {
   display: flex;
