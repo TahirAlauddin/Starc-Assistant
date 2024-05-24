@@ -138,7 +138,7 @@ async function setupPagination(param = "") {
     let data = await response.json();
 
     // Assuming data contains a property count which is the total number of items
-    const itemsPerPage = 5; // Adjust based on your needs
+    const itemsPerPage = 10; // Adjust based on your needs
     totalPages = Math.ceil(data.count / itemsPerPage);
 
   } catch (error) {
