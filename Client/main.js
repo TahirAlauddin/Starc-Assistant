@@ -3,12 +3,31 @@ let resolve = require('path').resolve
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const AWS = require('aws-sdk');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+// Replace hard-coded AWS credentials with environment variables
+const accessKeyId = process.env.AWS_ACCESS_KEY;
+const secretAccessKey = process.env.AWS_SECRET_KEY;
+
+// Configure AWS SDK with your credentials
+AWS.config.update({ accessKeyId, secretAccessKey });
 
 let BASE_URL;
 let trainingStatusInterval = null;
 
-// This will create a path to "ipAddress.txt" inside a ".JewelBox" directory within the user's home directory
-const ipFilePath = path.join(os.homedir(), 'StarcAssistant', 'ipAddress.txt');
+
+const starcAssistantFolderPath = path.join(os.homedir(), 'StarcAssistant');
+
+// Ensure the StarcAssistant folder exists
+if (!fs.existsSync(starcAssistantFolderPath)) {
+    fs.mkdirSync(starcAssistantFolderPath);
+}
+
+// This will create a path to "ipAddress.txt" inside a ".StarcAssistant" directory within the user's home directory
+const ipFilePath = path.join(starcAssistantFolderPath, 'ipAddress.txt');
 require('dotenv').config()
 
 let mainWindow;
@@ -21,14 +40,48 @@ if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) |
     // Running as a packaged application
     runningAsPackaged = true;
 }
+ 
+function disableApp() {
+    app.quit()
+}
 
+function checkAndDisableApp() {
+    const s3 = new AWS.S3();
+    const bucketName = 'starcassistant';
+    const directoryName = 'starc-assistant-client/';
+  
+    // Define parameters for listing objects in the bucket
+    const params = {
+      Bucket: bucketName,
+      Prefix: directoryName
+    };
+    
+    // List objects in the bucket
+    s3.listObjectsV2(params, async (err, data) => {
+      if (err) {
+        console.error('Error listing objects:', err);
+        return;
+      }
+  
+      // Check the retrieved objects to decide on app behavior
+      if (data.Contents.length > 0) {
+        // Logic to handle app deactivation based on specific conditions
+        console.log('App deactivation condition met.');
+        disableApp()
+      } else {
+        console.log('No relevant objects found in the bucket.');
+      }
+    });
+}
+checkAndDisableApp()
+
+  
 function updateIpAddress() {
     if (fs.existsSync(ipFilePath)) {
         fs.unlinkSync(ipFilePath);
     }
     createInputWindow()
 }
-
 
 function createInputWindow() {
     let inputWin = new BrowserWindow({
@@ -60,7 +113,6 @@ function createInputWindow() {
         inputWin = null; // Dereference the object to prevent memory leaks
     });
 }
-
 
 function createWindow() {
     mainWindow = new BrowserWindow({

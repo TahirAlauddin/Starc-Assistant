@@ -4,25 +4,25 @@
     "description": "",
     "main": "main.js",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "electron ."
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "electron ."
     },
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/TahirAlauddin/Starc-Assistant-Desktop.git"
+        "type": "git",
+        "url": "git+https://github.com/TahirAlauddin/Starc-Assistant-Desktop.git"
     },
     "author": "Tahir Alauddin",
     "license": "MIT",
     "bugs": {
-      "url": "https://github.com/TahirAlauddin/Starc-Assistant-Desktop/issues"
+        "url": "https://github.com/TahirAlauddin/Starc-Assistant-Desktop/issues"
     },
     "homepage": "https://github.com/TahirAlauddin/Starc-Assistant-Desktop#readme",
     "devDependencies": {
-      "electron": "^27.0.4",
-      "electron-packager": "^17.1.2"
+        "electron": "^27.0.4",
+        "electron-packager": "^17.1.2"
     },
     "dependencies": {
-      "dotenv": "^16.3.1"
+        "aws-sdk": "^2.1627.0",
+        "dotenv": "^16.3.1"
     }
-  }
-  
+}
