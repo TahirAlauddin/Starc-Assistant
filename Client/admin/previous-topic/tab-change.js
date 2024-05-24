@@ -68,7 +68,7 @@ function setRettificheTab(selectedClass) {
 
 function setQualitaTab(selectedClass) {
     document.getElementById("admin-heading").textContent =
-        "Control Qualita";
+        "Controllo Qualità";
 
     
 

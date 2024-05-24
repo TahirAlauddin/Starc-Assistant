@@ -24,7 +24,7 @@ if (perfEntries[0].type === "back_forward") {
 const textToType = ["Hi, I'm Tarsia! Welcome to chat bot, How can I help you?"];
 let charIndex = 0;
 let lineIndex = 0;
-let typingSpeed = 100;
+let typingSpeed = 30;
 
 function typeText() {
   let typingElement = document.getElementById("typingText");
@@ -408,7 +408,6 @@ async function createDepartmentMain() {
 
   mainContainer.appendChild(departmentMain);
   await sleep(100);
-  typeText();
   responsivePage();
 }
 
@@ -512,4 +511,5 @@ document.addEventListener("keypress", function (event) {
 
 window.onload = function () {
   document.getElementById('message-input').focus()
+  typeText();
 }

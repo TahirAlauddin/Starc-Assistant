@@ -65,7 +65,7 @@ async function setRettificheTab(selectedClass) {
 
 async function setQualitaTab(selectedClass) {
     document.getElementById("admin-heading").textContent =
-        "Control Qualita";
+        "Controllo Qualità";
     await addOptionsToDropdown("Qualita");
 
     qualitaTab.classList.add(selectedClass);

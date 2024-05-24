@@ -67,7 +67,7 @@ function loadQualitaTab() {
     }
 
     document.getElementById("departments-title").textContent =
-        "Control Qualita Department";
+        "Controllo Qualità Department";
     addOptionsToDropdown("Qualita");
 
     qualitaTab.classList.add(selectedClass);
