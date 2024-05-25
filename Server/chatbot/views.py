@@ -184,8 +184,8 @@ class TrainingViewSet(viewsets.ModelViewSet):
     queryset = Training.objects.all()
     serializer_class = TrainingSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['title', 'content']  
-    search_fields = ['title', 'content']
+    filterset_fields = ['title', 'content', 'category__id']  
+    search_fields = ['title', 'content', 'category__name']
     ordering_fields = ['id', 'title'] 
     # ordering = ['name']  # Default ordering
     pagination_class = StandardResultsSetPagination    
@@ -297,7 +297,7 @@ def get_training_file(request):
     query = request.query_params.get('search', None)
     if query is not None:
         trainings = Training.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
+            Q(title__icontains=query) | Q(content__icontains=query) | Q(category__name__icontains=query)
         )
     else:
         trainings = Training.objects.all()
@@ -325,7 +325,7 @@ def get_training_count(request):
     query = request.query_params.get('search', None)
     if query is not None:
         trainings = Training.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
+            Q(title__icontains=query) | Q(content__icontains=query) | Q(category__name__icontains=query)
         )
         count = trainings.count()
     else:
