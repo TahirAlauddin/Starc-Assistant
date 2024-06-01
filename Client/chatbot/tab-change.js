@@ -29,6 +29,9 @@ function loadTornituraTab() {
     rettificheTab.classList.remove(selectedClass);
     qualitaTab.classList.remove(selectedClass);
 
+    typeText();
+
+
     addOptionsToDropdown("Tornitura");
 }
 
@@ -62,6 +65,9 @@ function loadRettificheTab() {
     qualitaObjectSelected.style.display = "none";
     tornituraTab.classList.remove(selectedClass);
     qualitaTab.classList.remove(selectedClass);
+
+  typeText();
+
 
     addOptionsToDropdown("Rettifiche");
 
@@ -97,6 +103,9 @@ function loadQualitaTab() {
     rettificheObjectSelected.style.display = "none";
     tornituraTab.classList.remove(selectedClass);
     rettificheTab.classList.remove(selectedClass);
+
+      typeText();
+
 
     addOptionsToDropdown("Qualita");
 }
