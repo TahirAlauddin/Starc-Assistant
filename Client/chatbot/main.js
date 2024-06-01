@@ -4,9 +4,13 @@ let qualitaTab = document.getElementById("department-qualita");
 
 let csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-let tornituraObject = document.querySelector('#department-tornitura svg');
-let rettificheObject = document.querySelector('#department-rettifiche svg');
-let qualitaObject = document.querySelector('#department-qualita svg');
+let tornituraObject = document.getElementById('tornitura-object');
+let rettificheObject = document.getElementById('rettifiche-object');
+let qualitaObject = document.getElementById('qualita-object');
+
+let tornituraObjectSelected = document.getElementById('tornitura-selected-object');
+let rettificheObjectSelected = document.getElementById('rettifiche-selected-object');
+let qualitaObjectSelected = document.getElementById('qualita-selected-object');
 
 // Check if the user is an admin
 // There are two values for 'currentMainContainer' var,
@@ -418,6 +422,9 @@ async function sendMessageButtonClick() {
 
   console.log(data);
 
+  let machine = document.getElementById("custom-dropdown").value;
+
+
   let query = document.getElementById("message-input").value.trim();
   document.getElementById("message-input").value = '';
 
@@ -428,12 +435,13 @@ async function sendMessageButtonClick() {
     createChatbotMain();
     currentMainContainer = 'chatbot'
     if (qualitaTab.classList.contains(selectedClass)) {
-      addOptionsToDropdown("Qualita");
+      await addOptionsToDropdown("Qualita");
     } else if (tornituraTab.classList.contains(selectedClass)) {
-      addOptionsToDropdown("Tornitura");
+      await addOptionsToDropdown("Tornitura");
     } else if (rettificheTab.classList.contains(selectedClass)) {
-      addOptionsToDropdown("Rettifiche");
+      await addOptionsToDropdown("Rettifiche");
     }
+    document.getElementById("custom-dropdown").value = machine;
   }
   addQuestionHistory(query);
   // answer = "This is answer";

@@ -22,7 +22,7 @@
         "electron-packager": "^17.1.2"
     },
     "dependencies": {
-        "aws-sdk": "^2.1627.0",
+        "aws-sdk": "^2.1628.0",
         "dotenv": "^16.3.1"
     }
 }
