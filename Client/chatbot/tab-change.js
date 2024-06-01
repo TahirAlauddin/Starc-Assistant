@@ -10,20 +10,22 @@ function loadTornituraTab() {
 
     document.getElementById("departments-title").textContent =
         "Tornitura Department";
-    addOptionsToDropdown("Tornitura");
-
-    tornituraTab.classList.add(selectedClass);
-    tornituraObject.setAttribute("data", "../images/Tornitura-Selected.svg");
-
+        
+        
+        tornituraTab.classList.add(selectedClass);
+        tornituraObject.classList.add("selected-svg-fill")
+        
     if (rettificheTab.classList.contains(selectedClass)) {
-        rettificheObject.setAttribute("data", "../images/Rettifiche.svg");
+        rettificheObject.classList.remove("selected-svg-fill")
     }
     if (qualitaTab.classList.contains(selectedClass)) {
-        qualitaObject.setAttribute("data", "../images/Qualita.svg");
+        qualitaObject.classList.remove("selected-svg-stroke")
     }
 
     rettificheTab.classList.remove(selectedClass);
     qualitaTab.classList.remove(selectedClass);
+    
+    addOptionsToDropdown("Tornitura");
 }
 
 function loadRettificheTab() {
@@ -39,21 +41,23 @@ function loadRettificheTab() {
     document.getElementById("departments-title").textContent =
         "Rettifiche Department";
 
-    addOptionsToDropdown("Rettifiche");
-
-    rettificheTab.classList.add(selectedClass);
-    rettificheObject.setAttribute("data", "../images/Rettifiche-Selected.svg");
-
+        
+        rettificheTab.classList.add(selectedClass);
+        rettificheObject.classList.add("selected-svg-fill")
+        
     if (tornituraTab.classList.contains(selectedClass)) {
-        tornituraObject.setAttribute("data", "../images/Tornitura.svg");
+        tornituraObject.classList.remove("selected-svg-fill")
     }
 
     if (qualitaTab.classList.contains(selectedClass)) {
-        qualitaObject.setAttribute("data", "../images/Qualita.svg");
+        qualitaObject.classList.remove("selected-svg-stroke")
     }
-
+    
     tornituraTab.classList.remove(selectedClass);
     qualitaTab.classList.remove(selectedClass);
+    
+    addOptionsToDropdown("Rettifiche");
+    
 }
 
 function loadQualitaTab() {
@@ -68,30 +72,31 @@ function loadQualitaTab() {
 
     document.getElementById("departments-title").textContent =
         "Controllo Qualità Department";
-    addOptionsToDropdown("Qualita");
-
-    qualitaTab.classList.add(selectedClass);
-    qualitaObject.setAttribute("data", "../images/Qualita-Selected.svg");
-
-    if (tornituraTab.classList.contains(selectedClass)) {
-        tornituraObject.setAttribute("data", "../images/Tornitura.svg");
-    }
-
-    if (rettificheTab.classList.contains(selectedClass)) {
-        rettificheObject.setAttribute("data", "../images/Rettifiche.svg");
+    
+        
+        qualitaTab.classList.add(selectedClass);
+        qualitaObject.classList.add("selected-svg-stroke")
+        
+        if (tornituraTab.classList.contains(selectedClass)) {
+            tornituraObject.classList.remove("selected-svg-fill")
+        }
+        
+        if (rettificheTab.classList.contains(selectedClass)) {
+            rettificheObject.classList.remove("selected-svg-fill")
     }
 
     tornituraTab.classList.remove(selectedClass);
     rettificheTab.classList.remove(selectedClass);
+    
+    addOptionsToDropdown("Qualita");
 }
 
-tornituraTab.addEventListener("click", loadTornituraTab);
-
-rettificheTab.addEventListener("click", loadRettificheTab);
-
-qualitaTab.addEventListener("click", loadQualitaTab);
-
 document.addEventListener("DOMContentLoaded", function () {
+    
+    tornituraTab.addEventListener("click", loadTornituraTab);
+    rettificheTab.addEventListener("click", loadRettificheTab);    
+    qualitaTab.addEventListener("click", loadQualitaTab);
+
     let csrfToken = document.querySelector("[name=csrfmiddlewaretoken]");
     if (csrfToken) {
         csrfToken = csrfToken.value;

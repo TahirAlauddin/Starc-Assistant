@@ -56,7 +56,7 @@ async function fetchAndOrganizeMachineData() {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        return departments
       }
 
       const machines = await response.json();
@@ -81,6 +81,8 @@ async function fetchAndOrganizeMachineData() {
 
     return departments;
   } catch (error) {
+    const departments = { "Tornitura": [], "Rettifiche": [], "Qualita": [] };
+    return departments;
     console.error('Error fetching or processing data: ', error);
   }
 }

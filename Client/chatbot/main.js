@@ -1,15 +1,14 @@
-// Check if the user is an admin
 let tornituraTab = document.getElementById("department-tornitura");
 let rettificheTab = document.getElementById("department-rettifiche");
 let qualitaTab = document.getElementById("department-qualita");
 
 let csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-var tornituraObject = document.querySelector('#department-tornitura object');
-var rettificheObject = document.querySelector('#department-rettifiche object');
-var qualitaObject = document.querySelector('#department-qualita object');
+let tornituraObject = document.querySelector('#department-tornitura svg');
+let rettificheObject = document.querySelector('#department-rettifiche svg');
+let qualitaObject = document.querySelector('#department-qualita svg');
 
-
+// Check if the user is an admin
 // There are two values for 'currentMainContainer' var,
 // 1. base
 // 2. chatbot
@@ -511,5 +510,7 @@ document.addEventListener("keypress", function (event) {
 
 window.onload = function () {
   document.getElementById('message-input').focus()
-  typeText();
 }
+document.addEventListener('DOMContentLoaded', () => {
+  typeText();
+})

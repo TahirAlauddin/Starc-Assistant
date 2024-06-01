@@ -230,6 +230,14 @@ body {
   pointer-events: none;
 }
 
+.selected-svg-stroke {
+  stroke: #fff;
+}
+
+.selected-svg-fill {
+  fill: #fff;
+}
+
 /* Modify the scrollbar track */
 /* For WebKit (Chrome, Safari, Opera) */
 ::-webkit-scrollbar {
