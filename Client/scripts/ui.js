@@ -216,8 +216,8 @@ function openPopup(src, fileType) {
     theDivElement = video;
     video.src = src;
     video.controls = true;
-    video.style.maxWidth = '90%';
-    video.style.maxHeight = '90%';
+    video.style.maxWidth = '100%';
+    video.style.maxHeight = '100%';
     content.appendChild(video);
   } else if (fileType === 'pdf') {
     // PDFs cannot be easily displayed in a popup like images/videos.
