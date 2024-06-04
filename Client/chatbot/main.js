@@ -519,6 +519,3 @@ document.addEventListener("keypress", function (event) {
 window.onload = function () {
   document.getElementById('message-input').focus()
 }
-document.addEventListener('DOMContentLoaded', () => {
-  typeText();
-})
